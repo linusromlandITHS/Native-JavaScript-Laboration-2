@@ -5,10 +5,9 @@ const userErrorTag = document.querySelector("#userError");
 const repoErrorTag = document.querySelector("#repoError");
 const historySearches = document.querySelector("#historySearches");
 let history = [];
-let autoCompleteSearches = {
-    src: []
-};
+let autoCompleteSearches = [];
 let autoCompleteJS;
+
 window.onload = () => {
     //Gets history from localStorage if exists.
     if (localStorage.getItem("history")) {
@@ -23,37 +22,20 @@ window.onload = () => {
             historySearches.appendChild(ul);
         });
     }
-    autoCompleteJS = new autoComplete({
-        selector: "#searchBar",
-        placeHolder: "Search for Github Account/Repository...",
-        submit: true,
-        data: autoCompleteSearches,
-        resultItem: {
-            highlight: {
-                render: true
-            }
-        },
-        events: {
-            input: {
-                selection: (event) => {
-                    const selection = event.detail.selection.value;
-                    autoCompleteJS.input.value = selection;
-                }
-            }
-        }
-    });
+    autoCompleteSearches = history
+    initAutocomplete()
 };
 
 inputField.addEventListener("input", async (event) => {
-    if (inputField.value.length % 5 === 0) {
+    if (inputField.value.length % 3 === 0) {
         let search = await searchUser(inputField.value);
-        autoCompleteSearches.src = [];
+        autoCompleteSearches = history;
         search.forEach(searchItem => {
-            autoCompleteSearches.src.push(searchItem.login)
+            if (!autoCompleteSearches.includes(searchItem.login)) autoCompleteSearches.push(searchItem.login)
         });
         console.log(autoCompleteJS)
-        console.log(autoCompleteSearches)
-
+        console.log(autoCompleteSearches);
+        initAutocomplete();
     }
 })
 
@@ -94,7 +76,7 @@ saveToHistory = (value) => {
     //Saves search to localStorage for history
     if (!history.includes(value)) {
         history.push(value);
-        if (history.length > 5) history.shift();
+        if (history.length > 50) history.shift();
     }
     localStorage.setItem("history", JSON.stringify(history));
 }
@@ -120,3 +102,28 @@ clearError = () => {
     repoErrorTag.hidden = true;
     userErrorTag.hidden = true;
 };
+
+initAutocomplete = () => {
+    autoCompleteJS = new autoComplete({
+        selector: "#searchBar",
+        placeHolder: "Search for Github Account/Repository...",
+        submit: true,
+        data: {
+            src: autoCompleteSearches
+        },
+        resultItem: {
+            highlight: {
+                render: true
+            }
+        },
+        events: {
+            input: {
+                selection: (event) => {
+                    const selection = event.detail.selection.value;
+                    autoCompleteJS.input.value = selection;
+                }
+            }
+        }
+    });
+    inputField.focus();
+}
