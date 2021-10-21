@@ -25,6 +25,5 @@ searchUser = async (username) => {
         } 
     }
 
-
-    console.log(users)
+    return users;
 }

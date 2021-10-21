@@ -5,12 +5,14 @@ const userErrorTag = document.querySelector("#userError");
 const repoErrorTag = document.querySelector("#repoError");
 const historySearches = document.querySelector("#historySearches");
 let history = [];
-
+let autoCompleteSearches = {
+    src: []
+};
+let autoCompleteJS;
 window.onload = () => {
     //Gets history from localStorage if exists.
     if (localStorage.getItem("history")) {
         history = JSON.parse(localStorage.getItem("history"));
-        historySearches.hidden = false;
         history.forEach(item => {
             let ul = document.createElement("ul");
             let a = document.createElement("a");
@@ -21,7 +23,39 @@ window.onload = () => {
             historySearches.appendChild(ul);
         });
     }
+    autoCompleteJS = new autoComplete({
+        selector: "#searchBar",
+        placeHolder: "Search for Github Account/Repository...",
+        submit: true,
+        data: autoCompleteSearches,
+        resultItem: {
+            highlight: {
+                render: true
+            }
+        },
+        events: {
+            input: {
+                selection: (event) => {
+                    const selection = event.detail.selection.value;
+                    autoCompleteJS.input.value = selection;
+                }
+            }
+        }
+    });
 };
+
+inputField.addEventListener("input", async (event) => {
+    if (inputField.value.length % 5 === 0) {
+        let search = await searchUser(inputField.value);
+        autoCompleteSearches.src = [];
+        search.forEach(searchItem => {
+            autoCompleteSearches.src.push(searchItem.login)
+        });
+        console.log(autoCompleteJS)
+        console.log(autoCompleteSearches)
+
+    }
+})
 
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
