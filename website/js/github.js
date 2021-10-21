@@ -1,7 +1,15 @@
 getUser = async (username) => {
     let request = await fetch(`https://api.github.com/users/${username}`)
+    if(request.status === 404) return null;
     let data = await request.json();
-    console.log(data)
+    return data;
+}
+
+getRepo = async (repo) => {
+    let request = await fetch(`https://api.github.com/repo/${repo}`)
+    if(request.status === 404) return null;
+    let data = await request.json();
+    return data;
 }
 
 searchUser = async (username) => {
