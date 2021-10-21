@@ -6,7 +6,7 @@ getUser = async (username) => {
 }
 
 getRepo = async (repo) => {
-    let request = await fetch(`https://api.github.com/repo/${repo}`)
+    let request = await fetch(`https://api.github.com/repos/${repo}`)
     if(request.status === 404) return null;
     let data = await request.json();
     return data;

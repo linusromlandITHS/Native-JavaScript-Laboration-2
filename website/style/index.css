@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+
+#main {
+    height: 100vh;
+}
+
+#searchForm {
+    width: 100%;
+    margin: 2rem;
+}
+
+#searchArea {
+    padding: 2rem;
+    width: 50%;
+}
+
+#searchBar {
+    transition: all 0.2s;
+    width: 75%;
+    height: 3rem;
+    border-radius: 209px;
+    border: 1px solid black;
+    color: black;
+    font-size: 100%;
+    text-align: center;
+}
+
+#searchBar:focus {
+    outline: none;
+}
+
+#searchBar:hover {
+    box-shadow: 0px 0px 5px 3px #C3C3C3
+}
+
+#error {
+    color: red;
+}
+
+.historyItem {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+a{
+    color: black;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+footer {
+    height: 5vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+ul {
+    list-style: none;
+}
