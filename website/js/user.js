@@ -27,28 +27,41 @@ loading = (done) => {
 }
 
 commitsToChart = (commitArray) => {
+    console.log(JSON.parse(JSON.stringify(commitArray)))
     commitArray = commitArray.reverse();
     let object = {
         amount: [],
         day: []
     }
+    //  for (let i = 0; i < commitArray.length; i++) { //Loops through commits
+    //      const commit = commitArray[i];
+    //      for (let j = 1; j < commitArray.length; j++) {
+    //          const event = commitArray[j];
+    //          if (commit.created_at.split("T")[0] === event.created_at.split("T")[0]) {
+    //              commit.payload.commits = commit.payload.commits.concat(event.payload.commits)
+    //              commitArray.splice(j, 1)
+    //              j--
+    //          }
+    //      }
+    //      let uniqueCommits = commit.payload.commits.filter(function (item, pos) {
+    //          return commit.payload.commits.indexOf(item) == pos;
+    //      })
+    //      object.amount.push(uniqueCommits.length)
+    //      object.day.push(commit.created_at.split("T")[0])
+    //  }
+
     for (let i = 0; i < commitArray.length; i++) {
-        const commit = commitArray[i];
-        for (let j = 1; j < commitArray.length; j++) {
-            const event = commitArray[j];
-            if (commit.created_at.split("T")[0] === event.created_at.split("T")[0]) {
-                commit.payload.commits = commit.payload.commits.concat(event.payload.commits)
-                commitArray.splice(j, 1)
-                j--
-            }
-        }
-        let uniqueCommits = commit.payload.commits.filter(function (item, pos) {
-            return commit.payload.commits.indexOf(item) == pos;
-        })
-        object.amount.push(uniqueCommits.length)
-        object.day.push(commit.created_at.split("T")[0])
+        let results = commitArray.filter(function (commit) {
+            return commit.created_at.split("T")[0] === commitArray[i].created_at.split("T")[0];
+        });
+        let amount = 0;
+        results.forEach(result => amount += result.payload.commits.length)
+        object.amount[i] = amount;
+        object.day[i] = results[0].created_at.split("T")[0]
+
+        commitArray.splice(0, results.length)
     }
-    console.log(object)
+
 }
 
 renderChart = (dataPoints, categories, selector, type, name) => {
