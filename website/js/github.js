@@ -6,7 +6,7 @@ const githubUsername = localStorage.getItem("githubusername")
 const githubpersonaltoken = localStorage.getItem("githubpersonaltoken")
 
 
-if (false) { //If available in local storage
+if (githubUsername && githubpersonaltoken) { //If available in local storage
     params.headers = {
         "Authorization": `${githubUsername}:${githubpersonaltoken}`
     }
@@ -14,6 +14,7 @@ if (false) { //If available in local storage
 
 getUser = async (username) => {
     let request = await fetch(`https://api.github.com/users/${username}`, params)
+    outOfRequests(request)
     if (request.status === 404) return null;
     let data = await request.json();
     return data;
@@ -21,6 +22,7 @@ getUser = async (username) => {
 
 getRepo = async (repo) => {
     let request = await fetch(`https://api.github.com/repos/${repo}`, params)
+    outOfRequests(request)
     if (request.status === 404) return null;
     let data = await request.json();
     return data;
@@ -28,6 +30,7 @@ getRepo = async (repo) => {
 
 searchUser = async (username) => {
     const request = await fetch(`https://api.github.com/search/users?q=${username}`, params)
+    outOfRequests(request)
     const data = await request.json();
     let users = data.items;
     while (true) {
@@ -47,6 +50,7 @@ getCommits = async (user) => {
     while (true) {
         const request = await fetch(`https://api.github.com/users/${user}/events/public?sort=pushed&per_page=100&page=${i}`, params)
         if (request.status !== 200) break;
+        outOfRequests(request)
         const data = await request.json();
         commits = commits.concat(data);
         i++;
@@ -61,6 +65,11 @@ getCommits = async (user) => {
     return commits;
 }
 
-outOfRequests = () => {
-    alert("You are out of request! You have 60 request/hour.\nYou can get more (5000 request/hour) if you authenticate with GitHub and Personal Token! to do this, visit /token.html")
-}
+outOfRequests = (request) => {
+        if (request.status === 403) {
+            let path = `${window.location.origin + window.location.pathname.substring(0,window.location.pathname.length-9)}getToken.html`
+            const errorMessage = githubUsername && githubpersonaltoken ? `You are out of request!` : `You are out of request! You have 60 request/hour.\nYou can get more (5000 request/hour) if you authenticate with GitHub and Personal Token!\nTo do this, visit: \n${path}`
+            
+            alert(errorMessage)
+            }
+        }
