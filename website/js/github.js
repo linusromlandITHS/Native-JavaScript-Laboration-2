@@ -1,3 +1,17 @@
+let params = {
+    headers: {}
+};
+
+const githubUsername = localStorage.getItem("githubusername")
+const githubpersonaltoken = localStorage.getItem("githubpersonaltoken")
+
+
+if (false) { //If available in local storage
+    params.headers = {
+        "Authorization": `${githubUsername}:${githubpersonaltoken}`
+    }
+}
+
 getUser = async (username) => {
     let request = await fetch(`https://api.github.com/users/${username}`, params)
     if (request.status === 404) return null;
@@ -45,4 +59,8 @@ getCommits = async (user) => {
     }
 
     return commits;
+}
+
+outOfRequests = () => {
+    alert("You are out of request! You have 60 request/hour.\nYou can get more (5000 request/hour) if you authenticate with GitHub and Personal Token! to do this, visit /token.html")
 }

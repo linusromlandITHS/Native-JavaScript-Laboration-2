@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Token - Github Statistics</title>
+</head>
+<body>
+    <p>Github Statistics - Add Token</p>
+    <p>This will grant you 5000 request per hour instead of the standard 60 to GitHub.</p>
+    <form>
+        <input type="text" id="GithubUsername" placeholder="Github Username">
+        <input type="text" id="GithubPersonalToken" placeholder="Github Personal Token">
+        <input type="submit" value="Add Token">
+    </form>
+    <script>
+        const form = document.querySelector("form")
+        const GithubUsername = document.querySelector("#GithubUsername")
+        const GithubPersonalToken = document.querySelector("#GithubPersonalToken")
+
+        form.addEventListener("submit", async event => {
+            event.preventDefault();
+            if(GithubPersonalToken && GithubUsername){
+                await localStorage.setItem("githubusername", GithubUsername.value)
+                await localStorage.setItem("githubpersonaltoken", GithubPersonalToken.value)
+                window.location = "index.html"
+            }
+        })
+    </script>
+</body>
+</html>
