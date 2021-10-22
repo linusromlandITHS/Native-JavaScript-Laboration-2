@@ -37,19 +37,19 @@ commitsToChart = (commitArray) => {
         const commit = commitArray[i];
         let date = moment(commit.created_at.split("T")[0]) //Converts date to momentObject
         let diff = date.diff(moment(object.day[object.day.length - 1]), "days")
-        if(diff > 1){
+        if (diff > 1) {
             let newDate = moment(object.day[object.day.length - 1])
-            for (let i = 0; i < diff -1; i++) {
+            for (let i = 0; i < diff - 1; i++) {
                 newDate.add(1, "days")
                 object.day.push(newDate.format("YYYY-MM-DD"))
-                object.amount.push(0)    
+                object.amount.push(0)
             }
         }
         let index = object.day.findIndex((e) => e === date.format("YYYY-MM-DD")) //Checks if date is in date array
-        if(index === -1){ // if date is not in array and either adds it or updates amount.
+        if (index === -1) { // if date is not in array and either adds it or updates amount.
             object.day.push(date.format("YYYY-MM-DD"))
             object.amount.push(commit.payload.commits.length)
-        }else{
+        } else {
             object.amount[index] += commit.payload.commits.length
         }
     }
