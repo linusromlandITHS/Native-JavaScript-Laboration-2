@@ -33,8 +33,6 @@ inputField.addEventListener("input", async (event) => {
         search.forEach(searchItem => {
             if (!autoCompleteSearches.includes(searchItem.login)) autoCompleteSearches.push(searchItem.login)
         });
-        console.log(autoCompleteJS)
-        console.log(autoCompleteSearches);
         initAutocomplete();
     }
 })
