@@ -27,41 +27,34 @@ loading = (done) => {
 }
 
 commitsToChart = (commitArray) => {
-    console.log(JSON.parse(JSON.stringify(commitArray)))
-    commitArray = commitArray.reverse();
+    commitArray = commitArray.reverse(); //reverse array to get oldest first
     let object = {
         amount: [],
         day: []
     }
-    //  for (let i = 0; i < commitArray.length; i++) { //Loops through commits
-    //      const commit = commitArray[i];
-    //      for (let j = 1; j < commitArray.length; j++) {
-    //          const event = commitArray[j];
-    //          if (commit.created_at.split("T")[0] === event.created_at.split("T")[0]) {
-    //              commit.payload.commits = commit.payload.commits.concat(event.payload.commits)
-    //              commitArray.splice(j, 1)
-    //              j--
-    //          }
-    //      }
-    //      let uniqueCommits = commit.payload.commits.filter(function (item, pos) {
-    //          return commit.payload.commits.indexOf(item) == pos;
-    //      })
-    //      object.amount.push(uniqueCommits.length)
-    //      object.day.push(commit.created_at.split("T")[0])
-    //  }
 
-    for (let i = 0; i < commitArray.length; i++) {
-        let results = commitArray.filter(function (commit) {
-            return commit.created_at.split("T")[0] === commitArray[i].created_at.split("T")[0];
-        });
-        let amount = 0;
-        results.forEach(result => amount += result.payload.commits.length)
-        object.amount[i] = amount;
-        object.day[i] = results[0].created_at.split("T")[0]
-
-        commitArray.splice(0, results.length)
+    for (let i = 0; i < commitArray.length; i++) { //Loops through commits
+        const commit = commitArray[i];
+        let date = moment(commit.created_at.split("T")[0]) //Converts date to momentObject
+        let diff = date.diff(moment(object.day[object.day.length - 1]), "days")
+        if(diff > 1){
+            let newDate = moment(object.day[object.day.length - 1])
+            for (let i = 0; i < diff -1; i++) {
+                newDate.add(1, "days")
+                object.day.push(newDate.format("YYYY-MM-DD"))
+                object.amount.push(0)    
+            }
+        }
+        let index = object.day.findIndex((e) => e === date.format("YYYY-MM-DD")) //Checks if date is in date array
+        if(index === -1){ // if date is not in array and either adds it or updates amount.
+            object.day.push(date.format("YYYY-MM-DD"))
+            object.amount.push(commit.payload.commits.length)
+        }else{
+            object.amount[index] += commit.payload.commits.length
+        }
     }
-
+    console.log(object)
+    return object
 }
 
 renderChart = (dataPoints, categories, selector, type, name) => {
