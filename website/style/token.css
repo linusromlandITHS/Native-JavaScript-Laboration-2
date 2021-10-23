@@ -1,0 +1,47 @@
+body {
+    background-color: #F2EEE4;
+}
+
+#main {
+    min-height: 95vh;
+}
+
+#addToken {
+    width: 40%;
+}
+
+#title {
+    color: #5065A8;
+}
+
+#title,
+#infoText {
+    margin-bottom: 1rem
+}
+
+#inputFields {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    background-color: #5065A8;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 100%;
+    transition: all 0.2s;
+}
+
+.button:hover {
+    background-color: rgba(80, 101, 168, 0.7);
+}
+
+.button:active {
+    transform: scale(0.9);
+}
+

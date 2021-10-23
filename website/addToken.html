@@ -6,30 +6,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Token - Github Statistics</title>
+
+    <!-- Import of Global CSS Stylesheet -->
+    <link rel="stylesheet" href="style/global.css">
+
+    <!-- Import of Token CSS Stylesheet -->
+    <link rel="stylesheet" href="style/token.css">
+
+    <!-- Import of CSS Stylesheet for Footer -->
+    <link rel="stylesheet" href="style/footer.css">
+
+    <!-- Import of JavaScript for token  -->
+    <script src="js/addToken.js" defer></script>
 </head>
 
 <body>
-    <p>Github Statistics - Add Token</p>
-    <p>This will grant you 5000 request per hour instead of the standard 60 to GitHub.</p>
-    <form>
-        <input type="text" id="GithubUsername" placeholder="Github Username">
-        <input type="text" id="GithubPersonalToken" placeholder="Github Personal Token">
-        <input type="submit" value="Add Token">
-    </form>
-    <script>
-        const form = document.querySelector("form")
-        const GithubUsername = document.querySelector("#GithubUsername")
-        const GithubPersonalToken = document.querySelector("#GithubPersonalToken")
+    <div id="main" class="center">
+        <div id="addToken" class="center">
+            <h1 id="title">Github Statistics - Add Token</h1>
+            <p id="infoText">This will grant you 5000 requests per hour instead of the default 60 requests per hour when unauthenticated.
+                <br>
+                To authenticate you need to add your GitHub Personal Token. (<b>Note:</b> The personal token does not need any
+                permissons! Leave it all empty). Your Personal Token is saved in Local Storage in your browser and never
+                leaves your computer.
+                <br>To create a Personal Token go to <a href="http://github.com/">GitHub</a> and then head over
+                to settings. In the development settings you find Personal access tokens. Click Generate New Token.</p>
+            <form class="center">
+                <div id="inputFields">
+                    <input type="text" id="GithubUsername" class="input-field" placeholder="Github Username">
+                    <input type="text" id="GithubPersonalToken" class="input-field" placeholder="Github Personal Token">
+                </div>
+                <input type="submit" value="Add Token" class="button">
+            </form>
+        </div>
+    </div>
 
-        form.addEventListener("submit", async event => {
-            event.preventDefault();
-            if (GithubPersonalToken && GithubUsername) {
-                await localStorage.setItem("githubusername", GithubUsername.value)
-                await localStorage.setItem("githubpersonaltoken", GithubPersonalToken.value)
-                window.location = "index.html"
-            }
-        })
-    </script>
+    <!-- Footer -->
+    <footer>
+        <div>
+            Created by Linus Romland
+        </div>
+        <div>
+            Source Code is available on
+            <a href="https://github.com/linusromland-ITHS/Native-JavaScript-Laboration-2">GitHub</a>.
+        </div>
+        <div>
+            All data is from
+            <a href="https://github.com/">GitHub</a> and retrieved using
+            <a href="https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api">GitHub's API</a>
+        </div>
+    </footer>
 </body>
 
 </html>
