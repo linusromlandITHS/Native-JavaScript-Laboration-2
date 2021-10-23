@@ -1,0 +1,25 @@
+footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    height: 5vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media only screen and (max-width: 600px) {
+    footer {
+        flex-direction: column;
+        font-size: 15px;
+        height: 70px
+    }
+
+    footer>div:first-child {
+        padding-top: 10px;
+    }
+
+    footer>div:last-child {
+        padding-bottom: 10px;
+    }
+}

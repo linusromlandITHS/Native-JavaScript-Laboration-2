@@ -23,6 +23,9 @@
     <!-- Import of CSS Stylesheet for index -->
     <link rel="stylesheet" href="style/index.css">
 
+    <!-- Import of CSS Stylesheet for Footer -->
+    <link rel="stylesheet" href="style/footer.css">
+
     <!-- Import of Autocomplete.js -->
     <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
     <link rel="stylesheet"
@@ -36,12 +39,11 @@
             <div id="spacerLine"></div>
             <h1 id="title">GitHub Statistics</h1>
             <form id="searchForm" class="center">
-                <input type="text" id="searchBar" autocomplete="off" required>
+                <input type="text" id="searchBar" class="input-field" autocomplete="off" required>
                 <ul id="historySearches" hidden>
                 </ul>
                 <input type="submit" hidden>
             </form>
-
 
             <div id="error" hidden>
                 <p id="userError" hidden>No user found with that name!</p>

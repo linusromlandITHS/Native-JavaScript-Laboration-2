@@ -106,18 +106,4 @@ ul {
     #searchBar {
         width: 75vw !important;
     }
-
-    footer {
-        flex-direction: column;
-        font-size: 15px;
-        height: 70px
-    }
-
-    footer>div:first-child {
-        padding-top: 10px;
-    }
-
-    footer>div:last-child {
-        padding-bottom: 10px;
-    }
 }
