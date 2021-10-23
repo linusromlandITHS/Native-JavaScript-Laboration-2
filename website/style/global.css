@@ -4,4 +4,13 @@
     margin: 0;
     padding: 0;
     font-family: 'Lato', sans-serif;
+    color: black;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 }

@@ -68,13 +68,6 @@ a {
     color: black;
 }
 
-.center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
 footer {
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     height: 5vh;
