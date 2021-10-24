@@ -1,23 +1,38 @@
 const usernameTag = document.querySelector("#username")
 const loadingArea = document.querySelector("#loadingArea")
 const main = document.querySelector("#main")
+const noOfCommits = document.querySelector("#noOfCommits")
 
 let user;
 let name;
+
 window.onload = async () => {
+    //Convert URL to Params
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
+
+    //Gets user from GitHub API
     let user = await getUser(params.user);
     if (!user) window.location = "index.html"
     console.log("Loaded user data!")
+
+    //Sets varible "name" to login or Username if exsits.
     name = user.name ? user.name : user.login;
     document.title = `${user.login} - Github Statistics`
     username.textContent = name
-    loading(true)
+
     let commits = await getCommits(user.login)
     let chartData = await commitsToChart(commits)
+    await renderChart(chartData.amount, chartData.day, "#chart", "line", "Commits")
 
-    renderChart(chartData.amount, chartData.day, "#chart", "line", "Commits")
+    loading(true)
+    let noOfCommitsNum = 0;
+    chartData.amount.forEach(amount => {
+        noOfCommitsNum += parseInt(amount)
+        console.log(amount)
+    });
+    noOfCommits.textContent = `Commits (${chartData.day[0]} - ${chartData.day[chartData.day.length -1]}): ${noOfCommitsNum}`
+
 }
 
 loading = (done) => {
