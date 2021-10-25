@@ -1,5 +1,5 @@
 # Stuff to add
-- [ X ] chart.js Last months commits
+- [X] chart.js Last months commits
 - [ ] Last 5 commits, show message, date and repo(user)
 - [ ] Show title and description (alternative name and bio on profile)
 - [ ] Show Top Languages
