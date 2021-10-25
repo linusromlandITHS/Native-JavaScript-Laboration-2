@@ -44,7 +44,7 @@ searchUser = async (username) => {
     return users;
 }
 
-getCommits = async (user) => {
+getEvents = async (user) => {
     let i = 1;
     let commits = []
     while (true) {

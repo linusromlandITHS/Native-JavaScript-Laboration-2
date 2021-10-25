@@ -1,12 +1,12 @@
+// Retrives of HTML DOM elements
 const nameTag = document.querySelector("#name")
-const usernameTag = document.querySelector("#username")
-const loadingArea = document.querySelector("#loadingArea")
-const main = document.querySelector("#main")
-const noOfCommits = document.querySelector("#noOfCommits")
-const popularRepos = document.querySelector("#popularRepos")
+usernameTag = document.querySelector("#username")
+loadingArea = document.querySelector("#loadingArea")
+main = document.querySelector("#main")
+commitAmount = document.querySelector("#commitAmount")
+topRepositories = document.querySelector("#topRepositories")
 
-let user;
-let name;
+let user, name;
 
 window.onload = async () => {
     //Convert URL to Params
@@ -16,57 +16,102 @@ window.onload = async () => {
     //Gets user from GitHub API
     let user = await getUser(params.user);
     if (!user) window.location = "index.html"
-    console.log("Loaded user data!")
-    console.log(user)
 
+
+    let events = await getEvents(user.login)
+    let chartData = await eventArrayToChart(events)
+    await renderChart(chartData.amount, chartData.day, "#chart", "line", "Commits")
+
+    displayName(user)
+    displayTopRepos(chartData.topRepositories)
+    displayCommitAmount(chartData)
+
+    loading(true)
+}
+
+/**
+ * @param  {boolean} done indicates whether loading is complete or not.
+ * 
+ * Shows or hides the main content is loading
+ */
+loading = (done) => {
+    main.hidden = done ? false : true;
+    loadingArea.hidden = done ? true : false
+}
+
+/**
+ * @param  {object} user Object containing the user information
+ * 
+ * Sets the username DOMs and updated metadata.
+ */
+displayName = (user) => {
     //Sets varible "name" to login or Username if exsits.
     name = user.name ? user.name : user.login;
     document.title = `${user.login} - Github Statistics`
     nameTag.textContent = name
+
+    //If GitHub profile has name set, shows login name in other field.
     if (user.name) {
         usernameTag.textContent = user.login
         usernameTag.hidden = false;
     }
 
-    let commits = await getCommits(user.login)
-    let chartData = await commitsToChart(commits)
-    await renderChart(chartData.amount, chartData.day, "#chart", "line", "Commits")
-    let amount = chartData.popularRepositories.length > 5 ? 5 : chartData.popularRepositories.length
+    document.querySelector('meta[name="description"]').setAttribute("content", `Github Statistics for user ${user.login}`);
+}
+
+/**
+ * @param  {array} arr Object array of the top repositories
+ * 
+ * Loops through the top repositories (max 5) and displays them in the DOM.
+ */
+displayTopRepos = (arr) => {
+    let amount = arr.length > 5 ? 5 : arr.length
+
+    topRepositories.hidden = false;
     for (let i = 0; i < amount; i++) {
-        popularRepos.hidden = false;
-        const element = chartData.popularRepositories[i];
+        const element = arr[i];
         let li = document.createElement("li");
         li.textContent = `Repo: ${element.repo} (Commits: ${element.amount})`
-        popularRepos.appendChild(li)
+        topRepositories.appendChild(li)
     }
+}
 
-    loading(true)
-    let noOfCommitsNum = 0;
-    chartData.amount.forEach(amount => {
-        noOfCommitsNum += parseInt(amount)
-    });
-    noOfCommits.textContent = `Commits (${chartData.day[0]} - ${chartData.day[chartData.day.length -1]}): ${noOfCommitsNum}`
+/**
+ * @param  {object} data Object containing all commits (amount and day)
+ * 
+ * Adds all commmits to one number and displays in DOM.
+ */
+displayCommitAmount = (data) => {
+    let commits = data.amount.length > 0;
+    if (commits) {
+        data.amount.forEach(amount => {
+            commits += parseInt(amount)
+        });
+        commitAmount.textContent = `Commits (${data.day[0]} - ${data.day[data.day.length -1]}): ${commits}`
+        commitAmount.hidden = false;
+    }
+}
 
 }
 
-loading = (done) => {
+/**
+ * @param  {array} eventArray Array of Events directly from GitHub's API
+ * 
+ * Converts the eventArray from GitHub's API to a object with the amount of commits each day and the total number of commits in each repository.
+ */
+eventArrayToChart = (eventArray) => {
+    eventArray = eventArray.reverse(); //reverse array to get oldest first
 
-    main.hidden = done ? false : true;
-    loadingArea.hidden = done ? true : false
-}
-
-commitsToChart = (commitArray) => {
-    commitArray = commitArray.reverse(); //reverse array to get oldest first
     let object = {
         amount: [],
         day: [],
-        popularRepositories: null,
+        topRepositories: null,
     }
 
-    let popularRepositories = []
+    let topRepositories = []
 
-    for (let i = 0; i < commitArray.length; i++) { //Loops through commits
-        const commit = commitArray[i];
+    for (let i = 0; i < eventArray.length; i++) { //Loops through commits
+        const commit = eventArray[i];
         let date = moment(commit.created_at.split("T")[0]) //Converts date to momentObject
         let diff = date.diff(moment(object.day[object.day.length - 1]), "days")
         if (diff > 1) {
@@ -85,36 +130,50 @@ commitsToChart = (commitArray) => {
             object.amount[index] += commit.payload.commits.length
         }
 
-        let repoIndex = popularRepositories.findIndex((e) => e.repo === commit.repo.name) //Checks if repo is in repo array
+        let repoIndex = topRepositories.findIndex((e) => e.repo === commit.repo.name) //Checks if repo is in repo array
         if (repoIndex === -1) {
-            popularRepositories.push({
-                repo : commit.repo.name,
-                amount : commit.payload.commits.length
+            topRepositories.push({
+                repo: commit.repo.name,
+                amount: commit.payload.commits.length
             })
         } else {
-            popularRepositories[repoIndex].amount += commit.payload.commits.length
+            topRepositories[repoIndex].amount += commit.payload.commits.length
         }
     }
-    popularRepositories.sort((a, b) => b.amount - a.amount)
-    object.popularRepositories = popularRepositories
+
+    topRepositories.sort((a, b) => b.amount - a.amount) // Sorts array by no of commits
+    object.topRepositories = topRepositories //Sets topRepositories to topRepositories in object
+
     return object
 }
 
+/**
+ * @param  {array} dataPoints Data points for chart
+ * @param  {array} categories Categories for chart
+ * @param  {string} selector Selector (id, class etc. of DOM) to insert chart to
+ * @param  {string} type Type of chart (line etc.)
+ * @param  {string} name Name of Chart
+ * 
+ * Renders Chart to choosen DOM with inputed data
+ */
 renderChart = (dataPoints, categories, selector, type, name) => {
-    var options = {
-        chart: {
-            type: type
-        },
-        series: [{
-            name: name,
-            data: dataPoints
-        }],
-        xaxis: {
-            categories: categories
+    if (dataPoints.length > 0) {
+        var options = {
+            chart: {
+                type: type
+            },
+            series: [{
+                name: name,
+                data: dataPoints
+            }],
+            xaxis: {
+                categories: categories
+            }
         }
+
+        var chart = new ApexCharts(document.querySelector(selector), options);
+
+        chart.render();
+        document.querySelector(selector).hidden = false;
     }
-
-    var chart = new ApexCharts(document.querySelector(selector), options);
-
-    chart.render();
 }
