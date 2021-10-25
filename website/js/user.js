@@ -28,17 +28,23 @@ window.onload = async () => {
     displayCommitAmount(chartData)
     displayProfilePicture(user)
 
-    loading(true)
+    let fakeloading = true;
+    setTimeout(() => {
+        fakeloading = false;
+        loading(true)
+    }, 1000)
+
+    if(!fakeloading)loading(true)
 }
 
 /**
- * @param  {boolean} done indicates whether loading is complete or not.
  * 
- * Shows or hides the main content is loading
+ * Shows the main content and hides loading display
  */
-loading = (done) => {
-    main.hidden = done ? false : true;
-    loadingArea.hidden = done ? true : false
+loading = () => {
+    console.log("Loading complete!")
+    main.hidden = false;
+    loadingArea.style.display = "none"
 }
 
 /**

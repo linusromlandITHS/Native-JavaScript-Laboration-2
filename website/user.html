@@ -19,6 +19,9 @@
     <!-- Import of CSS Stylesheet for user -->
     <link rel="stylesheet" href="style/user.css">
 
+    <!-- Import of CSS Stylesheet for loading display -->
+    <link rel="stylesheet" href="style/loading.css">
+
     <!-- Import of ApexCharts -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
@@ -33,14 +36,19 @@
 </head>
 
 <body>
-    <a href="index.html">Home</a>
-    <div id="loadingArea">Loading...</div>
+    <div id="loadingArea">
+        <div id="loader"></div>
+        <h1>Loading user statistics</h1>
+    </div>
     <div id="main" hidden>
-        <img src="#" alt="Profile Picture" id="profilePicture"> 
+        <a href="index.html">Home</a>
+        <img src="#" alt="Profile Picture" id="profilePicture">
         <h1 id="name"></h1>
         <p id="username" hidden></p>
         <p id="commitAmount" hidden></p>
-        <ul id="topRepositories" hidden><h1>Popular Repositories</h1></ul>
+        <ul id="topRepositories" hidden>
+            <h1>Popular Repositories</h1>
+        </ul>
         <div id="chart" hidden></div>
     </div>
 </body>
