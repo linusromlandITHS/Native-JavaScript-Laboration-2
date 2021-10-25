@@ -11,7 +11,7 @@
 `Github Statistics` will become a website that will display statistics of your user or repository on GitHub.
 It is written without a JavaScript Framework as a final assignment in the Course `Native JavaScript`.
 
-# Additions to come
+## Additions to come
 - [X] chart.js Last months commits
 - [ ] Last 5 commits, show message, date and repo(user)
 - [ ] Show title and description (alternative name and bio on profile)
