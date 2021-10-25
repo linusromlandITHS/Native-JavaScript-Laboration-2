@@ -4,7 +4,7 @@
 - [ ] Show title and description (alternative name and bio on profile)
 - [ ] Show Top Languages
 - [ ] On repo show top contributiors based on commits
-- [ ] Starts
+- [ ] Stars
 - [ ] no of commits (last year on profile)
 - [ ] issues (both no and latest open)
 - [ ] pull requests (both no and latest open)
