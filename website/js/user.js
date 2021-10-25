@@ -16,6 +16,7 @@ window.onload = async () => {
 
     //Gets user from GitHub API
     let user = await getUser(params.user);
+    //Redirects client if user not found
     if (!user) window.location = "index.html"
 
 
@@ -34,7 +35,7 @@ window.onload = async () => {
         loading(true)
     }, 1000)
 
-    if(!fakeloading)loading(true)
+    if (!fakeloading) loading(true)
 }
 
 /**
