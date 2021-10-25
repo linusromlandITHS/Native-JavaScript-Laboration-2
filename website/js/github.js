@@ -1,17 +1,17 @@
-let params = {
-    headers: {}
-};
-
 const githubUsername = localStorage.getItem("githubusername")
 const githubpersonaltoken = localStorage.getItem("githubpersonaltoken")
 
+let params = {};
 
-if (githubUsername && githubpersonaltoken) { //If available in local storage
-    params.headers = {
-        "Authorization": `${githubUsername}:${githubpersonaltoken}`
-    }
+if (githubUsername && githubpersonaltoken) params.headers = {
+    "Authorization": `${githubUsername}:${githubpersonaltoken}`
 }
 
+/**
+ * @param  {string} username github accounts username 
+ * 
+ * Retrives Github User from GitHub's API
+ */
 getUser = async (username) => {
     let request = await fetch(`https://api.github.com/users/${username}`, params)
     outOfRequests(request)
@@ -20,6 +20,11 @@ getUser = async (username) => {
     return data;
 }
 
+/**
+ * @param  {string} repo github repo name 
+ * 
+ * Retrives Github Repository from GitHub's API
+ */
 getRepo = async (repo) => {
     let request = await fetch(`https://api.github.com/repos/${repo}`, params)
     outOfRequests(request)
@@ -28,6 +33,11 @@ getRepo = async (repo) => {
     return data;
 }
 
+/**
+ * @param  {string} username
+ * 
+ * Searches for username that matches input in GitHub's API
+ */
 searchUser = async (username) => {
     const request = await fetch(`https://api.github.com/search/users?q=${username}`, params)
     outOfRequests(request)
@@ -44,6 +54,11 @@ searchUser = async (username) => {
     return users;
 }
 
+/**
+ * @param  {string} user github accounts username
+ * 
+ * Retrives all events for user from GitHub's API
+ */
 getEvents = async (user) => {
     let i = 1;
     let commits = []
@@ -65,6 +80,11 @@ getEvents = async (user) => {
     return commits;
 }
 
+/**
+ * @param  {Response} request response object from fetch request
+ * 
+ * Checks if your out of request on GitHub's API and displays error if you're out.
+ */
 outOfRequests = (request) => {
     if (request.status === 403) {
         let path = `${window.location.origin + window.location.pathname.substring(0,window.location.pathname.length-9)}getToken.html`
