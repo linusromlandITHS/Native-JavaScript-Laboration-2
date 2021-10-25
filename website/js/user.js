@@ -5,6 +5,7 @@ loadingArea = document.querySelector("#loadingArea")
 main = document.querySelector("#main")
 commitAmount = document.querySelector("#commitAmount")
 topRepositories = document.querySelector("#topRepositories")
+profilePicture = document.querySelector("#profilePicture")
 
 let user, name;
 
@@ -25,6 +26,7 @@ window.onload = async () => {
     displayName(user)
     displayTopRepos(chartData.topRepositories)
     displayCommitAmount(chartData)
+    displayProfilePicture(user)
 
     loading(true)
 }
@@ -92,6 +94,13 @@ displayCommitAmount = (data) => {
     }
 }
 
+/**
+ * @param  {object} user Object containing the user information
+ * 
+ * Displays the profile picture of user in image DOM
+ */
+displayProfilePicture = (user) => {
+    profilePicture.setAttribute('src', user.avatar_url)
 }
 
 /**
