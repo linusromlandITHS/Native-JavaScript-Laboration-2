@@ -39,19 +39,35 @@
     <!-- Edit Modal -->
     <div id="editModal" class="modal">
         <div class="modal-content">
-            <input type="text" id="editCityName" placeholder="City" autocomplete="off">
-            <input type="number" id="editCityPopulation" placeholder="Population" autocomplete="off" min="0">
-            <button><span class="material-icons">save</span> Save</button>
-            <button><span class="material-icons">cancel</span>Cancel</button>
+            <h2>Edit City</h2>
+            <section>
+                <label for="editCityName">City name:</label>
+                <input type="text" id="editCityName" placeholder="City" autocomplete="off">
+            </section>
+            <section>
+                <label for="editCityPopulation">City population:</label>
+                <input type="number" id="editCityPopulation" placeholder="Population" autocomplete="off" min="0">
+            </section>
+            <div class="button-wrapper">
+                <button id="saveBtn"><span class="material-icons">save</span>
+                    <p>Save</p>
+                </button>
+                <button id="editCancel"><span class="material-icons">cancel</span>
+                    <p>Cancel</p>
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Delete Modal -->
     <div id="deleteModal" class="modal">
         <div class="modal-content">
-            <h1>Delete city</h1>
-            <button></button>
-            <button>No, save the city!</button>
+            <h2>Delete city</h2>
+            <p id="delConfirmText"></p>
+            <div class="button-wrapper">
+                <button id="delBtn"></button>
+                <button id="delCancel">No, don't delete.</button>
+            </div>
         </div>
     </div>
 </body>

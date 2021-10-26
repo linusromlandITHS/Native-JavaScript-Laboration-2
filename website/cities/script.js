@@ -20,13 +20,13 @@ window.onload = () => {
     // setInterval(renderCitites, 5000);
 }
 
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == editModal) {
         editModal.children[0].style.animation = "shake 0.5s"
-    }else if(event.target == deleteModal){
-        deleteModal.children[0].style.animation = "shake 0.5s"
+    } else if (event.target == deleteModal) {
+        deleteModal.children[0].style.animation = "shake 0.512s"
     }
-  } 
+}
 
 /**
  * Runs on submit from main form and creates a new city
@@ -169,12 +169,15 @@ editCityValue = async (name, pop, object) => {
  * Updates the edit modal to correct values
  */
 updateEditModal = (object) => {
-    editModal.children[0].children[0].value = object.name
-    editModal.children[0].children[1].value = object.population
-    editModal.children[0].children[2].onclick = () => {
-        editCityValue(editModal.children[0].children[0], editModal.children[0].children[1], object)
+    const editCityName = document.querySelector("#editCityName")
+    const editCityPopulation = document.querySelector("#editCityPopulation")
+
+    editCityName.value = object.name
+    editCityPopulation.value = object.population
+    document.querySelector("#saveBtn").onclick = () => {
+        editCityValue(editCityName, editCityPopulation, object)
     }
-    editModal.children[0].children[3].onclick = () => {
+    document.querySelector("#editCancel").onclick = () => {
         changeVisibilityModal(editModal)
     }
 
@@ -187,13 +190,14 @@ updateEditModal = (object) => {
  * Updates the delete modal to correct values
  */
 updateDeleteModal = (object) => {
+    const delBtn = document.querySelector("#delBtn")
     changeVisibilityModal(deleteModal)
-    deleteModal.children[0].children[0].textContent = `You are about to delete the city ${object.name}! Are you sure you want to do this?`
-    deleteModal.children[0].children[1].textContent = `Yes, delete the city ${object.name}`
-    deleteModal.children[0].children[1].onclick = () => {
+    document.querySelector("#delConfirmText").textContent = `You are about to delete the city ${object.name}! Are you sure you want to do this?`
+    delBtn.textContent = `Yes, delete the city ${object.name}`
+    delBtn.onclick = () => {
         deleteCity(object.id)
     }
-    deleteModal.children[0].children[2].onclick = () => {
+    document.querySelector("#delCancel").onclick = () => {
         changeVisibilityModal(deleteModal)
     }
 }

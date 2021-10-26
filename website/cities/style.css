@@ -4,7 +4,6 @@
     margin: 0;
     padding: 0;
     font-family: 'Lato', sans-serif;
-    color: black;
 }
 
 body {
@@ -17,7 +16,7 @@ body {
     align-items: center;
 }
 
-h1{
+h1 {
     margin: 2rem;
 }
 
@@ -30,7 +29,7 @@ h1{
     color: rgb(0, 128, 0);
 }
 
-#form-wrapper{
+#form-wrapper {
     text-align: center;
 }
 
@@ -41,6 +40,7 @@ button {
 
 .card {
     background-color: #5065A8;
+    color: rgb(226, 226, 226);
     margin: 1rem;
     width: 20rem;
     display: flex;
@@ -60,6 +60,9 @@ button {
 .card>div:first-child {
     margin: 1rem;
     width: 15em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .card>div:first-child>p {
@@ -96,13 +99,14 @@ input[type="number"] {
     font-size: 100%;
 }
 
-input[type="submit"], button{
-    font-size:100%;
+input[type="submit"],
+button {
+    font-size: 100%;
     border: 0;
     background-color: #d5d6d6;
     outline: 0;
     margin: 5px;
-    padding: 15px 20px;
+    padding: 10px 10px;
     border-radius: 8px;
 }
 
@@ -131,25 +135,59 @@ input[type="submit"], button{
     padding: 20px;
     border: 1px solid #888;
     width: 30%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    user-select: none;
 }
 
-.modal-content > button {
-    width: 40%;
-    display: inline;
+.modal-content>h2 {
+    text-align: center1;
+}
+
+.modal-content>section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.button-wrapper>button {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     cursor: pointer;
 }
 
-.modal-content > button:hover{
+.button-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content>button:hover {
     opacity: 0.8;
 }
 
-.modal-content > input{
+.modal-content>input {
     width: 80%;
+}
+
+#delBtn, #delCancel{
+    width: 40%;
+    overflow: hidden;
+    padding: 1em
+}
+
+/* STOLEN FROM https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 @keyframes shake {
