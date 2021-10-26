@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cities</title>
+
+    <!-- Import of CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Import of JavaScript -->
+    <script src="script.js" defer></script>
+
+    <!-- Import of Google Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+    <div id="main">
+        <h1>Add a city to the Cities API provided by Avancera!</h1>
+        <div id="form-wrapper">
+            <form>
+                <input type="text" placeholder="City" autocomplete="off">
+                <input type="number" placeholder="Population" autocomplete="off" min="0">
+                <input type="submit" value="Add cities">
+            </form>
+            <div id="response" hidden>
+            </div>
+        </div>
+        <ul id="cities-wrapper">
+
+        </ul>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <input type="text" placeholder="City" autocomplete="off">
+            <input type="number" placeholder="Population" autocomplete="off" min="0">
+            <button><span class="material-icons">save</span></button>
+        </div>
+    </div>
+    <!-- Delete Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <p></p>
+            <button></button>
+            <button>No, save the city!</button>
+        </div>
+    </div>
+</body>
+
+</html>
