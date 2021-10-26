@@ -17,6 +17,10 @@ body {
     align-items: center;
 }
 
+h1{
+    margin: 2rem;
+}
+
 .errorMessage {
     color: rgb(255, 30, 30);
     animation: shake 0.8s;
@@ -24,6 +28,10 @@ body {
 
 .successMessage {
     color: rgb(0, 128, 0);
+}
+
+#form-wrapper{
+    text-align: center;
 }
 
 button {
@@ -75,6 +83,30 @@ button {
     cursor: pointer;
 }
 
+input[type="text"],
+input[type="number"] {
+    margin: 5px;
+    padding-left: 20px;
+    color: #7b7b7b;
+    border-radius: 8px;
+    border: 0;
+    outline: 0;
+    background-color: #f1f3f4;
+    transition: all 0.2s;
+    height: 50px !important;
+    font-size: 100%;
+}
+
+input[type="submit"], button{
+    font-size:100%;
+    border: 0;
+    background-color: #d5d6d6;
+    outline: 0;
+    margin: 5px;
+    padding: 15px 20px;
+    border-radius: 8px;
+}
+
 #cities-wrapper {
     width: 90vw;
     display: flex;
@@ -98,7 +130,16 @@ button {
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 30%;
+}
+
+.modal-content > button {
+    width: 40%;
+    display: inline;
+    cursor: pointer;
+}
+.modal-content > button:hover{
+    opacity: 0.8;
 }
 
 .close {

@@ -166,8 +166,13 @@ updateEditModal = (object) => {
     editModal.children[0].children[2].onclick = () => {
         editCityValue(editModal.children[0].children[0], editModal.children[0].children[1], object)
     }
+    editModal.children[0].children[3].onclick = () => {
+        changeVisibilityModal(editModal)
+    }
+
     changeVisibilityModal(editModal)
 }
+
 /**
  * @param  {object} object Input of city object from Avancera API
  * 

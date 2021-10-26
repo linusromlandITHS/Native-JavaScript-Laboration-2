@@ -19,13 +19,15 @@
 
 <body>
     <div id="main">
-        <h1>Add a city to the Cities API provided by Avancera!</h1>
+        <h1>Cites, powered by Avancera API</h1>
         <div id="form-wrapper">
+            <p>Add your city below!</p>
             <form>
                 <input type="text" placeholder="City" autocomplete="off">
                 <input type="number" placeholder="Population" autocomplete="off" min="0">
-                <input type="submit" value="Add cities">
+                <input type="submit" value="Add city">
             </form>
+            <p><b>Note:</b> The database is cleared every 20 minutes!</p>
             <div id="response" hidden>
             </div>
         </div>
@@ -39,13 +41,15 @@
         <div class="modal-content">
             <input type="text" placeholder="City" autocomplete="off">
             <input type="number" placeholder="Population" autocomplete="off" min="0">
-            <button><span class="material-icons">save</span></button>
+            <button><span class="material-icons">save</span> Save</button>
+            <button><span class="material-icons">cancel</span>Cancel</button>
         </div>
     </div>
+
     <!-- Delete Modal -->
     <div id="deleteModal" class="modal">
         <div class="modal-content">
-            <p></p>
+            <h1>Delete city</h1>
             <button></button>
             <button>No, save the city!</button>
         </div>
