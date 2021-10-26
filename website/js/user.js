@@ -103,7 +103,11 @@ displayCommitAmount = (data) => {
         commitAmount.hidden = false;
     }
 }
-
+/**
+ * @param  {array} arr Array Containing latest events
+ * 
+ * Converts latest events (input) and then displays 5 latest commits
+ */
 displayLatestCommits = (arr) => {
     arr = arr.reverse();
 
@@ -136,7 +140,14 @@ displayLatestCommits = (arr) => {
         message.textContent = `${element.commit.message}`
 
         let date = document.createElement("p")
-        date.textContent = `${moment(element.commitInformation.created_at).calendar()}`
+        date.textContent = `${moment(element.commitInformation.created_at).calendar(null, {
+            lastDay : '[Yesterday at] HH:mm',
+            sameDay : '[Today at] HH:mm',
+            nextDay : '[Tomorrow at] HH:mm',
+            lastWeek : '[last] dddd [at] HH:mm',
+            nextWeek : 'dddd [at] HH:mm',
+            sameElse : 'L'
+        })}`
 
         li.appendChild(title)
         li.appendChild(message)
