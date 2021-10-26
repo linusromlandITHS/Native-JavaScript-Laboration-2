@@ -46,8 +46,7 @@ inputField.addEventListener("input", async (event) => {
  */
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const value = inputField.value;
-    search(value)
+    search(inputField.value)
 });
 
 /**

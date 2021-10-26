@@ -6,6 +6,7 @@ main = document.querySelector("#main")
 commitAmount = document.querySelector("#commitAmount")
 topRepositories = document.querySelector("#topRepositories")
 profilePicture = document.querySelector("#profilePicture")
+latestCommits = document.querySelector("#latestCommits")
 
 let user, name;
 
@@ -24,10 +25,12 @@ window.onload = async () => {
     let chartData = await eventArrayToChart(events)
     await renderChart(chartData.amount, chartData.day, "#chart", "line", "Commits")
 
+    //Displays diffrent information on load of site
     displayName(user)
     displayTopRepos(chartData.topRepositories)
     displayCommitAmount(chartData)
     displayProfilePicture(user)
+    displayLatestCommits(events)
 
     let fakeloading = true;
     setTimeout(() => {
@@ -76,11 +79,11 @@ displayName = (user) => {
 displayTopRepos = (arr) => {
     let amount = arr.length > 5 ? 5 : arr.length
 
-    topRepositories.hidden = false;
+    if (amount) topRepositories.hidden = false;
     for (let i = 0; i < amount; i++) {
         const element = arr[i];
         let li = document.createElement("li");
-        li.textContent = `Repo: ${element.repo} (Commits: ${element.amount})`
+        li.innerHTML = `Repo: <a href="https://github.com/${element.repo}/">${element.repo}</a> (Commits: ${element.amount})`
         topRepositories.appendChild(li)
     }
 }
@@ -98,6 +101,48 @@ displayCommitAmount = (data) => {
         });
         commitAmount.textContent = `Commits (${data.day[0]} - ${data.day[data.day.length -1]}): ${commits}`
         commitAmount.hidden = false;
+    }
+}
+
+displayLatestCommits = (arr) => {
+    arr = arr.reverse();
+
+    let commits = []
+    let i = 0;
+    while (commits.length < 5) {
+        if (arr[i].type === "PushEvent") { // Checkes that event is of type PushEvent.
+            arr[i].payload.commits.forEach(element => {
+                commits.push({
+                    commitInformation: arr[i],
+                    commit: element
+                })
+                commits[commits.length - 1].commitInformation.payload = {};
+            });
+            if (i > arr.length) break;
+        }
+        i++;
+    }
+    let amount = commits.length > 5 ? 5 : commits.length
+
+    if (amount) latestCommits.hidden = false;
+    for (let i = 0; i < amount; i++) {
+        const element = commits[i];        
+        let li = document.createElement("li");
+
+        let title = document.createElement("p")
+        title.textContent = `Pushed to repository ${element.commitInformation.repo.name}`
+
+        let message = document.createElement("p")
+        message.textContent = `${element.commit.message}`
+
+        let date = document.createElement("p")
+        date.textContent = `${moment(element.commitInformation.created_at).calendar()}`
+
+        li.appendChild(title)
+        li.appendChild(message)
+        li.appendChild(date)
+
+        latestCommits.appendChild(li)
     }
 }
 
