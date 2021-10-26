@@ -7,16 +7,93 @@
     color: black;
 }
 
-#main{
+body {
+    background-color: #F2EEE4;
+}
+
+#main {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.errorMessage{
-    color: red;
+.errorMessage {
+    color: rgb(255, 30, 30);
+    animation: shake 0.8s;
 }
 
-.successMessage{
-    color: green;
+.successMessage {
+    color: rgb(0, 128, 0);
+}
+
+button {
+    display: grid;
+    place-content: center;
+}
+
+.card {
+    background-color: #5065A8;
+    margin: 1rem;
+    min-width: 15rem;
+    display: flex;
+    padding: 0.4em;
+    justify-content: space-between;
+    transition: all 0.2s;
+    border-radius: 5px;
+    cursor: default;
+}
+
+.card:hover {
+    background-color: #697cb9;
+    box-shadow: 0px 0px 5px 2px gray;
+}
+
+.card>div:first-child {
+    margin: 1rem;
+}
+
+.card>div:first-child>p:first-child {
+    font-size: 1.5rem;
+}
+
+.card>div:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card>div:last-child>* {
+    margin: 0.1rem;
+    cursor: pointer;
+}
+
+#cities-wrapper {
+    width: 90vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+@keyframes shake {
+    10%,
+    90% {
+        transform: translate3d(-2px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-2px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(2px, 0, 0);
+    }
 }

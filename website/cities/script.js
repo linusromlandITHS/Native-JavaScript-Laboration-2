@@ -14,6 +14,8 @@ window.onload = () => {
 
     renderCitites()
 
+    setInterval(renderCitites, 5000);
+
 }
 
 form.addEventListener("submit", async (e) => {
@@ -29,12 +31,13 @@ form.addEventListener("submit", async (e) => {
             },
             method: 'POST'
         })
-        if(request.status === 201){
+        if (request.status === 201) {
             console.log(`Added city ${input.value} to Cities API`)
             responseMessage(`Added city "${input.value}" to Cities API`, "successMessage")
             input.value = ""
             populationInput.value = ""
-        }else{
+            renderCitites()
+        } else {
             let error = await request.json();
             console.log(`Error! ${error.error}`)
             responseMessage(`Error! ${error.error}`, "errorMessage")
@@ -57,7 +60,7 @@ responseMessage = (message, classes) => {
 renderCitites = async () => {
     let request = await fetch('https://avancera.app/cities/');
     let cities = await request.json();
-    
+
     //Clears previous cities
     citiesWrapper.innerHTML = ""
 
@@ -65,19 +68,33 @@ renderCitites = async () => {
         let container = document.createElement('div')
         container.classList = "card"
 
+        let textContainer = document.createElement('div')
+
         let cityName = document.createElement('p')
         cityName.textContent = city.name
 
         let cityPopulation = document.createElement('p')
-        cityPopulation.textContent = city.population
+        cityPopulation.textContent = `${city.population} inhabitants`
+
+        textContainer.append(cityName,cityPopulation)
+    
+        let buttonContainer = document.createElement('div')
 
         let editButton = document.createElement('button')
-        editButton.textContent = "Edit"
+        let editSpan = document.createElement('span')
+        editSpan.classList = "material-icons"
+        editSpan.textContent = "edit"
+        editButton.appendChild(editSpan)
 
         let deleteButton = document.createElement('button')
-        deleteButton.textContent = "Delete"
+        let deleteSpan = document.createElement('span')
+        deleteSpan.classList = "material-icons"
+        deleteSpan.textContent = "delete"
+        deleteButton.appendChild(deleteSpan)
 
-        container.append(cityName, cityPopulation, editButton, deleteButton)
+        buttonContainer.append(editButton, deleteButton)
+
+        container.append(textContainer, buttonContainer)
         citiesWrapper.appendChild(container)
     });
 }
@@ -85,7 +102,7 @@ renderCitites = async () => {
 /**
  * Function that checks if input fields are empty and enables disables button
  */
-checkStatus = () => {    
+checkStatus = () => {
     submitButton.disabled = !((input.value.length > 0) && (populationInput.value > 0))
 }
 
