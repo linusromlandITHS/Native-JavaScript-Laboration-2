@@ -36,19 +36,32 @@
 </head>
 
 <body>
+    <!-- Loading display  -->
     <div id="loadingArea">
         <div id="loader"></div>
         <h1>Loading user statistics</h1>
     </div>
+    <!-- Main Content (Shows after load) -->
     <div id="main" hidden>
+        <!-- Home button  (back to search) -->
         <a href="index.html">Home</a>
+
+        <!-- Profile Picture for Github User -->
         <img src="#" alt="Profile Picture" id="profilePicture">
+
+        <!-- Name and login name  -->
         <h1 id="name"></h1>
         <p id="username" hidden></p>
+
+        <!-- Current amount of commits for user -->
         <p id="commitAmount" hidden></p>
+
+        <!-- List with the top repositories (Generated in JS) -->
         <ul id="topRepositories" hidden>
             <h1>Popular Repositories</h1>
         </ul>
+
+        <!-- ApexCharts Container (Generated in JS) -->
         <div id="chart" hidden></div>
     </div>
 </body>

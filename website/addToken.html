@@ -21,15 +21,24 @@
 </head>
 
 <body>
+  
+    <!-- Main Content -->
     <div id="main" class="center">
         <div id="addToken" class="center">
             <h1 id="title">Github Statistics - Add Token</h1>
-            <p id="infoText">This will grant you 5000 requests per hour instead of the default 60 requests per hour when unauthenticated.
+
+            <!-- Information text about what the token is and why it is needed -->
+            <p id="infoText">This will grant you 5000 requests per hour instead of the default 60 requests per hour when
+                unauthenticated.
                 <br>
-                To authenticate you need to add your GitHub Personal Token. (<b>Note:</b> The personal token does not need any
-                permissons! Leave it all empty). Your Personal Token is saved in Local Storage in your browser and is only sent to <a href="https://github.com/">github.com</a>.
+                To authenticate you need to add your GitHub Personal Token. (<b>Note:</b> The personal token does not
+                need any
+                permissons! Leave it all empty). Your Personal Token is saved in Local Storage in your browser and is
+                only sent to <a href="https://github.com/">github.com</a>.
                 <br>To create a Personal Token go to <a href="http://github.com/">GitHub</a> and then head over
                 to settings. In the development settings you find Personal access tokens. Click Generate New Token.</p>
+
+            <!-- Form to add GitHub username and token to Local Storage -->
             <form class="center">
                 <div id="inputFields">
                     <input type="text" id="GithubUsername" class="input-field" placeholder="Github Username">

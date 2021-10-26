@@ -33,11 +33,18 @@
 </head>
 
 <body>
+    <!-- Main Content -->
     <div id="main" class="center">
-        <div id="searchArea" class="center">
+
+        <!-- Search Container -->
+        <div id="search-wrapper" class="center">
+            <!-- Site Logo -->
             <img src="images/icon.svg" alt="Github Statistics Icon" width="125px" id="icon">
             <div id="spacerLine"></div>
+
             <h1 id="title">GitHub Statistics</h1>
+
+            <!-- Form for input and search -->
             <form id="searchForm" class="center">
                 <input type="text" id="searchBar" class="input-field" autocomplete="off" required>
                 <ul id="historySearches" hidden>
@@ -45,6 +52,7 @@
                 <input type="submit" hidden>
             </form>
 
+            <!-- Error messages -->
             <div id="error" hidden>
                 <p id="userError" hidden>No user found with that name!</p>
                 <p id="repoError" hidden>No user and/or repositories found with that name!</p>
