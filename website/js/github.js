@@ -4,9 +4,10 @@ const githubpersonaltoken = localStorage.getItem("githubpersonaltoken")
 let params = {};
 
 if (githubUsername && githubpersonaltoken) params.headers = {
-    "Authorization": `${githubUsername}:${githubpersonaltoken}`
+    "Authorization": `Basic ${btoa(githubUsername + ":" + githubpersonaltoken)}`
 }
 
+console.log(params);
 /**
  * @param  {string} username github accounts username 
  * 
