@@ -24,6 +24,10 @@ It is written without a JavaScript Framework as a final assignment in the Course
 
 Have other ideas? Add a comment!
 
+## Colors, Fonts and icons
+
+For information about what Colors, Fonts and icons i used, check the [`BRAND.md`](BRAND.md)
+
 ## ⭐️ Project assistance
 
 If you want to say **thank you** or/and support active development of `Github Statistics`:
