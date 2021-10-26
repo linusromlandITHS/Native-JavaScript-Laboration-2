@@ -20,6 +20,14 @@ window.onload = () => {
     // setInterval(renderCitites, 5000);
 }
 
+window.onclick = function(event) {
+    if (event.target == editModal) {
+        editModal.children[0].style.animation = "shake 0.5s"
+    }else if(event.target == deleteModal){
+        deleteModal.children[0].style.animation = "shake 0.5s"
+    }
+  } 
+
 /**
  * Runs on submit from main form and creates a new city
  */
