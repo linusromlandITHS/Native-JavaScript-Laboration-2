@@ -1,13 +1,13 @@
 // Retrives of HTML DOM elements
-const inputField = document.querySelector("#searchBar");
-const form = document.querySelector("form");
-const errorContainer = document.querySelector("#error");
-const userErrorTag = document.querySelector("#userError");
-const repoErrorTag = document.querySelector("#repoError");
-const historySearches = document.querySelector("#historySearches");
+const inputField = document.querySelector("#searchBar")
+ form = document.querySelector("form")
+ errorContainer = document.querySelector("#error")
+ userErrorTag = document.querySelector("#userError")
+ repoErrorTag = document.querySelector("#repoError")
+ historySearches = document.querySelector("#historySearches")
 
-let history, autoCompleteSearches = [];
-let autoCompleteJS;
+let _history, _autoCompleteSearches = [];
+let _autoCompleteJS;
 
 window.onload = () => {
     //Gets history from localStorage if exists.
@@ -23,7 +23,7 @@ window.onload = () => {
             historySearches.appendChild(ul);
         });
     }
-    autoCompleteSearches = history
+    _autoCompleteSearches = history
     initAutocomplete()
 };
 
@@ -33,9 +33,9 @@ window.onload = () => {
 inputField.addEventListener("input", async (event) => {
     if (inputField.value.length % 3 === 0) {
         let search = await searchUser(inputField.value);
-        autoCompleteSearches = history;
+        _autoCompleteSearches = history;
         search.forEach(searchItem => {
-            if (!autoCompleteSearches.includes(searchItem.login)) autoCompleteSearches.push(searchItem.login)
+            if (!_autoCompleteSearches.includes(searchItem.login)) _autoCompleteSearches.push(searchItem.login)
         });
         initAutocomplete();
     }
@@ -133,12 +133,12 @@ clearError = () => {
  * initialize of Autocomplete.JS
  */
 initAutocomplete = () => {
-    autoCompleteJS = new autoComplete({
+    _autoCompleteJS = new autoComplete({
         selector: "#searchBar",
         placeHolder: "Search for Github Account/Repository...",
         submit: true,
         data: {
-            src: autoCompleteSearches
+            src: _autoCompleteSearches
         },
         resultItem: {
             highlight: {
@@ -149,7 +149,7 @@ initAutocomplete = () => {
             input: {
                 selection: (event) => {
                     const selection = event.detail.selection.value;
-                    autoCompleteJS.input.value = selection;
+                    _autoCompleteJS.input.value = selection;
                 }
             }
         }

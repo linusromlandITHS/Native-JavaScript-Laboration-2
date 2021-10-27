@@ -1,20 +1,20 @@
-const githubUsername = localStorage.getItem("githubusername")
-const githubpersonaltoken = localStorage.getItem("githubpersonaltoken")
+const _githubUsername = localStorage.getItem("githubusername")
+ _githubPersonalToken = localStorage.getItem("githubpersonaltoken")
 
-let params = {};
+let _params = {};
 
-if (githubUsername && githubpersonaltoken) params.headers = {
-    "Authorization": `Basic ${btoa(githubUsername + ":" + githubpersonaltoken)}`
+if (_githubUsername && _githubPersonalToken) _params.headers = {
+    "Authorization": `Basic ${btoa(_githubUsername + ":" + _githubPersonalToken)}`
 }
 
-console.log(params);
+console.log(_params);
 /**
  * @param  {string} username github accounts username 
  * 
  * Retrives Github User from GitHub's API
  */
 getUser = async (username) => {
-    let request = await fetch(`https://api.github.com/users/${username}`, params)
+    let request = await fetch(`https://api.github.com/users/${username}`, _params)
     outOfRequests(request)
     if (request.status === 404) return null;
     let data = await request.json();
@@ -27,7 +27,7 @@ getUser = async (username) => {
  * Retrives Github Repository from GitHub's API
  */
 getRepo = async (repo) => {
-    let request = await fetch(`https://api.github.com/repos/${repo}`, params)
+    let request = await fetch(`https://api.github.com/repos/${repo}`, _params)
     outOfRequests(request)
     if (request.status === 404) return null;
     let data = await request.json();
@@ -40,7 +40,7 @@ getRepo = async (repo) => {
  * Searches for username that matches input in GitHub's API
  */
 searchUser = async (username) => {
-    const request = await fetch(`https://api.github.com/search/users?q=${username}`, params)
+    const request = await fetch(`https://api.github.com/search/users?q=${username}`, _params)
     outOfRequests(request)
     const data = await request.json();
     let users = data.items;
@@ -64,7 +64,7 @@ getEvents = async (user) => {
     let i = 1;
     let commits = []
     while (true) {
-        const request = await fetch(`https://api.github.com/users/${user}/events/public?sort=pushed&per_page=100&page=${i}`, params)
+        const request = await fetch(`https://api.github.com/users/${user}/events/public?sort=pushed&per_page=100&page=${i}`, _params)
         if (request.status !== 200) break;
         outOfRequests(request)
         const data = await request.json();
@@ -89,7 +89,7 @@ getEvents = async (user) => {
 outOfRequests = (request) => {
     if (request.status === 403) {
         let path = `${window.location.origin + window.location.pathname.substring(0,window.location.pathname.length-9)}getToken.html`
-        const errorMessage = githubUsername && githubpersonaltoken ? `You are out of request!` : `You are out of request! You have 60 request/hour.\nYou can get more (5000 request/hour) if you authenticate with GitHub and Personal Token!\nTo do this, visit: \n${path}`
+        const errorMessage = _githubUsername && _githubPersonalToken ? `You are out of request!` : `You are out of request! You have 60 request/hour.\nYou can get more (5000 request/hour) if you authenticate with GitHub and Personal Token!\nTo do this, visit: \n${path}`
 
         alert(errorMessage)
     }

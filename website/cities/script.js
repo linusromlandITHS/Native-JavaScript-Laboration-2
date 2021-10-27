@@ -1,11 +1,11 @@
 const form = document.querySelector("form")
-const input = document.querySelector("input[type=text]")
-const populationInput = document.querySelector("input[type=number]")
-const submitButton = document.querySelector("input[type=submit]")
-const response = document.querySelector("#response")
-const citiesWrapper = document.querySelector("#cities-wrapper")
-const editModal = document.querySelector("#editModal");
-const deleteModal = document.querySelector("#deleteModal");
+ input = document.querySelector("input[type=text]")
+ populationInput = document.querySelector("input[type=number]")
+ submitButton = document.querySelector("input[type=submit]")
+ response = document.querySelector("#response")
+ citiesWrapper = document.querySelector("#cities-wrapper")
+ editModal = document.querySelector("#editModal")
+ deleteModal = document.querySelector("#deleteModal")
 
 window.onload = () => {
     //Sets button to disabled by default

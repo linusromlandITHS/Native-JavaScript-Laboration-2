@@ -8,7 +8,7 @@ topRepositories = document.querySelector("#topRepositories")
 profilePicture = document.querySelector("#profilePicture")
 latestCommits = document.querySelector("#latestCommits")
 
-let user, name;
+let _user, _name;
 
 window.onload = async () => {
     //Convert URL to Params
