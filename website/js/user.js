@@ -7,6 +7,7 @@ commitAmount = document.querySelector("#commitAmount")
 topRepositories = document.querySelector("#topRepositories")
 profilePicture = document.querySelector("#profilePicture")
 latestCommits = document.querySelector("#latestCommits")
+bio = document.querySelector("#bio")
 
 let _user, _name;
 
@@ -66,6 +67,12 @@ displayName = (user) => {
     if (user.name) {
         usernameTag.textContent = user.login
         usernameTag.hidden = false;
+    }
+
+    //If GitHub profile has bio set, shows bio in field.
+    if(user.bio){
+        bio.textContent = user.bio
+        bio.hidden = false;
     }
 
     document.querySelector('meta[name="description"]').setAttribute("content", `Github Statistics for user ${user.login}`);
