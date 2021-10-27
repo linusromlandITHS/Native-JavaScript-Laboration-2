@@ -98,7 +98,7 @@ renderCitites = async () => {
         cityName.textContent = city.name
 
         let cityPopulation = document.createElement('p')
-        cityPopulation.textContent = `${city.population} ${city.population == "1" ? "inhabitant" : "inhabitants"}`
+        cityPopulation.textContent = `${Intl.NumberFormat().format(city.population)} ${city.population == "1" ? "inhabitant" : "inhabitants"}`
 
         textContainer.append(cityName, cityPopulation)
 
