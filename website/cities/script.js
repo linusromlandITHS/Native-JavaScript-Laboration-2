@@ -134,6 +134,7 @@ renderCitites = async () => {
  * Deletes the city with inputed ID
  */
 deleteCity = async (id) => {
+    console.log(`Removed city with id ${id}`)
     await fetch(`https://avancera.app/cities/${id}`, {
         headers: {
             'Content-Type': 'application/json'
@@ -151,6 +152,7 @@ deleteCity = async (id) => {
  * 
  */
 editCityValue = async (name, pop, object) => {
+    console.log(`Updated the city ${object.name}'s information. (ID=${object.id})`)
     let obj = {};
     if (name.value && object.name != name.value) obj.name = name.value;
     if (pop.value && object.population != parseInt(pop.value)) obj.population = parseInt(pop.value);
