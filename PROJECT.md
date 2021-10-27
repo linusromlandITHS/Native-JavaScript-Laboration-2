@@ -13,8 +13,8 @@ It is written without a JavaScript Framework as a final assignment in the Course
 
 ## Additions to come
 - [X] chart.js Last months commits
-- [ ] Last 5 commits, show message, date and repo(user)
-- [ ] Show title and description (alternative name and bio on profile)
+- [X] Last 5 commits, show message, date and repo(user)
+- [X] Show title and description (alternative name and bio on profile)
 - [ ] Show Top Languages
 - [ ] On repo show top contributiors based on commits
 - [ ] Stars
