@@ -16,6 +16,10 @@ body {
     align-items: center;
 }
 
+#main>button:first-child {
+    justify-self: center;
+}
+
 h1 {
     margin: 2rem;
 }
@@ -100,6 +104,7 @@ input[type="number"] {
 }
 
 input[type="submit"],
+#backToHome,
 button {
     font-size: 100%;
     border: 0;
@@ -108,6 +113,11 @@ button {
     margin: 5px;
     padding: 10px 10px;
     border-radius: 8px;
+}
+
+#backToHome{
+    text-decoration: none;
+    color: black;
 }
 
 #cities-wrapper {
@@ -227,10 +237,12 @@ input[type=number] {
     input[type="number"] {
         width: 80%
     }
-    .modal-content{
+
+    .modal-content {
         width: 80%;
     }
-    .button-wrapper > button{
+
+    .button-wrapper>button {
         width: 40%;
     }
 }
