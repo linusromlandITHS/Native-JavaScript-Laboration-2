@@ -1,11 +1,13 @@
 const form = document.querySelector("form")
- input = document.querySelector("input[type=text]")
- populationInput = document.querySelector("input[type=number]")
- submitButton = document.querySelector("input[type=submit]")
- response = document.querySelector("#response")
- citiesWrapper = document.querySelector("#cities-wrapper")
- editModal = document.querySelector("#editModal")
- deleteModal = document.querySelector("#deleteModal")
+input = document.querySelector("input[type=text]")
+populationInput = document.querySelector("input[type=number]")
+submitButton = document.querySelector("input[type=submit]")
+response = document.querySelector("#response")
+citiesWrapper = document.querySelector("#cities-wrapper")
+editModal = document.querySelector("#editModal")
+deleteModal = document.querySelector("#deleteModal")
+
+let _cities;
 
 window.onload = () => {
     //Sets button to disabled by default
@@ -17,7 +19,7 @@ window.onload = () => {
     renderCitites()
 
     //Every 5 seconds updates citites from Avancera API
-    // setInterval(renderCitites, 5000);
+    setInterval(renderCitites, 5000);
 }
 
 window.onclick = (event) => {
@@ -83,50 +85,55 @@ responseMessage = (message, classes) => {
 renderCitites = async () => {
     let request = await fetch('https://avancera.app/cities/');
     let cities = await request.json();
+    if (JSON.stringify(cities) != JSON.stringify(_cities)) {
+        console.log("New data, rendering!")
+        //Clears previous cities
+        citiesWrapper.innerHTML = ""
 
-    //Clears previous cities
-    citiesWrapper.innerHTML = ""
+        cities.forEach(city => {
+            let container = document.createElement('div')
+            container.classList = "card"
+            container.title = city.name
 
-    cities.forEach(city => {
-        let container = document.createElement('div')
-        container.classList = "card"
-        container.title = city.name
+            let textContainer = document.createElement('div')
 
-        let textContainer = document.createElement('div')
+            let cityName = document.createElement('p')
+            cityName.textContent = city.name
 
-        let cityName = document.createElement('p')
-        cityName.textContent = city.name
+            let cityPopulation = document.createElement('p')
+            cityPopulation.textContent = `${Intl.NumberFormat().format(city.population)} ${city.population == "1" ? "inhabitant" : "inhabitants"}`
 
-        let cityPopulation = document.createElement('p')
-        cityPopulation.textContent = `${Intl.NumberFormat().format(city.population)} ${city.population == "1" ? "inhabitant" : "inhabitants"}`
+            textContainer.append(cityName, cityPopulation)
 
-        textContainer.append(cityName, cityPopulation)
+            let buttonContainer = document.createElement('div')
 
-        let buttonContainer = document.createElement('div')
+            let editButton = document.createElement('button')
+            let editSpan = document.createElement('span')
+            editSpan.classList = "material-icons"
+            editSpan.textContent = "edit"
+            editButton.onclick = () => {
+                updateEditModal(city)
+            }
+            editButton.appendChild(editSpan)
 
-        let editButton = document.createElement('button')
-        let editSpan = document.createElement('span')
-        editSpan.classList = "material-icons"
-        editSpan.textContent = "edit"
-        editButton.onclick = () => {
-            updateEditModal(city)
-        }
-        editButton.appendChild(editSpan)
+            let deleteButton = document.createElement('button')
+            let deleteSpan = document.createElement('span')
+            deleteSpan.classList = "material-icons"
+            deleteSpan.textContent = "delete"
+            deleteButton.onclick = () => {
+                updateDeleteModal(city)
+            }
+            deleteButton.appendChild(deleteSpan)
 
-        let deleteButton = document.createElement('button')
-        let deleteSpan = document.createElement('span')
-        deleteSpan.classList = "material-icons"
-        deleteSpan.textContent = "delete"
-        deleteButton.onclick = () => {
-            updateDeleteModal(city)
-        }
-        deleteButton.appendChild(deleteSpan)
+            buttonContainer.append(editButton, deleteButton)
 
-        buttonContainer.append(editButton, deleteButton)
-
-        container.append(textContainer, buttonContainer)
-        citiesWrapper.appendChild(container)
-    });
+            container.append(textContainer, buttonContainer)
+            citiesWrapper.appendChild(container)
+        });
+    } else {
+        console.log("No new data, canceling render!")
+    }
+    _cities = cities;
 }
 /**
  * @param  {string} id Avancera API City id
