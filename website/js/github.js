@@ -7,7 +7,6 @@ if (_githubUsername && _githubPersonalToken) _params.headers = {
     "Authorization": `Basic ${btoa(_githubUsername + ":" + _githubPersonalToken)}`
 }
 
-console.log(_params);
 /**
  * @param  {string} username github accounts username 
  * 
