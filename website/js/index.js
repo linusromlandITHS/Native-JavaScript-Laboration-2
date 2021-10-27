@@ -12,8 +12,8 @@ let _autoCompleteJS;
 window.onload = () => {
     //Gets history from localStorage if exists.
     if (localStorage.getItem("history")) {
-        history = JSON.parse(localStorage.getItem("history"));
-        history.forEach(item => {
+        _history = JSON.parse(localStorage.getItem("history"));
+        _history.forEach(item => {
             let ul = document.createElement("ul");
             let a = document.createElement("a");
             a.textContent = item;
@@ -23,7 +23,7 @@ window.onload = () => {
             historySearches.appendChild(ul);
         });
     }
-    _autoCompleteSearches = history
+    _autoCompleteSearches = _history
     initAutocomplete()
 };
 
@@ -33,7 +33,7 @@ window.onload = () => {
 inputField.addEventListener("input", async (event) => {
     if (inputField.value.length % 3 === 0) {
         let search = await searchUser(inputField.value);
-        _autoCompleteSearches = history;
+        _autoCompleteSearches = _history;
         search.forEach(searchItem => {
             if (!_autoCompleteSearches.includes(searchItem.login)) _autoCompleteSearches.push(searchItem.login)
         });
@@ -88,11 +88,11 @@ search = async (value) => {
  */
 saveToHistory = (value) => {
     //Saves search to localStorage for history
-    if (!history.includes(value)) {
-        history.push(value);
-        if (history.length > 50) history.shift();
+    if (!_history.includes(value)) {
+        _history.push(value);
+        if (_history.length > 50) _history.shift();
     }
-    localStorage.setItem("history", JSON.stringify(history));
+    localStorage.setItem("history", JSON.stringify(_history));
 }
 
 /**
