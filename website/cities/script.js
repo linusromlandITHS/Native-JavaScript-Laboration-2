@@ -130,8 +130,6 @@ renderCitites = async () => {
             container.append(textContainer, buttonContainer)
             citiesWrapper.appendChild(container)
         });
-    } else {
-        console.log("No new data, canceling render!")
     }
     _cities = cities;
 }
