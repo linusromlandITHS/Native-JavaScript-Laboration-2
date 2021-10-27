@@ -20,7 +20,7 @@ window.onload = () => {
     // setInterval(renderCitites, 5000);
 }
 
-window.onclick = function (event) {
+window.onclick = (event) => {
     if (event.target == editModal) {
         resetAnimation(editModal.children[0])
         editModal.children[0].style.animation = "shake 0.5s"
@@ -128,7 +128,11 @@ renderCitites = async () => {
         citiesWrapper.appendChild(container)
     });
 }
-
+/**
+ * @param  {string} id Avancera API City id
+ * 
+ * Deletes the city with inputed ID
+ */
 deleteCity = async (id) => {
     await fetch(`https://avancera.app/cities/${id}`, {
         headers: {
@@ -226,11 +230,16 @@ checkStatus = () => {
     submitButton.disabled = !((input.value.length > 0) && (populationInput.value > 0))
 }
 
+/**
+ * @param  {HTMLElement} el The element you want to reset animation on.
+ * 
+ * Deletes all animation on inputed element
+ */
 resetAnimation = (el) => {
     el.style.animation = 'none';
     el.offsetHeight;
-    el.style.animation = null; 
-  }
+    el.style.animation = null;
+}
 
 /*
  * Add event listener for input on both name and population to update if button is enabled or disabled.
