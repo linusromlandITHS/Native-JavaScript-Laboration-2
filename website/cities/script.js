@@ -22,9 +22,11 @@ window.onload = () => {
 
 window.onclick = function (event) {
     if (event.target == editModal) {
+        resetAnimation(editModal.children[0])
         editModal.children[0].style.animation = "shake 0.5s"
     } else if (event.target == deleteModal) {
-        deleteModal.children[0].style.animation = "shake 0.512s"
+        resetAnimation(deleteModal.children[0])
+        deleteModal.children[0].style.animation = "shake 0.5s"
     }
 }
 
@@ -169,6 +171,7 @@ editCityValue = async (name, pop, object) => {
  * Updates the edit modal to correct values
  */
 updateEditModal = (object) => {
+    editModal.children[0].style.animation = ""
     const editCityName = document.querySelector("#editCityName")
     const editCityPopulation = document.querySelector("#editCityPopulation")
 
@@ -190,6 +193,7 @@ updateEditModal = (object) => {
  * Updates the delete modal to correct values
  */
 updateDeleteModal = (object) => {
+    deleteModal.children[0].style.animation = ""
     const delBtn = document.querySelector("#delBtn")
     changeVisibilityModal(deleteModal)
     document.querySelector("#delConfirmText").textContent = `You are about to delete the city ${object.name}! Are you sure you want to do this?`
@@ -221,6 +225,12 @@ changeVisibilityModal = (modal) => {
 checkStatus = () => {
     submitButton.disabled = !((input.value.length > 0) && (populationInput.value > 0))
 }
+
+resetAnimation = (el) => {
+    el.style.animation = 'none';
+    el.offsetHeight;
+    el.style.animation = null; 
+  }
 
 /*
  * Add event listener for input on both name and population to update if button is enabled or disabled.
