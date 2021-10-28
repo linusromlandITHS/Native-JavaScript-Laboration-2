@@ -37,7 +37,7 @@ window.onload = async () => {
     setTimeout(() => {
         fakeloading = false;
         loading(true)
-    }, 500)
+    }, 400)
 
     if (!fakeloading) loading(true)
 }
