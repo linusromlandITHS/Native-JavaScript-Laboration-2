@@ -20,6 +20,28 @@ getUser = async (username) => {
 }
 
 /**
+ * @param  {string} username github accounts username 
+ * 
+ * Retrives Github User Repos from GitHub's API
+ */
+ getUserRepos = async (username) => {
+    let request = await fetch(`https://api.github.com/users/${username}/repos`, _params)
+    outOfRequests(request)
+    if (request.status === 404) return null;
+    let data = await request.json();
+    return data;
+}
+
+fetchURL = async (url) => {
+    let request = await fetch(url, _params)
+    outOfRequests(request)
+    if (request.status === 404) return null;
+    let data = await request.json();
+    return data;
+}
+
+
+/**
  * @param  {string} repo github repo name 
  * 
  * Retrives Github Repository from GitHub's API

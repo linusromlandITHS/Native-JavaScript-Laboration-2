@@ -18,11 +18,13 @@ window.onload = async () => {
 
     //Gets user from GitHub API
     let user = await getUser(params.user);
+    console.log(reposToLanguages(await getUserRepos(params.user)));
     //Redirects client if user not found
     if (!user) window.location = "index.html"
 
 
     let events = await getEvents(user.login)
+    console.log(user)
     let chartData = await eventArrayToChart(events)
     await renderChart(chartData.amount, chartData.day, "#chart", "line", "Commits")
 
@@ -224,6 +226,26 @@ eventArrayToChart = (eventArray) => {
     object.topRepositories = topRepositories //Sets topRepositories to topRepositories in object
 
     return object
+}
+
+reposToLanguages = (repoArray) => {
+    let topLangs = []
+    repoArray.forEach(async repo => {
+        const languages = await fetchURL(repo.languages_url)
+        for (const lang in languages) {
+            let index = topLangs.findIndex((e) => e.lang == lang)
+            if(index == -1){
+                topLangs.push({
+                    lang: lang,
+                    amount: languages[lang]
+                })
+            }else{
+                topLangs[index].amount += languages[lang]
+            }
+            topLangs.sort((a, b) => b.amount - a.amount)
+          }
+    });
+    return topLangs
 }
 
 /**
