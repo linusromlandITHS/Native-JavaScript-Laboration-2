@@ -10,6 +10,8 @@ let _history, _autoCompleteSearches = [];
 let _autoCompleteJS;
 
 window.onload = () => {
+    initPartials()
+
     //Gets history from localStorage if exists.
     if (localStorage.getItem("history")) {
         _history = JSON.parse(localStorage.getItem("history"));
