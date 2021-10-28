@@ -1,10 +1,9 @@
-const _githubUsername = localStorage.getItem("githubusername")
- _githubPersonalToken = localStorage.getItem("githubpersonaltoken")
+const _githubPersonalToken = localStorage.getItem("githubpersonaltoken")
 
 let _params = {};
 
-if (_githubUsername && _githubPersonalToken) _params.headers = {
-    "Authorization": `Basic ${btoa(_githubUsername + ":" + _githubPersonalToken)}`
+if (_githubPersonalToken) _params.headers = {
+    "Authorization": `Bearer ${ _githubPersonalToken}`
 }
 
 /**
