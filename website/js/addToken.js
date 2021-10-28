@@ -11,3 +11,7 @@ form.addEventListener("submit", async event => {
         window.location = "index.html"
     }
 })
+
+window.onload = () => {
+    initPartials()
+}
