@@ -8,6 +8,7 @@ topRepositories = document.querySelector("#topRepositories")
 profilePicture = document.querySelector("#profilePicture")
 latestCommits = document.querySelector("#latestCommits")
 bio = document.querySelector("#bio")
+pullRequestsDOM = document.querySelector("#pullRequests")
 
 let _user, _name;
 
@@ -19,7 +20,9 @@ window.onload = async () => {
     //Gets user from GitHub API
     const user = await getUser(params.user);
     const userRepos = await getUserRepos(params.user)
-    console.log(reposToPullRequests(userRepos)) //User Pull Requests
+    const pullRequests = await reposToPullRequests(userRepos)
+
+    console.log(await reposToPullRequests(userRepos)) //User Pull Requests
     console.log(reposToIssues(userRepos)) //User issues
     console.log(reposToLanguages(userRepos)); //Top langs
 
@@ -37,7 +40,7 @@ window.onload = async () => {
     displayCommitAmount(chartData)
     displayProfilePicture(user)
     displayLatestCommits(events)
-
+    displayPullRequests(pullRequests)
 
     //Fake loading
     let fakeloading = true;
@@ -83,6 +86,49 @@ displayName = (user) => {
     }
 
     document.querySelector('meta[name="description"]').setAttribute("content", `Github Statistics for user ${user.login}`);
+}
+
+displayPullRequests = async (pulls) => {
+    let elements = []
+
+    for (let i = 0; i < pulls.length; i++) {
+        const pull = pulls[i];
+        if(pull.state == "open"){
+            console.log(pull)
+            //Main list item
+            const li = document.createElement("li")
+
+            //Annchor tag for link
+            const a = document.createElement("a")
+            a.href = pull.html_url
+            
+            //Container to contain main content
+            const container = document.createElement("div")
+
+            //Title
+            const h2 = document.createElement("h2")
+            h2.textContent = pull.title
+
+            //Updated at time
+            const created = document.createElement("p")
+            created.textContent = "Last updated: " + moment(pull.updated_at).format("dddd, MMMM Do YYYY, HH:mm")
+
+            //Appends title and time to container
+            container.append(h2, created)
+
+            //Appends container to anchor
+            a.append(container)
+
+            //Appends anchor to list item
+            li.appendChild(a)
+
+            //Pushes list item to array
+            elements.push(li)
+        }
+        if(elements.length >= 5) break;
+    }
+    elements.forEach(element => pullRequestsDOM.appendChild(element));
+    pullRequestsDOM.hidden = false
 }
 
 /**
@@ -277,7 +323,7 @@ reposToIssues = (repoArray) => {
  * 
  * Converts repoarray to the pulls
  */
- reposToPullRequests = (repoArray) => {
+ reposToPullRequests = async (repoArray) => {
     let pullRequests = []
     repoArray.forEach(async repo => {
         const pullRequestsFromRepo = await fetchURL(`${repo.url}/pulls?state=all`)
