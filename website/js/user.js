@@ -112,12 +112,16 @@ displayPullRequests = async (pulls) => {
             const h2 = document.createElement("h2")
             h2.textContent = pull.title
 
+            //Reponame
+            const repoName = document.createElement("p")
+            repoName.textContent = "Repository: " + pull.base.repo.full_name
+
             //Updated at time
             const created = document.createElement("p")
             created.textContent = "Last updated: " + moment(pull.updated_at).format("dddd, MMMM Do YYYY, HH:mm")
 
             //Appends title and time to container
-            container.append(h2, created)
+            container.append(h2, repoName, created)
 
             //Appends container to anchor
             a.append(container)
