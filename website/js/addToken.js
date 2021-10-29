@@ -5,9 +5,11 @@ const form = document.querySelector("form")
  loginWithGithub = document.querySelector("#loginWithGithub")
 
 window.onload = () => {
-    
+
+    const apiDomain = "githubStats.romland.space"
+
     //TODO add check if URL is correct
-    if(true){
+    if(window.location.host == "localhost:3000"){
         loginWithGithub.hidden = false;
         addToken.style.display = "none"
     }

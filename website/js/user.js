@@ -52,10 +52,10 @@ window.onload = async () => {
     let fakeloading = true;
     setTimeout(() => {
         fakeloading = false;
-        loading(true)
+        loading()
     }, 400)
 
-    if (!fakeloading) loading(true)
+    if (!fakeloading) loading()
 }
 
 /**
@@ -64,7 +64,7 @@ window.onload = async () => {
  */
 loading = () => {
     console.log("Loading complete!")
-    main.hidden = false;
+    main.style.display = "flex";
     loadingArea.style.display = "none"
 }
 

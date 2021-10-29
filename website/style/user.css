@@ -1,7 +1,25 @@
+body {
+    background-color: #F2EEE4;
+}
+
+#main{
+    /* Changes display configuration to flex in JavaScript */
+    display: none;
+    justify-content: baseline;
+}
+
 #chart{
     width: 50rem;
 }
 
 #profilePicture {
     border-radius: 50%;
+}
+
+#userArea{
+    margin: 2rem;
+}
+
+#pullRequests > ul:nth-child(3) > li:nth-child(1){
+    list-style: none
 }
