@@ -22,7 +22,6 @@ window.onload = async () => {
     const userRepos = await getUserRepos(params.user)
     const pullRequests = await reposToPullRequests(userRepos)
 
-    console.log(await reposToPullRequests(userRepos)) //User Pull Requests
     console.log(reposToIssues(userRepos)) //User issues
     console.log(reposToLanguages(userRepos)); //Top langs
 
@@ -99,7 +98,6 @@ displayPullRequests = async (pulls) => {
     for (let i = 0; i < pulls.length; i++) {
         const pull = pulls[i];
         if(pull.state == "open"){
-            console.log(pull)
             //Main list item
             const li = document.createElement("li")
 
