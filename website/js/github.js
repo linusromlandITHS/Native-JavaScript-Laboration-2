@@ -32,6 +32,11 @@ getUser = async (username) => {
     return data;
 }
 
+/**
+ * @param  {string} url URL to make request to 
+ * 
+ * Makes a fetch and includes _params
+ */
 fetchURL = async (url) => {
     let request = await fetch(url, _params)
     outOfRequests(request)
@@ -39,7 +44,6 @@ fetchURL = async (url) => {
     let data = await request.json();
     return data;
 }
-
 
 /**
  * @param  {string} repo github repo name 

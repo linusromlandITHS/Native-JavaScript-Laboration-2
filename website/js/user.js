@@ -94,6 +94,8 @@ displayName = (user) => {
  */
 displayPullRequests = async (pulls) => {
     let elements = []
+    let openPullRequests = 0;
+    let closedPullRequests = 0;
 
     for (let i = 0; i < pulls.length; i++) {
         const pull = pulls[i];
@@ -131,9 +133,20 @@ displayPullRequests = async (pulls) => {
 
             //Pushes list item to array
             elements.push(li)
+
+            //Increases openPullRequests by one
+            openPullRequests++;
+        }else{
+            //Increases closedPullRequests by one
+            closedPullRequests++;
         }
         if(elements.length >= 5) break;
     }
+    //P tag that displays how many open and closed pull requests in public repos.
+    const requestsOpen = document.createElement("p")
+    requestsOpen.textContent = `${openPullRequests} open / ${closedPullRequests} closed`
+
+    pullRequestsDOM.appendChild(requestsOpen)
     elements.forEach(element => pullRequestsDOM.appendChild(element));
     pullRequestsDOM.hidden = false
 }
