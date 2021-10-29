@@ -273,6 +273,11 @@ displayProfilePicture = (user) => {
     profilePicture.setAttribute('src', `${user.avatar_url}&s=250`)
 }
 
+/**
+ * @param  {arrays} topLangs Array containg the most popular languages in repos
+ * 
+ * Displays the 5 most popular languages on user page
+ */
 displayTopLanguages = (topLangs) => {
     let elements = []
 
