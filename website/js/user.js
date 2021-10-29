@@ -266,7 +266,7 @@ reposToLanguages = (repoArray) => {
 reposToIssues = (repoArray) => {
     let issues = []
     repoArray.forEach(async repo => {
-        const issueFromRepo = await fetchURL(`${repo.url}/issues`)
+        const issueFromRepo = await fetchURL(`${repo.url}/issues?state=all`)
         issues.push(...issueFromRepo)
     });
     return issues
@@ -280,7 +280,7 @@ reposToIssues = (repoArray) => {
  reposToPullRequests = (repoArray) => {
     let pullRequests = []
     repoArray.forEach(async repo => {
-        const pullRequestsFromRepo = await fetchURL(`${repo.url}/pulls`)
+        const pullRequestsFromRepo = await fetchURL(`${repo.url}/pulls?state=all`)
         pullRequests.push(...pullRequestsFromRepo)
     });
     return pullRequests
