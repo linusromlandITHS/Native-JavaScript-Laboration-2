@@ -270,7 +270,7 @@ displayLatestCommits = (arr) => {
  * Displays the profile picture of user in image DOM
  */
 displayProfilePicture = (user) => {
-    profilePicture.setAttribute('src', user.avatar_url)
+    profilePicture.setAttribute('src', `${user.avatar_url}&s=250`)
 }
 
 displayTopLanguages = (topLangs) => {
