@@ -17,14 +17,17 @@ window.onload = async () => {
     const params = Object.fromEntries(urlSearchParams.entries());
 
     //Gets user from GitHub API
-    let user = await getUser(params.user);
-    console.log(reposToLanguages(await getUserRepos(params.user)));
+    const user = await getUser(params.user);
+    const userRepos = await getUserRepos(params.user)
+    console.log(reposToPullRequests(userRepos)) //User Pull Requests
+    console.log(reposToIssues(userRepos)) //User issues
+    console.log(reposToLanguages(userRepos)); //Top langs
+
     //Redirects client if user not found
     if (!user) window.location = "index.html"
 
 
     let events = await getEvents(user.login)
-    console.log(user)
     let chartData = await eventArrayToChart(events)
     await renderChart(chartData.amount, chartData.day, "#chart", "line", "Commits")
 
@@ -35,6 +38,8 @@ window.onload = async () => {
     displayProfilePicture(user)
     displayLatestCommits(events)
 
+
+    //Fake loading
     let fakeloading = true;
     setTimeout(() => {
         fakeloading = false;
@@ -251,6 +256,34 @@ reposToLanguages = (repoArray) => {
           }
     });
     return topLangs
+}
+
+/**
+ * @param  {array} repoArray
+ * 
+ * Converts repoarray to the issues
+ */
+reposToIssues = (repoArray) => {
+    let issues = []
+    repoArray.forEach(async repo => {
+        const issueFromRepo = await fetchURL(`${repo.url}/issues`)
+        issues.push(...issueFromRepo)
+    });
+    return issues
+}
+
+/**
+ * @param  {array} repoArray
+ * 
+ * Converts repoarray to the pulls
+ */
+ reposToPullRequests = (repoArray) => {
+    let pullRequests = []
+    repoArray.forEach(async repo => {
+        const pullRequestsFromRepo = await fetchURL(`${repo.url}/pulls`)
+        pullRequests.push(...pullRequestsFromRepo)
+    });
+    return pullRequests
 }
 
 /**
