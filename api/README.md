@@ -1,0 +1,6 @@
+# .env Config
+
+```
+CLIENT_ID=YOUR_CLIENT_ID
+SECRET=YOUR_SECRET
+```
