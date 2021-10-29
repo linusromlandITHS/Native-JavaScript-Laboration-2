@@ -5,9 +5,16 @@ loadingArea = document.querySelector("#loadingArea")
 main = document.querySelector("#main")
 commitAmount = document.querySelector("#commitAmount")
 topRepositories = document.querySelector("#topRepositories")
+topRepositoriesList = document.querySelector("#topRepositories>ul")
 profilePicture = document.querySelector("#profilePicture")
 latestCommits = document.querySelector("#latestCommits")
+latestCommitsList = document.querySelector("#latestCommits>ul")
 bio = document.querySelector("#bio")
+pullRequestsDOM = document.querySelector("#pullRequests")
+pullRequestsList = document.querySelector("#pullRequests>ul")
+issues = document.querySelector("#issues")
+topLanguages = document.querySelector("#topLanguages")
+topLanguagesList = document.querySelector("#topLanguages>ol")
 
 let _user, _name;
 
@@ -17,7 +24,12 @@ window.onload = async () => {
     const params = Object.fromEntries(urlSearchParams.entries());
 
     //Gets user from GitHub API
-    let user = await getUser(params.user);
+    const user = await getUser(params.user);
+    const userRepos = await getUserRepos(params.user)
+    const pullRequests = await reposToPullRequests(userRepos)
+    const issues = await reposToIssues(userRepos)
+    const topLanguages = await reposToLanguages(userRepos);
+
     //Redirects client if user not found
     if (!user) window.location = "index.html"
 
@@ -32,7 +44,11 @@ window.onload = async () => {
     displayCommitAmount(chartData)
     displayProfilePicture(user)
     displayLatestCommits(events)
+    displayPullRequests(pullRequests)
+    displayIssues(issues)
+    displayTopLanguages(topLanguages)
 
+    //Fake loading
     let fakeloading = true;
     setTimeout(() => {
         fakeloading = false;
@@ -79,6 +95,90 @@ displayName = (user) => {
 }
 
 /**
+ * @param  {array} pulls Array of all pull requests.
+ * 
+ * Converts inputed array to list items containg information and appends dem to pullRequestsDOM
+ */
+displayPullRequests = async (pulls) => {
+    let elements = []
+    let openPullRequests = 0;
+    let closedPullRequests = 0;
+
+    for (let i = 0; i < pulls.length; i++) {
+        const pull = pulls[i];
+        if(pull.state == "open"){
+            //Main list item
+            const li = document.createElement("li")
+
+            //Annchor tag for link
+            const a = document.createElement("a")
+            a.href = pull.html_url
+            
+            //Container to contain main content
+            const container = document.createElement("div")
+
+            //Title
+            const h2 = document.createElement("h2")
+            h2.textContent = pull.title
+
+            //Reponame
+            const repoName = document.createElement("p")
+            repoName.textContent = "Repository: " + pull.base.repo.full_name
+
+            //Updated at time
+            const created = document.createElement("p")
+            created.textContent = "Last updated: " + moment(pull.updated_at).format("dddd, MMMM Do YYYY, HH:mm")
+
+            //Appends title and time to container
+            container.append(h2, repoName, created)
+
+            //Appends container to anchor
+            a.append(container)
+
+            //Appends anchor to list item
+            li.appendChild(a)
+
+            //Pushes list item to array
+            elements.push(li)
+
+            //Increases openPullRequests by one
+            openPullRequests++;
+        }else{
+            //Increases closedPullRequests by one
+            closedPullRequests++;
+        }
+        if(elements.length >= 5) break;
+    }
+    //P tag that displays how many open and closed pull requests in public repos.
+    const requestsOpen = document.createElement("p")
+    requestsOpen.textContent = `${openPullRequests} open / ${closedPullRequests} closed`
+
+    pullRequestsDOM.appendChild(requestsOpen)
+    elements.forEach(element => pullRequestsList.appendChild(element));
+    pullRequestsDOM.hidden = false
+}
+
+/**
+ * @param  {array} issuesArray 
+ * 
+ * Converts issue array to show on html
+ */
+displayIssues = (issuesArray) => {
+    openIssues = 0;
+    closedIssues = 0;
+
+    issuesArray.forEach(issue => {
+        if(issue.state == "open") openIssues++;
+        else closedIssues++;
+    });
+
+    const p = document.createElement("p")
+    p.textContent = `${openIssues} open / ${closedIssues} closed`
+    issues.appendChild(p)
+    issues.hidden = false;
+}
+
+/**
  * @param  {array} arr Object array of the top repositories
  * 
  * Loops through the top repositories (max 5) and displays them in the DOM.
@@ -91,7 +191,7 @@ displayTopRepos = (arr) => {
         const element = arr[i];
         let li = document.createElement("li");
         li.innerHTML = `Repo: <a href="https://github.com/${element.repo}/">${element.repo}</a> (Commits: ${element.amount})`
-        topRepositories.appendChild(li)
+        topRepositoriesList.appendChild(li)
     }
 }
 
@@ -160,7 +260,7 @@ displayLatestCommits = (arr) => {
         li.appendChild(message)
         li.appendChild(date)
 
-        latestCommits.appendChild(li)
+        latestCommitsList.appendChild(li)
     }
 }
 
@@ -171,6 +271,32 @@ displayLatestCommits = (arr) => {
  */
 displayProfilePicture = (user) => {
     profilePicture.setAttribute('src', user.avatar_url)
+}
+
+displayTopLanguages = (topLangs) => {
+    let elements = []
+
+    topLanguages.hidden = false;
+
+    for (let i = 0; i < topLangs.length; i++) {
+        const lang = topLangs[i];
+        // Main listitem
+        const li = document.createElement("li")
+
+        //Text DOM
+        const p = document.createElement("p")
+        p.textContent = lang.lang
+
+        li.appendChild(p)
+        elements.push(li)
+
+        if(elements.length >= 5) break;
+    }
+
+
+    elements.forEach(element => {
+        topLanguagesList.appendChild(element)
+    });
 }
 
 /**
@@ -224,6 +350,59 @@ eventArrayToChart = (eventArray) => {
     object.topRepositories = topRepositories //Sets topRepositories to topRepositories in object
 
     return object
+}
+
+/**
+ * @param  {array} repoArray
+ * 
+ * Converts repoarray to the top languages
+ */
+reposToLanguages = (repoArray) => {
+    let topLangs = []
+    repoArray.forEach(async repo => {
+        const languages = await fetchURL(repo.languages_url)
+        for (const lang in languages) {
+            let index = topLangs.findIndex((e) => e.lang == lang)
+            if(index == -1){
+                topLangs.push({
+                    lang: lang,
+                    amount: languages[lang]
+                })
+            }else{
+                topLangs[index].amount += languages[lang]
+            }
+            topLangs.sort((a, b) => b.amount - a.amount)
+          }
+    });
+    return topLangs
+}
+
+/**
+ * @param  {array} repoArray
+ * 
+ * Converts repoarray to the issues
+ */
+reposToIssues = (repoArray) => {
+    let issues = []
+    repoArray.forEach(async repo => {
+        const issueFromRepo = await fetchURL(`${repo.url}/issues?state=all`)
+        issues.push(...issueFromRepo)
+    });
+    return issues
+}
+
+/**
+ * @param  {array} repoArray
+ * 
+ * Converts repoarray to the pulls
+ */
+ reposToPullRequests = async (repoArray) => {
+    let pullRequests = []
+    repoArray.forEach(async repo => {
+        const pullRequestsFromRepo = await fetchURL(`${repo.url}/pulls?state=all`)
+        pullRequests.push(...pullRequestsFromRepo)
+    });
+    return pullRequests
 }
 
 /**
