@@ -13,6 +13,8 @@ bio = document.querySelector("#bio")
 pullRequestsDOM = document.querySelector("#pullRequests")
 pullRequestsList = document.querySelector("#pullRequests>ul")
 issues = document.querySelector("#issues")
+topLanguages = document.querySelector("#topLanguages")
+topLanguagesList = document.querySelector("#topLanguages>ol")
 
 let _user, _name;
 
@@ -26,7 +28,7 @@ window.onload = async () => {
     const userRepos = await getUserRepos(params.user)
     const pullRequests = await reposToPullRequests(userRepos)
     const issues = await reposToIssues(userRepos)
-    console.log(reposToLanguages(userRepos)); //Top langs
+    const topLanguages = await reposToLanguages(userRepos);
 
     //Redirects client if user not found
     if (!user) window.location = "index.html"
@@ -44,6 +46,7 @@ window.onload = async () => {
     displayLatestCommits(events)
     displayPullRequests(pullRequests)
     displayIssues(issues)
+    displayTopLanguages(topLanguages)
 
     //Fake loading
     let fakeloading = true;
@@ -155,6 +158,11 @@ displayPullRequests = async (pulls) => {
     pullRequestsDOM.hidden = false
 }
 
+/**
+ * @param  {array} issuesArray 
+ * 
+ * Converts issue array to show on html
+ */
 displayIssues = (issuesArray) => {
     openIssues = 0;
     closedIssues = 0;
@@ -263,6 +271,32 @@ displayLatestCommits = (arr) => {
  */
 displayProfilePicture = (user) => {
     profilePicture.setAttribute('src', user.avatar_url)
+}
+
+displayTopLanguages = (topLangs) => {
+    let elements = []
+
+    topLanguages.hidden = false;
+
+    for (let i = 0; i < topLangs.length; i++) {
+        const lang = topLangs[i];
+        // Main listitem
+        const li = document.createElement("li")
+
+        //Text DOM
+        const p = document.createElement("p")
+        p.textContent = lang.lang
+
+        li.appendChild(p)
+        elements.push(li)
+
+        if(elements.length >= 5) break;
+    }
+
+
+    elements.forEach(element => {
+        topLanguagesList.appendChild(element)
+    });
 }
 
 /**
