@@ -88,6 +88,11 @@ displayName = (user) => {
     document.querySelector('meta[name="description"]').setAttribute("content", `Github Statistics for user ${user.login}`);
 }
 
+/**
+ * @param  {array} pulls Array of all pull requests.
+ * 
+ * Converts inputed array to list items containg information and appends dem to pullRequestsDOM
+ */
 displayPullRequests = async (pulls) => {
     let elements = []
 
