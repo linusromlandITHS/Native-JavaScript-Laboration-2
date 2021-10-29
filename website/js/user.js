@@ -228,6 +228,11 @@ eventArrayToChart = (eventArray) => {
     return object
 }
 
+/**
+ * @param  {array} repoArray
+ * 
+ * Converts repoarray to the top languages
+ */
 reposToLanguages = (repoArray) => {
     let topLangs = []
     repoArray.forEach(async repo => {
