@@ -9,6 +9,7 @@ profilePicture = document.querySelector("#profilePicture")
 latestCommits = document.querySelector("#latestCommits")
 bio = document.querySelector("#bio")
 pullRequestsDOM = document.querySelector("#pullRequests")
+issues = document.querySelector("#issues")
 
 let _user, _name;
 
@@ -21,8 +22,7 @@ window.onload = async () => {
     const user = await getUser(params.user);
     const userRepos = await getUserRepos(params.user)
     const pullRequests = await reposToPullRequests(userRepos)
-
-    console.log(reposToIssues(userRepos)) //User issues
+    const issues = await reposToIssues(userRepos)
     console.log(reposToLanguages(userRepos)); //Top langs
 
     //Redirects client if user not found
@@ -40,6 +40,7 @@ window.onload = async () => {
     displayProfilePicture(user)
     displayLatestCommits(events)
     displayPullRequests(pullRequests)
+    displayIssues(issues)
 
     //Fake loading
     let fakeloading = true;
@@ -149,6 +150,21 @@ displayPullRequests = async (pulls) => {
     pullRequestsDOM.appendChild(requestsOpen)
     elements.forEach(element => pullRequestsDOM.appendChild(element));
     pullRequestsDOM.hidden = false
+}
+
+displayIssues = (issuesArray) => {
+    openIssues = 0;
+    closedIssues = 0;
+
+    issuesArray.forEach(issue => {
+        if(issue.state == "open") openIssues++;
+        else closedIssues++;
+    });
+
+    const p = document.createElement("p")
+    p.textContent = `${openIssues} open / ${closedIssues} closed`
+    issues.appendChild(p)
+    issues.hidden = false;
 }
 
 /**
