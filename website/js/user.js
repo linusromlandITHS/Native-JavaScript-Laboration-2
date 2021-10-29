@@ -5,10 +5,13 @@ loadingArea = document.querySelector("#loadingArea")
 main = document.querySelector("#main")
 commitAmount = document.querySelector("#commitAmount")
 topRepositories = document.querySelector("#topRepositories")
+topRepositoriesList = document.querySelector("#topRepositories>ul")
 profilePicture = document.querySelector("#profilePicture")
 latestCommits = document.querySelector("#latestCommits")
+latestCommitsList = document.querySelector("#latestCommits>ul")
 bio = document.querySelector("#bio")
 pullRequestsDOM = document.querySelector("#pullRequests")
+pullRequestsList = document.querySelector("#pullRequests>ul")
 issues = document.querySelector("#issues")
 
 let _user, _name;
@@ -148,7 +151,7 @@ displayPullRequests = async (pulls) => {
     requestsOpen.textContent = `${openPullRequests} open / ${closedPullRequests} closed`
 
     pullRequestsDOM.appendChild(requestsOpen)
-    elements.forEach(element => pullRequestsDOM.appendChild(element));
+    elements.forEach(element => pullRequestsList.appendChild(element));
     pullRequestsDOM.hidden = false
 }
 
@@ -180,7 +183,7 @@ displayTopRepos = (arr) => {
         const element = arr[i];
         let li = document.createElement("li");
         li.innerHTML = `Repo: <a href="https://github.com/${element.repo}/">${element.repo}</a> (Commits: ${element.amount})`
-        topRepositories.appendChild(li)
+        topRepositoriesList.appendChild(li)
     }
 }
 
@@ -249,7 +252,7 @@ displayLatestCommits = (arr) => {
         li.appendChild(message)
         li.appendChild(date)
 
-        latestCommits.appendChild(li)
+        latestCommitsList.appendChild(li)
     }
 }
 
