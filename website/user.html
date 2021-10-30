@@ -2,28 +2,34 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!--Metadata updated in JavaScript-->
     <title>Github Statistics</title>
-    <meta name="description" content="User page for Github Statistics">
+    <meta name="description" content="User page for Github Statistics" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 
     <!-- Import of Global CSS Stylesheet -->
-    <link rel="stylesheet" href="style/global.css">
+    <link rel="stylesheet" href="style/global.css" />
 
     <!-- Import of CSS Stylesheet for user -->
-    <link rel="stylesheet" href="style/user.css">
+    <link rel="stylesheet" href="style/user.css" />
+    
+    <!-- Import of CSS Stylesheet for Footer -->
+    <link rel="stylesheet" href="style/footer.css">
 
     <!-- Import of CSS Stylesheet for loading display -->
-    <link rel="stylesheet" href="style/loading.css">
+    <link rel="stylesheet" href="style/loading.css" />
 
     <!-- Import of ApexCharts -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <!-- Import of JavaScript for partials -->
+    <script src="js/partials.js" defer></script>
 
     <!-- Import of moment.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
@@ -46,7 +52,7 @@
     <div id="main">
         <div id="userArea">
             <!-- Profile Picture for Github User -->
-            <img src="#" alt="Profile Picture" id="profilePicture">
+            <img src="#" alt="Profile Picture" id="profilePicture" />
 
             <!-- Name and login name  -->
             <h1 id="name">GitHub Username</h1>
@@ -61,7 +67,9 @@
             <!-- Shows latest 5 open pull requests and also total in public repos -->
             <div id="pullRequests" hidden>
                 <h2>Pull Requests:</h2>
-                <p>This only includes pull requests found in users public repositories.</p>
+                <p>
+                    This only includes pull requests found in users public repositories.
+                </p>
                 <ul></ul>
             </div>
 
@@ -91,6 +99,9 @@
         <!-- ApexCharts Container (Generated in JS) -->
         <div id="chart" hidden></div>
     </div>
+
+    <!-- Footer -->
+    <div data-partials="footer.html"></div>
 </body>
 
 </html>
