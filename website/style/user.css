@@ -2,7 +2,7 @@ body {
     background-color: #F2EEE4;
 }
 
-#main{
+#mainContentArea{
     /* Changes display configuration to flex in JavaScript */
     display: none;
     justify-content: baseline;

@@ -3,6 +3,7 @@ const nameTag = document.querySelector("#name")
 usernameTag = document.querySelector("#username")
 loadingArea = document.querySelector("#loadingArea")
 main = document.querySelector("#main")
+mainContentArea = document.querySelector("#mainContentArea")
 commitAmount = document.querySelector("#commitAmount")
 topRepositories = document.querySelector("#topRepositories")
 topRepositoriesList = document.querySelector("#topRepositories>ul")
@@ -20,7 +21,7 @@ let _user, _name;
 
 window.onload = async () => {
     initPartials()
-
+    
     //Convert URL to Params
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
@@ -58,6 +59,7 @@ window.onload = async () => {
     }, 400)
 
     if (!fakeloading) loading()
+    checkToken()
 }
 
 /**
@@ -66,7 +68,7 @@ window.onload = async () => {
  */
 loading = () => {
     console.log("Loading complete!")
-    main.style.display = "flex";
+    mainContentArea.style.display = "flex";
     loadingArea.style.display = "none"
 }
 
