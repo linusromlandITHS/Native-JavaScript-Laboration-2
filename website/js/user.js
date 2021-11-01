@@ -68,6 +68,7 @@ window.onload = async () => {
  */
 loading = () => {
     console.log("Loading complete!")
+    main.style.display = "block"
     mainContentArea.style.display = "flex";
     loadingArea.style.display = "none"
 }
@@ -120,10 +121,10 @@ displayPullRequests = async (pulls) => {
             
             //Container to contain main content
             const container = document.createElement("div")
-
+            
             //Title
             const h2 = document.createElement("h2")
-            h2.textContent = pull.title
+            h2.textContent = `#${pull.number} - ${pull.title}`
 
             //Reponame
             const repoName = document.createElement("p")

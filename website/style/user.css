@@ -1,14 +1,31 @@
 body {
-    background-color: #F2EEE4;
+    background-color: #F2EEE4 !important;
 }
 
-#mainContentArea{
+#main {
+    display: none;
+}
+
+#name{
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+#username{
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+#mainContentArea {
     /* Changes display configuration to flex in JavaScript */
     display: none;
     justify-content: baseline;
 }
 
-#chart{
+#mainContentArea>* {
+    margin: 0.5rem;
+}
+
+#chart {
     width: 50rem;
 }
 
@@ -16,10 +33,44 @@ body {
     border-radius: 50%;
 }
 
-#userArea{
+#userArea {
     margin: 2rem;
 }
 
-#pullRequests > ul:nth-child(3) > li:nth-child(1){
-    list-style: none
+#pullRequests>ul, #latestCommits>ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#pullRequests>ul>li{
+    padding: 0.5rem;
+    width: 80%;
+    transition: all 0.2s;
+}
+
+#pullRequests>ul>li:hover{
+    background-color: #dbdbdb;
+    border-radius: 5px
+}
+
+#pullRequests>ul>li>p{
+    margin:0 !important;
+    padding:0 !important;
+}
+
+#latestCommits>ul>li{
+    padding: 0.5rem;
+    width: 80%;
+    transition: all 0.2s;
+}
+
+#latestCommits>ul>li:hover{
+    background-color: #dbdbdb;
+    border-radius: 5px
+}
+
+#latestCommits>ul>li>p{
+    margin:0 !important;
+    padding:0 !important;
 }
