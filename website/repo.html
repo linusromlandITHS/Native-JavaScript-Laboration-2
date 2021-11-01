@@ -19,9 +19,12 @@
     <!-- Import of CSS Stylesheet for repo -->
     <link rel="stylesheet" href="style/repo.css">
 
+    <!-- Import of CSS Stylesheet for shared -->
+    <link rel="stylesheet" href="style/shared.css" />
+
     <!-- Import of JavaScript for partials -->
     <script src="js/partials.js" defer></script>
-    
+
     <!-- Import of moment.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
         integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
@@ -57,22 +60,47 @@
         <div data-partials="header.html"></div>
 
         <div id="mainContentArea">
-            <!-- Shows 5 latest open issues and total of issues in repo-->
-            <div id="issues" hidden>
-                <h2>Issues:</h2>
+            <div id="userArea">
+                <section>
+                    <!-- Repo name  -->
+                    <h1 id="name">Repository</h1>
+                </section>
+
+                <!-- about on repo -->
+                <p id="bio" hidden></p>
+                <!-- Current amount of commits for user -->
+                <p id="commitAmount" hidden></p>
+
+                <!-- Shows 5 latest open issues and total of issues in public repos-->
+                <div id="issues" hidden>
+                    <h2>Issues:</h2>
+                </div>
+
+                <!-- Shows latest 5 open pull requests and also total in public repos -->
+                <div id="pullRequests" hidden>
+                    <h2>Pull Requests:</h2>
+                    <ul></ul>
+                </div>
+
+                <!-- List with the top repositories (Generated in JS) -->
+                <div id="topLanguages" hidden>
+                    <h2>Top Languages</h2>
+                    <ol></ol>
+                </div>
             </div>
 
-            <!-- Shows latest 5 open pull requests and also total in repo -->
-            <div id="pullRequests" hidden>
-                <h2>Pull Requests:</h2>
-                <ul></ul>
-            </div>
+            <section>
+                <!-- Lastest Commits (Generated in JS) -->
+                <div id="latestCommits">
+                    <h2>Latest Commits</h2>
+                    <ul></ul>
+                </div>
+            </section>
 
-            <!-- List with the top repositories (Generated in JS) -->
-            <div id="topLanguages" hidden>
-                <h2>Top Languages</h2>
-                <ol></ol>
-            </div>
+            <section>
+                <!-- ApexCharts Container (Generated in JS) -->
+                <div id="chart" hidden></div>
+            </section>
         </div>
 
         <!-- Footer -->

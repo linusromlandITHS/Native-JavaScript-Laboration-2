@@ -1,3 +1,6 @@
+const nameTag = document.querySelector("#name")
+bio = document.querySelector("#bio")
+
 window.onload = async () => {
     initPartials()
 
@@ -16,6 +19,7 @@ window.onload = async () => {
     displayPullRequests(pullRequests)
     displayIssues(issues)
     displayTopLanguages(topLanguages)
+    displayName(repo)
 
     //Fake loading
     let fakeloading = true;
@@ -26,5 +30,21 @@ window.onload = async () => {
 
     if (!fakeloading) loading()
     checkToken()
+}
 
+/**
+ * @param  {object} user Object containing the user information
+ * 
+ * Sets the username DOMs and updated metadata.
+ */
+ displayName = (repo) => {
+    document.title = `${repo.name} - Github Statistics`
+    nameTag.textContent = repo.name
+
+
+    //If GitHub repo has bio set, shows bio in field.
+    if (repo.description) {
+        bio.textContent = repo.description
+        bio.hidden = false;
+    }
 }
