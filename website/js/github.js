@@ -122,7 +122,7 @@ outOfRequests = (request) => {
  * 
  * Converts repoarray to the top languages
  */
- reposToLanguages = (repoArray) => {
+reposToLanguages = (repoArray) => {
     let topLangs = []
     repoArray.forEach(async repo => {
         const languages = await fetchURL(repo.languages_url)
@@ -168,4 +168,40 @@ reposToPullRequests = async (repoArray) => {
         pullRequests.push(...pullRequestsFromRepo)
     });
     return pullRequests
+}
+
+/**
+ * @param  {object} repo
+ * 
+ * Converts repo to the pulls
+ */
+repoToPullRequests = async (repo) => {
+    return await fetchURL(`${repo.url}/pulls?state=all`)
+}
+
+/**
+ * @param  {object} repo
+ * 
+ * Converts repo to the issues
+ */
+repoToIssues = async (repo) => {
+    return await fetchURL(`${repo.url}/issues?state=all`)
+}
+
+/**
+ * @param  {object} repo
+ * 
+ * Converts repo to the top languages
+ */
+repoToLanguages = async (repo) => {
+    let topLangs = []
+    const languages = await fetchURL(repo.languages_url)
+    for (const lang in languages) {
+        topLangs.push({
+            lang: lang,
+            amount: languages[lang]
+        })
+        topLangs.sort((a, b) => b.amount - a.amount)
+    }
+    return topLangs
 }

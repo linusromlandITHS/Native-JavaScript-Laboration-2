@@ -9,12 +9,9 @@ window.onload = async () => {
     let repo = await getRepo(params.repo);
     //Redirects client if repo not found
     if (!repo) window.location = "index.html"
-
-    const pullRequests = await reposToPullRequests([repo])
-    const issues = await reposToIssues([repo])
-    const topLanguages = await reposToLanguages([repo]);
-
-    console.log(pullRequests, issues, topLanguages);
+    const pullRequests = await repoToPullRequests(repo)
+    const issues = await repoToIssues(repo)
+    const topLanguages = await repoToLanguages(repo);
 
     displayPullRequests(pullRequests)
     displayIssues(issues)

@@ -10,7 +10,9 @@ topLanguagesList = document.querySelector("#topLanguages>ol")
  * Converts inputed array to list items containg information and appends dem to pullRequestsDOM
  */
  displayPullRequests = async (pulls) => {
-     
+    // console.log(pulls)
+    // console.log(pulls.length)
+    // console.log(JSON.stringify(pulls))
     let elements = []
     let openPullRequests = 0;
     let closedPullRequests = 0;

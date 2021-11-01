@@ -39,7 +39,6 @@ window.onload = async () => {
     let events = await getEvents(user.login)
     let chartData = await eventArrayToChart(events)
     await renderChart(chartData.amount, chartData.day, "#chart", "line", "Commits")
-    console.log(pullRequests, issues, topLanguages);
 
     //Displays diffrent information on load of site
     displayName(user)
