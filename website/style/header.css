@@ -34,6 +34,7 @@ header > * > button {
     margin: 5px;
     padding: 5px 5px;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {
