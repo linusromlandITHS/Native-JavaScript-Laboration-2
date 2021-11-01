@@ -1,6 +1,21 @@
 // Retrives of HTML DOM elements
 const form = document.querySelector("form")
  githubPersonalToken = document.querySelector("#GithubPersonalToken")
+ addToken = document.querySelector("#addToken")
+ loginWithGithub = document.querySelector("#loginWithGithub")
+
+window.onload = () => {
+
+    const apiDomain = "githubStats.romland.space"
+
+    //TODO add check if URL is correct
+    if(window.location.host == "localhost:3000"){
+        loginWithGithub.hidden = false;
+        addToken.style.display = "none"
+    }
+
+    initPartials()
+}
 
 //Runs on submit on form
 form.addEventListener("submit", async event => {
@@ -8,10 +23,6 @@ form.addEventListener("submit", async event => {
     if (githubPersonalToken) {
         //updates entries in localstorage and redirect client.
         await localStorage.setItem("githubpersonaltoken", githubPersonalToken.value)
-        window.location = "index.html"
+        window.location = "/"
     }
 })
-
-window.onload = () => {
-    initPartials()
-}

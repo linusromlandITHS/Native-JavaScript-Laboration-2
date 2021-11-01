@@ -1,12 +1,13 @@
 // Retrives of HTML DOM elements
 const inputField = document.querySelector("#searchBar")
- form = document.querySelector("form")
- errorContainer = document.querySelector("#error")
- userErrorTag = document.querySelector("#userError")
- repoErrorTag = document.querySelector("#repoError")
- historySearches = document.querySelector("#historySearches")
+form = document.querySelector("form")
+errorContainer = document.querySelector("#error")
+userErrorTag = document.querySelector("#userError")
+repoErrorTag = document.querySelector("#repoError")
+historySearches = document.querySelector("#historySearches")
 
-let _history, _autoCompleteSearches = [];
+let _history = [];
+let _autoCompleteSearches = [];
 let _autoCompleteJS;
 
 window.onload = () => {
@@ -25,7 +26,7 @@ window.onload = () => {
             historySearches.appendChild(ul);
         });
     }
-    _autoCompleteSearches = _history
+    if (_history && _history.length > 0) _autoCompleteSearches = _history
     initAutocomplete()
 };
 
@@ -35,7 +36,7 @@ window.onload = () => {
 inputField.addEventListener("input", async (event) => {
     if (inputField.value.length % 3 === 0) {
         let search = await searchUser(inputField.value);
-        _autoCompleteSearches = _history;
+        if (_history && _history.length > 0) _autoCompleteSearches = _history
         search.forEach(searchItem => {
             if (!_autoCompleteSearches.includes(searchItem.login)) _autoCompleteSearches.push(searchItem.login)
         });
@@ -89,11 +90,16 @@ search = async (value) => {
  * Saves the input to localstorage and history
  */
 saveToHistory = (value) => {
-    //Saves search to localStorage for history
-    if (!_history.includes(value)) {
+    if (_history) {
+        //Saves search to localStorage for history
+        if (!_history.includes(value)) {
+            _history.push(value);
+            if (_history.length > 50) _history.shift();
+        }
+    } else {
         _history.push(value);
-        if (_history.length > 50) _history.shift();
     }
+
     localStorage.setItem("history", JSON.stringify(_history));
 }
 

@@ -3,6 +3,7 @@ const nameTag = document.querySelector("#name")
 usernameTag = document.querySelector("#username")
 loadingArea = document.querySelector("#loadingArea")
 main = document.querySelector("#main")
+mainContentArea = document.querySelector("#mainContentArea")
 commitAmount = document.querySelector("#commitAmount")
 topRepositories = document.querySelector("#topRepositories")
 topRepositoriesList = document.querySelector("#topRepositories>ul")
@@ -19,6 +20,8 @@ topLanguagesList = document.querySelector("#topLanguages>ol")
 let _user, _name;
 
 window.onload = async () => {
+    initPartials()
+    
     //Convert URL to Params
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
@@ -52,10 +55,11 @@ window.onload = async () => {
     let fakeloading = true;
     setTimeout(() => {
         fakeloading = false;
-        loading(true)
+        loading()
     }, 400)
 
-    if (!fakeloading) loading(true)
+    if (!fakeloading) loading()
+    checkToken()
 }
 
 /**
@@ -64,7 +68,8 @@ window.onload = async () => {
  */
 loading = () => {
     console.log("Loading complete!")
-    main.hidden = false;
+    main.style.display = "block"
+    mainContentArea.style.display = "flex";
     loadingArea.style.display = "none"
 }
 
@@ -116,10 +121,10 @@ displayPullRequests = async (pulls) => {
             
             //Container to contain main content
             const container = document.createElement("div")
-
+            
             //Title
             const h2 = document.createElement("h2")
-            h2.textContent = pull.title
+            h2.textContent = `#${pull.number} - ${pull.title}`
 
             //Reponame
             const repoName = document.createElement("p")
