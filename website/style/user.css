@@ -1,3 +1,7 @@
+*{
+    transition: all 0.2s;
+}
+
 body {
     background-color: #F2EEE4 !important;
 }
@@ -6,11 +10,12 @@ body {
     display: none;
 }
 
-#name{
+#name {
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
 }
-#username{
+
+#username {
     margin-top: 0 !important;
     padding-top: 0 !important;
 }
@@ -18,7 +23,7 @@ body {
 #mainContentArea {
     /* Changes display configuration to flex in JavaScript */
     display: none;
-    justify-content: baseline;
+    min-height: 90vh;
 }
 
 #mainContentArea>* {
@@ -27,6 +32,7 @@ body {
 
 #chart {
     width: 50rem;
+    min-height: 0 !important
 }
 
 #profilePicture {
@@ -35,42 +41,66 @@ body {
 
 #userArea {
     margin: 2rem;
+    margin-left: 0;
 }
 
-#pullRequests>ul, #latestCommits>ul {
+#userArea>* {
+    margin: 1rem;
+}
+
+#latestCommits {
+    width: 90%;
+    margin-right: 0 !important;
+}
+
+#topLanguages>ol {
+    list-style: none;
+    counter-reset: i;
+}
+
+#topLanguages>ol>li>p {
+    display: inline;
+}
+
+#topLanguages>ol>li::before {
+    display: inline;
+    counter-increment: i;
+    content: counter(i) ". "
+}
+
+#pullRequests>ul,
+#latestCommits>ul,
+#topRepositories>ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-#pullRequests>ul>li{
+#pullRequests>ul>li,
+#latestCommits>ul>li,
+#topRepositories>ul>li {
     padding: 0.5rem;
-    width: 80%;
-    transition: all 0.2s;
+    padding-left: 0;
 }
 
-#pullRequests>ul>li:hover{
+#pullRequests>ul>li:hover,
+#latestCommits>ul>li:hover,
+#topRepositories>ul>li:hover {
     background-color: #dbdbdb;
     border-radius: 5px
 }
 
-#pullRequests>ul>li>p{
-    margin:0 !important;
-    padding:0 !important;
+#pullRequests>ul>li>p,
+#latestCommits>ul>li>p {
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-#latestCommits>ul>li{
-    padding: 0.5rem;
-    width: 80%;
-    transition: all 0.2s;
-}
-
-#latestCommits>ul>li:hover{
-    background-color: #dbdbdb;
-    border-radius: 5px
-}
-
-#latestCommits>ul>li>p{
-    margin:0 !important;
-    padding:0 !important;
+@media only screen and (max-width: 1000px) {
+    #mainContentArea {
+        flex-direction: column;
+    }
+    #chart{
+        width: 100%
+    }
 }

@@ -24,7 +24,7 @@ getUser = async (username) => {
  * 
  * Retrives Github User Repos from GitHub's API
  */
- getUserRepos = async (username) => {
+getUserRepos = async (username) => {
     let request = await fetch(`https://api.github.com/users/${username}/repos`, _params)
     outOfRequests(request)
     if (request.status === 404) return null;
@@ -113,8 +113,6 @@ getEvents = async (user) => {
 outOfRequests = (request) => {
     if (request.status === 403) {
         let path = `${window.location.origin + window.location.pathname.substring(0,window.location.pathname.length-9)}authenticate.html`
-        const errorMessage = _githubPersonalToken ? `You are out of request!` : `You are out of request! You have 60 request/hour.\nYou can get more (5000 request/hour) if you authenticate with GitHub and Personal Token!\nTo do this, visit: \n${path}`
-
-        alert(errorMessage)
+        window.location = path;
     }
 }

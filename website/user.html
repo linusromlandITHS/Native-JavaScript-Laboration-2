@@ -19,13 +19,6 @@
     <!-- Import of CSS Stylesheet for user -->
     <link rel="stylesheet" href="style/user.css" />
 
-    <!-- Import of Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
-
     <!-- Import of CSS Stylesheet for Footer -->
     <link rel="stylesheet" href="style/footer.css" />
 
@@ -47,8 +40,9 @@
     <script src="js/user.js" defer></script>
     <script src="js/github.js" defer></script>
 
-    <!-- Import of JS for Header -->
-    <script src="js/header.js" defer></script>
+    <!-- Import for header -->
+    <link rel="stylesheet" href="style/header.css">
+    <script src="js/header.js"></script>
 </head>
 
 <body>
@@ -69,9 +63,11 @@
                 <!-- Profile Picture for Github User -->
                 <img src="#" alt="Profile Picture" id="profilePicture" />
 
-                <!-- Name and login name  -->
-                <h1 id="name">GitHub Username</h1>
-                <p id="username" hidden></p>
+                <section>
+                    <!-- Name and login name  -->
+                    <h1 id="name">GitHub Username</h1>
+                    <p id="username" hidden></p>
+                </section>
 
                 <!-- Bio on user -->
                 <p id="bio" hidden></p>
@@ -81,36 +77,43 @@
                 <!-- Current amount of commits for user -->
                 <p id="commitAmount" hidden></p>
 
+                <div id="issues" hidden>
+                    <h2>Issues:</h2>
+                </div>
+
                 <!-- Shows latest 5 open pull requests and also total in public repos -->
                 <div id="pullRequests" hidden>
                     <h2>Pull Requests:</h2>
                     <ul></ul>
                 </div>
 
-                <div id="issues" hidden>
-                    <h2>Issues:</h2>
+                <!-- List with the top repositories (Generated in JS) -->
+                <div id="topLanguages" hidden>
+                    <h2>Top Languages</h2>
+                    <ol></ol>
                 </div>
             </div>
-            <!-- List with the top repositories (Generated in JS) -->
-            <div id="topLanguages" hidden>
-                <h2>Top Languages</h2>
-                <ol></ol>
-            </div>
 
-            <!-- Lastest Commits (Generated in JS) -->
-            <div id="latestCommits">
-                <h2>Latest Commits</h2>
-                <ul></ul>
-            </div>
+            <section>
+                <!-- Lastest Commits (Generated in JS) -->
+                <div id="latestCommits">
+                    <h2>Latest Commits</h2>
+                    <ul></ul>
+                </div>
+            </section>
 
-            <!-- List with the top repositories (Generated in JS) -->
-            <div id="topRepositories" hidden>
-                <h2>Popular Repositories</h2>
-                <ul></ul>
-            </div>
+            <section>
+                <!-- ApexCharts Container (Generated in JS) -->
+                <div id="chart" hidden></div>
 
-            <!-- ApexCharts Container (Generated in JS) -->
-            <div id="chart" hidden></div>
+                <!-- List with the top repositories (Generated in JS) -->
+                <div id="topRepositories" hidden>
+                    <h2>Popular Repositories</h2>
+                    <p>Calulated from latest commits</p>
+                    <ul></ul>
+                </div>
+            </section>
+
         </div>
 
         <!-- Footer -->

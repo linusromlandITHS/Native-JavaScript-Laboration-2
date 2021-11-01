@@ -21,7 +21,7 @@ let _user, _name;
 
 window.onload = async () => {
     initPartials()
-    
+
     //Convert URL to Params
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
@@ -35,7 +35,6 @@ window.onload = async () => {
 
     //Redirects client if user not found
     if (!user) window.location = "index.html"
-
 
     let events = await getEvents(user.login)
     let chartData = await eventArrayToChart(events)
@@ -91,7 +90,7 @@ displayName = (user) => {
     }
 
     //If GitHub profile has bio set, shows bio in field.
-    if(user.bio){
+    if (user.bio) {
         bio.textContent = user.bio
         bio.hidden = false;
     }
@@ -111,17 +110,17 @@ displayPullRequests = async (pulls) => {
 
     for (let i = 0; i < pulls.length; i++) {
         const pull = pulls[i];
-        if(pull.state == "open"){
+        if (pull.state == "open") {
             //Main list item
             const li = document.createElement("li")
 
             //Annchor tag for link
             const a = document.createElement("a")
             a.href = pull.html_url
-            
+
             //Container to contain main content
             const container = document.createElement("div")
-            
+
             //Title
             const h2 = document.createElement("h2")
             h2.textContent = `#${pull.number} - ${pull.title}`
@@ -148,11 +147,11 @@ displayPullRequests = async (pulls) => {
 
             //Increases openPullRequests by one
             openPullRequests++;
-        }else{
+        } else {
             //Increases closedPullRequests by one
             closedPullRequests++;
         }
-        if(elements.length >= 5) break;
+        if (elements.length >= 5) break;
     }
     //P tag that displays how many open and closed pull requests in public repos.
     const requestsOpen = document.createElement("p")
@@ -173,7 +172,7 @@ displayIssues = (issuesArray) => {
     closedIssues = 0;
 
     issuesArray.forEach(issue => {
-        if(issue.state == "open") openIssues++;
+        if (issue.state == "open") openIssues++;
         else closedIssues++;
     });
 
@@ -195,7 +194,7 @@ displayTopRepos = (arr) => {
     for (let i = 0; i < amount; i++) {
         const element = arr[i];
         let li = document.createElement("li");
-        li.innerHTML = `Repo: <a href="https://github.com/${element.repo}/">${element.repo}</a> (Commits: ${element.amount})`
+        li.innerHTML = `<a href="https://github.com/${element.repo}/">${element.repo}</a><p>Commits: ${element.amount}</p>`
         topRepositoriesList.appendChild(li)
     }
 }
@@ -215,6 +214,7 @@ displayCommitAmount = (data) => {
         commitAmount.hidden = false;
     }
 }
+
 /**
  * @param  {array} arr Array Containing latest events
  * 
@@ -225,7 +225,7 @@ displayLatestCommits = (arr) => {
 
     let commits = []
     let i = 0;
-    while (commits.length < 5) {
+    while (commits.length < 8) {
         if (arr[i].type === "PushEvent") { // Checkes that event is of type PushEvent.
             arr[i].payload.commits.forEach(element => {
                 commits.push({
@@ -238,11 +238,11 @@ displayLatestCommits = (arr) => {
         }
         i++;
     }
-    let amount = commits.length > 5 ? 5 : commits.length
+    let amount = commits.length > 8 ? 8 : commits.length
 
     if (amount) latestCommits.hidden = false;
     for (let i = 0; i < amount; i++) {
-        const element = commits[i];        
+        const element = commits[i];
         let li = document.createElement("li");
 
         let title = document.createElement("p")
@@ -300,7 +300,7 @@ displayTopLanguages = (topLangs) => {
         li.appendChild(p)
         elements.push(li)
 
-        if(elements.length >= 5) break;
+        if (elements.length >= 5) break;
     }
 
 
@@ -373,16 +373,16 @@ reposToLanguages = (repoArray) => {
         const languages = await fetchURL(repo.languages_url)
         for (const lang in languages) {
             let index = topLangs.findIndex((e) => e.lang == lang)
-            if(index == -1){
+            if (index == -1) {
                 topLangs.push({
                     lang: lang,
                     amount: languages[lang]
                 })
-            }else{
+            } else {
                 topLangs[index].amount += languages[lang]
             }
             topLangs.sort((a, b) => b.amount - a.amount)
-          }
+        }
     });
     return topLangs
 }
@@ -406,7 +406,7 @@ reposToIssues = (repoArray) => {
  * 
  * Converts repoarray to the pulls
  */
- reposToPullRequests = async (repoArray) => {
+reposToPullRequests = async (repoArray) => {
     let pullRequests = []
     repoArray.forEach(async repo => {
         const pullRequestsFromRepo = await fetchURL(`${repo.url}/pulls?state=all`)
@@ -436,7 +436,8 @@ renderChart = (dataPoints, categories, selector, type, name) => {
             }],
             xaxis: {
                 categories: categories
-            }
+            },
+            colors: ['#5065A8']
         }
 
         var chart = new ApexCharts(document.querySelector(selector), options);
