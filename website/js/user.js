@@ -113,7 +113,7 @@ displayLatestCommits = (arr) => {
 
     let commits = []
     let i = 0;
-    while (commits.length < 8) {
+    while (commits.length < 8 && arr.length > 0) {
         if (arr[i].type === "PushEvent") { // Checkes that event is of type PushEvent.
             arr[i].payload.commits.forEach(element => {
                 commits.push({
