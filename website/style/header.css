@@ -38,13 +38,19 @@ header > a {
 header > * > button {
     height: 20%;
     font-size: 100%;
-    border: 0;
+    background-color: rgba(255, 255, 255, 0);
+    color: #5065A8;
+    border: 1px solid #5065A8;
     outline: 0;
     margin: 5px;
     margin-left: 16px;
     padding: 5px 5px;
     border-radius: 8px;
     cursor: pointer;
+}
+
+header > * > button:hover{
+    background-color: rgba(255, 255, 255, 0.432);
 }
 
 @media only screen and (max-width: 600px) {

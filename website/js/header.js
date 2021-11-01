@@ -24,7 +24,7 @@ checkToken = async () => {
             profileImage.style.borderRadius = "999px"
 
             const logOut = document.createElement("button")
-            logOut.textContent = `Log Out`
+            logOut.textContent = `Logout`
             logOut.onclick = () => {
                 localStorage.removeItem("githubpersonaltoken")
                 console.log(localStorage.getItem("githubpersonaltoken"))
