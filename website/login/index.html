@@ -16,7 +16,7 @@
             const params = Object.fromEntries(urlSearchParams.entries());
 
             //Makes request to API
-            let request = await fetch(`/api/callback?code=${params.code}`)
+            const request = await fetch(`/api/callback?code=${params.code}`)
 
             //Gets response text from request
             const authResponse = await request.text();

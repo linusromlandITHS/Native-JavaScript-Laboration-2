@@ -13,7 +13,7 @@ topLanguagesList = document.querySelector("#topLanguages>ol")
     // console.log(pulls)
     // console.log(pulls.length)
     // console.log(JSON.stringify(pulls))
-    let elements = []
+    const elements = []
     let openPullRequests = 0;
     let closedPullRequests = 0;
 
@@ -96,7 +96,7 @@ displayIssues = (issuesArray) => {
  * Displays the 5 most popular languages on user page
  */
  displayTopLanguages = (topLangs) => {
-    let elements = []
+    const elements = []
 
     topLanguages.hidden = false;
 

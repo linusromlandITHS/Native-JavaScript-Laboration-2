@@ -1,6 +1,5 @@
 const _githubPersonalToken = localStorage.getItem("githubpersonaltoken")
-
-let _params = {};
+_params = {};
 
 if (_githubPersonalToken) _params.headers = {
     "Authorization": `Bearer ${ _githubPersonalToken}`
@@ -12,10 +11,10 @@ if (_githubPersonalToken) _params.headers = {
  * Retrives Github User from GitHub's API
  */
 getUser = async (username) => {
-    let request = await fetch(`https://api.github.com/users/${username}`, _params)
+    const request = await fetch(`https://api.github.com/users/${username}`, _params)
     outOfRequests(request)
     if (request.status === 404) return null;
-    let data = await request.json();
+    const data = await request.json();
     return data;
 }
 
@@ -25,10 +24,10 @@ getUser = async (username) => {
  * Retrives Github User Repos from GitHub's API
  */
 getUserRepos = async (username) => {
-    let request = await fetch(`https://api.github.com/users/${username}/repos`, _params)
+    const request = await fetch(`https://api.github.com/users/${username}/repos`, _params)
     outOfRequests(request)
     if (request.status === 404) return null;
-    let data = await request.json();
+    const data = await request.json();
     return data;
 }
 
@@ -38,10 +37,10 @@ getUserRepos = async (username) => {
  * Makes a fetch and includes _params
  */
 fetchURL = async (url) => {
-    let request = await fetch(url, _params)
+    const request = await fetch(url, _params)
     outOfRequests(request)
     if (request.status === 404) return null;
-    let data = await request.json();
+    const data = await request.json();
     return data;
 }
 
@@ -51,10 +50,10 @@ fetchURL = async (url) => {
  * Retrives Github Repository from GitHub's API
  */
 getRepo = async (repo) => {
-    let request = await fetch(`https://api.github.com/repos/${repo}`, _params)
+    const request = await fetch(`https://api.github.com/repos/${repo}`, _params)
     outOfRequests(request)
     if (request.status === 404) return null;
-    let data = await request.json();
+    const data = await request.json();
     return data;
 }
 
@@ -67,9 +66,9 @@ searchUser = async (username) => {
     const request = await fetch(`https://api.github.com/search/users?q=${username}`, _params)
     outOfRequests(request)
     const data = await request.json();
-    let users = data.items;
+    const users = data.items;
     while (true) {
-        let index = users.findIndex(o => o.type === "Organization")
+        const index = users.findIndex(o => o.type === "Organization")
         if (index === -1) {
             break;
         } else {
@@ -97,7 +96,7 @@ getEvents = async (user) => {
     }
     let j = 0;
     while (true) {
-        let index = commits.findIndex(e => e.type !== "PushEvent")
+        const index = commits.findIndex(e => e.type !== "PushEvent")
         if (index == -1) break;
         else commits.splice(index, 1);
     }
@@ -112,7 +111,7 @@ getEvents = async (user) => {
  */
 outOfRequests = (request) => {
     if (request.status === 403) {
-        let path = `${window.location.origin + window.location.pathname.substring(0,window.location.pathname.length-9)}authenticate.html`
+        const path = `${window.location.origin + window.location.pathname.substring(0,window.location.pathname.length-9)}authenticate.html`
         window.location = path;
     }
 }
@@ -123,11 +122,11 @@ outOfRequests = (request) => {
  * Converts repoarray to the top languages
  */
 reposToLanguages = (repoArray) => {
-    let topLangs = []
+    const topLangs = []
     repoArray.forEach(async repo => {
         const languages = await fetchURL(repo.languages_url)
         for (const lang in languages) {
-            let index = topLangs.findIndex((e) => e.lang == lang)
+            const index = topLangs.findIndex((e) => e.lang == lang)
             if (index == -1) {
                 topLangs.push({
                     lang: lang,
@@ -148,7 +147,7 @@ reposToLanguages = (repoArray) => {
  * Converts repoarray to the issues
  */
 reposToIssues = (repoArray) => {
-    let issues = []
+    const issues = []
     repoArray.forEach(async repo => {
         const issueFromRepo = await fetchURL(`${repo.url}/issues?state=all`)
         issues.push(...issueFromRepo)
@@ -162,7 +161,7 @@ reposToIssues = (repoArray) => {
  * Converts repoarray to the pulls
  */
 reposToPullRequests = async (repoArray) => {
-    let pullRequests = []
+    const pullRequests = []
     repoArray.forEach(async repo => {
         const pullRequestsFromRepo = await fetchURL(`${repo.url}/pulls?state=all`)
         pullRequests.push(...pullRequestsFromRepo)
@@ -194,7 +193,7 @@ repoToIssues = async (repo) => {
  * Converts repo to the top languages
  */
 repoToLanguages = async (repo) => {
-    let topLangs = []
+    const topLangs = []
     const languages = await fetchURL(repo.languages_url)
     for (const lang in languages) {
         topLangs.push({

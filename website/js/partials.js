@@ -2,12 +2,12 @@
 const partialLocation = "partials/"
 
 initPartials = () => {
-    let partialNodes = document.querySelectorAll('[data-partials]')
+    const partialNodes = document.querySelectorAll('[data-partials]')
 
     partialNodes.forEach(async element => {
-        let elementName = element.getAttribute('data-partials')
-        let request = await fetch(partialLocation + elementName)
-        let htmlResponse = await request.text();
+        const elementName = element.getAttribute('data-partials')
+        const request = await fetch(partialLocation + elementName)
+        const htmlResponse = await request.text();
         if(request.status == 200){
             element.innerHTML = htmlResponse
         }else{

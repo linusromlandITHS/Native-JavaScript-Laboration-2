@@ -3,12 +3,12 @@ checkToken = async () => {
     const personalToken = localStorage.getItem("githubpersonaltoken");
     authArea.innerHTML = "";
     if (personalToken) {
-        let request = await fetch("https://api.github.com/user", {
+        const request = await fetch("https://api.github.com/user", {
             headers: {
                 "Authorization": `Bearer ${personalToken}`
             }
         });
-        let data = await request.json();
+        const data = await request.json();
         if (data.login) {
             const name = data.name ? data.name : data.login;
 

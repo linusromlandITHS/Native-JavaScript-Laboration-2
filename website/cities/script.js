@@ -38,7 +38,7 @@ window.onclick = (event) => {
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (input.value && populationInput.value) {
-        let request = await fetch('https://avancera.app/cities/', {
+        const request = await fetch('https://avancera.app/cities/', {
             body: JSON.stringify({
                 name: input.value,
                 population: parseInt(populationInput.value)
@@ -55,7 +55,7 @@ form.addEventListener("submit", async (e) => {
             populationInput.value = ""
             renderCitites()
         } else {
-            let error = await request.json();
+            const error = await request.json();
             console.log(`Error! ${error.error}`)
             responseMessage(`Error! ${error.error}`, "errorMessage")
         }
@@ -72,7 +72,7 @@ form.addEventListener("submit", async (e) => {
 responseMessage = (message, classes) => {
     //Clears all previous response messages!
     response.innerHTML = '';
-    let p = document.createElement('p')
+    const p = document.createElement('p')
     p.classList = classes
     p.textContent = message
     response.appendChild(p)
@@ -83,32 +83,32 @@ responseMessage = (message, classes) => {
  * Retrives all the lastest cities from API and displays them
  */
 renderCitites = async () => {
-    let request = await fetch('https://avancera.app/cities/');
-    let cities = await request.json();
+    const request = await fetch('https://avancera.app/cities/');
+    const cities = await request.json();
     if (JSON.stringify(cities) != JSON.stringify(_cities)) {
         console.log("New data, rendering!")
         //Clears previous cities
         citiesWrapper.innerHTML = ""
 
         cities.forEach(city => {
-            let container = document.createElement('div')
+            const container = document.createElement('div')
             container.classList = "card"
             container.title = city.name
 
-            let textContainer = document.createElement('div')
+            const textContainer = document.createElement('div')
 
-            let cityName = document.createElement('p')
+            const cityName = document.createElement('p')
             cityName.textContent = city.name
 
-            let cityPopulation = document.createElement('p')
+            const cityPopulation = document.createElement('p')
             cityPopulation.textContent = `${Intl.NumberFormat().format(city.population)} ${city.population == "1" ? "inhabitant" : "inhabitants"}`
 
             textContainer.append(cityName, cityPopulation)
 
-            let buttonContainer = document.createElement('div')
+            const buttonContainer = document.createElement('div')
 
-            let editButton = document.createElement('button')
-            let editSpan = document.createElement('span')
+            const editButton = document.createElement('button')
+            const editSpan = document.createElement('span')
             editSpan.classList = "material-icons"
             editSpan.textContent = "edit"
             editButton.onclick = () => {
@@ -116,8 +116,8 @@ renderCitites = async () => {
             }
             editButton.appendChild(editSpan)
 
-            let deleteButton = document.createElement('button')
-            let deleteSpan = document.createElement('span')
+            const deleteButton = document.createElement('button')
+            const deleteSpan = document.createElement('span')
             deleteSpan.classList = "material-icons"
             deleteSpan.textContent = "delete"
             deleteButton.onclick = () => {
@@ -158,13 +158,13 @@ deleteCity = async (id) => {
  */
 editCityValue = async (name, pop, object) => {
     console.log(`Updated the city ${object.name}'s information. (ID=${object.id})`)
-    let obj = {};
+    const obj = {};
     if (name.value && object.name != name.value) obj.name = name.value;
     if (pop.value && object.population != parseInt(pop.value)) obj.population = parseInt(pop.value);
 
 
     if (object.id && !(!name.value && !pop.value)) {
-        let request = await fetch(`https://avancera.app/cities/${object.id}`, {
+        const request = await fetch(`https://avancera.app/cities/${object.id}`, {
             body: JSON.stringify(obj),
             headers: {
                 "Content-Type": "application/json",

@@ -36,8 +36,8 @@ window.onload = async () => {
     //Redirects client if user not found
     if (!user) window.location = "index.html"
 
-    let events = await getEvents(user.login)
-    let chartData = await eventArrayToChart(events)
+    const events = await getEvents(user.login)
+    const chartData = await eventArrayToChart(events)
     await renderChart(chartData.amount, chartData.day, "#chart", "line", "Commits")
 
     //Displays diffrent information on load of site
@@ -111,7 +111,7 @@ displayCommitAmount = (data) => {
 displayLatestCommits = (arr) => {
     arr = arr.reverse();
 
-    let commits = []
+    const commits = []
     let i = 0;
     while (commits.length < 8 && arr.length > 0) {
         if (arr[i].type === "PushEvent") { // Checkes that event is of type PushEvent.
@@ -126,23 +126,23 @@ displayLatestCommits = (arr) => {
         }
         i++;
     }
-    let amount = commits.length > 8 ? 8 : commits.length
+    const amount = commits.length > 8 ? 8 : commits.length
 
     if (amount) latestCommits.hidden = false;
     for (let i = 0; i < amount; i++) {
         const element = commits[i];
-        let li = document.createElement("li");
+        const li = document.createElement("li");
 
-        let a = document.createElement("a");
+        const a = document.createElement("a");
         a.href = `https://github.com/${element.commitInformation.repo.name}/commit/${element.commit.sha}`;
 
-        let title = document.createElement("p")
+        const title = document.createElement("p")
         title.textContent = `Pushed to repository ${element.commitInformation.repo.name}`
 
-        let message = document.createElement("p")
+        const message = document.createElement("p")
         message.textContent = `${element.commit.message}`
 
-        let date = document.createElement("p")
+        const date = document.createElement("p")
         date.textContent = `${moment(element.commitInformation.created_at).calendar(null, {
             lastDay : '[Yesterday at] HH:mm',
             sameDay : '[Today at] HH:mm',
@@ -165,12 +165,12 @@ displayLatestCommits = (arr) => {
  * Loops through the top repositories (max 5) and displays them in the DOM.
  */
  displayTopRepos = (arr) => {
-    let amount = arr.length > 5 ? 5 : arr.length
+    const amount = arr.length > 5 ? 5 : arr.length
 
     if (amount) topRepositories.hidden = false;
     for (let i = 0; i < amount; i++) {
         const element = arr[i];
-        let li = document.createElement("li");
+        const li = document.createElement("li");
         li.innerHTML = `<a href="https://github.com/${element.repo}/"><p>${element.repo}</p><p>Commits: ${element.amount}</p></a>`
         topRepositoriesList.appendChild(li)
     }
@@ -193,27 +193,27 @@ displayProfilePicture = (user) => {
 eventArrayToChart = (eventArray) => {
     eventArray = eventArray.reverse(); //reverse array to get oldest first
 
-    let object = {
+    const object = {
         amount: [],
         day: [],
         topRepositories: null,
     }
 
-    let topRepositories = []
+    const topRepositories = []
 
     for (let i = 0; i < eventArray.length; i++) { //Loops through commits
         const commit = eventArray[i];
-        let date = moment(commit.created_at.split("T")[0]) //Converts date to momentObject
-        let diff = date.diff(moment(object.day[object.day.length - 1]), "days")
+        const date = moment(commit.created_at.split("T")[0]) //Converts date to momentObject
+        const diff = date.diff(moment(object.day[object.day.length - 1]), "days")
         if (diff > 1) {
-            let newDate = moment(object.day[object.day.length - 1])
+            const newDate = moment(object.day[object.day.length - 1])
             for (let i = 0; i < diff - 1; i++) {
                 newDate.add(1, "days")
                 object.day.push(newDate.format("YYYY-MM-DD"))
                 object.amount.push(0)
             }
         }
-        let index = object.day.findIndex((e) => e === date.format("YYYY-MM-DD")) //Checks if date is in date array
+        const index = object.day.findIndex((e) => e === date.format("YYYY-MM-DD")) //Checks if date is in date array
         if (index === -1) { // if date is not in array and either adds it or updates amount.
             object.day.push(date.format("YYYY-MM-DD"))
             object.amount.push(commit.payload.commits.length)
@@ -221,7 +221,7 @@ eventArrayToChart = (eventArray) => {
             object.amount[index] += commit.payload.commits.length
         }
 
-        let repoIndex = topRepositories.findIndex((e) => e.repo === commit.repo.name) //Checks if repo is in repo array
+        const repoIndex = topRepositories.findIndex((e) => e.repo === commit.repo.name) //Checks if repo is in repo array
         if (repoIndex === -1) {
             topRepositories.push({
                 repo: commit.repo.name,

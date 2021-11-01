@@ -9,7 +9,7 @@ window.onload = async () => {
     const params = Object.fromEntries(urlSearchParams.entries());
 
     //Gets repo from GitHub API
-    let repo = await getRepo(params.repo);
+    const repo = await getRepo(params.repo);
     //Redirects client if repo not found
     if (!repo) window.location = "index.html"
     const pullRequests = await repoToPullRequests(repo)

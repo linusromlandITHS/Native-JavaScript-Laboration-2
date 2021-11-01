@@ -17,8 +17,8 @@ window.onload = () => {
     if (localStorage.getItem("history")) {
         _history = JSON.parse(localStorage.getItem("history"));
         _history.forEach(item => {
-            let ul = document.createElement("ul");
-            let a = document.createElement("a");
+            const ul = document.createElement("ul");
+            const a = document.createElement("a");
             a.textContent = item;
             a.className = "historyItem"
             a.addEventListener("click", historySearch)
@@ -35,7 +35,7 @@ window.onload = () => {
  */
 inputField.addEventListener("input", async (event) => {
     if (inputField.value.length % 3 === 0) {
-        let search = await searchUser(inputField.value);
+        const search = await searchUser(inputField.value);
         if (_history && _history.length > 0) _autoCompleteSearches = _history
         search.forEach(searchItem => {
             if (!_autoCompleteSearches.includes(searchItem.login)) _autoCompleteSearches.push(searchItem.login)
@@ -61,7 +61,7 @@ search = async (value) => {
     if (value) {
         //Checks if input includes /. (is repo or not)
         if (value.includes("/")) {
-            let repo = await getRepo(value);
+            const repo = await getRepo(value);
             if (repo) { //Checks if valid repo else displays error
                 clearError();
                 saveToHistory(value)
@@ -70,7 +70,7 @@ search = async (value) => {
                 repoError();
             }
         } else {
-            let user = await getUser(value);
+            const user = await getUser(value);
             if (user) { //Checks if valid user else displays error
                 clearError();
                 saveToHistory(value)
