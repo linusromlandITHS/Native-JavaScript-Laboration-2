@@ -194,7 +194,7 @@ displayTopRepos = (arr) => {
     for (let i = 0; i < amount; i++) {
         const element = arr[i];
         let li = document.createElement("li");
-        li.innerHTML = `<a href="https://github.com/${element.repo}/">${element.repo}</a><p>Commits: ${element.amount}</p>`
+        li.innerHTML = `<a href="https://github.com/${element.repo}/"><p>${element.repo}</p><p>Commits: ${element.amount}</p></a>`
         topRepositoriesList.appendChild(li)
     }
 }
@@ -245,6 +245,9 @@ displayLatestCommits = (arr) => {
         const element = commits[i];
         let li = document.createElement("li");
 
+        let a = document.createElement("a");
+        a.href = `https://github.com/${element.commitInformation.repo.name}/commit/${element.commit.sha}`;
+
         let title = document.createElement("p")
         title.textContent = `Pushed to repository ${element.commitInformation.repo.name}`
 
@@ -261,9 +264,8 @@ displayLatestCommits = (arr) => {
             sameElse : 'L'
         })}`
 
-        li.appendChild(title)
-        li.appendChild(message)
-        li.appendChild(date)
+        a.append(title, message, date)
+        li.appendChild(a)
 
         latestCommitsList.appendChild(li)
     }

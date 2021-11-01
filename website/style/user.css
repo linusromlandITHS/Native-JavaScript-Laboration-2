@@ -20,6 +20,10 @@ body {
     padding-top: 0 !important;
 }
 
+a{
+    text-decoration: none;
+}
+
 #mainContentArea {
     /* Changes display configuration to flex in JavaScript */
     display: none;
@@ -96,6 +100,8 @@ body {
     margin: 0 !important;
     padding: 0 !important;
 }
+
+
 
 @media only screen and (max-width: 1000px) {
     #mainContentArea {

@@ -9,6 +9,15 @@ header{
 }
 
 header > a {
+    display: flex;
+    justify-content: center;
+}
+
+header > a > img {
+    margin: 0 8px;
+}
+
+header > a {
     font-size: 1.5rem;
     font-weight: 700;
     margin-left: 1rem;
@@ -32,6 +41,7 @@ header > * > button {
     border: 0;
     outline: 0;
     margin: 5px;
+    margin-left: 16px;
     padding: 5px 5px;
     border-radius: 8px;
     cursor: pointer;
@@ -41,16 +51,24 @@ header > * > button {
     header > a {
         font-size: 1rem;
     }
-    header> * > img{
+
+    header > a {
+        font-size: 0
+    }
+
+    header> div > img{
         display: none;
     }
+
     #authArea {
         margin-right: 0 !important;
     }
+
     #authArea > p {
         margin-right: 1rem;
         text-align: right;
     }
+
     header > * > button {
         margin: 1px;
         padding: 1px 1px;
