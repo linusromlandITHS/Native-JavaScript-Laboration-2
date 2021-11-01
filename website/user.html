@@ -22,9 +22,6 @@
     <!-- Import of CSS Stylesheet for Footer -->
     <link rel="stylesheet" href="style/footer.css" />
 
-    <!-- Import of CSS Stylesheet for loading display -->
-    <link rel="stylesheet" href="style/loading.css" />
-
     <!-- Import of ApexCharts -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
@@ -43,6 +40,13 @@
     <!-- Import for header -->
     <link rel="stylesheet" href="style/header.css">
     <script src="js/header.js"></script>
+
+    <!-- Import of JavaScript for shared display functions -->
+    <script src="js/sharedDisplay.js" defer></script>
+
+    <!-- Import of loading  -->
+    <script src="js/loading.js" defer></script>
+    <link rel="stylesheet" href="style/loading.css" />
 </head>
 
 <body>
@@ -77,6 +81,7 @@
                 <!-- Current amount of commits for user -->
                 <p id="commitAmount" hidden></p>
 
+                <!-- Shows 5 latest open issues and total of issues in public repos-->
                 <div id="issues" hidden>
                     <h2>Issues:</h2>
                 </div>

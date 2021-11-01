@@ -116,3 +116,56 @@ outOfRequests = (request) => {
         window.location = path;
     }
 }
+
+/**
+ * @param  {array} repoArray
+ * 
+ * Converts repoarray to the top languages
+ */
+ reposToLanguages = (repoArray) => {
+    let topLangs = []
+    repoArray.forEach(async repo => {
+        const languages = await fetchURL(repo.languages_url)
+        for (const lang in languages) {
+            let index = topLangs.findIndex((e) => e.lang == lang)
+            if (index == -1) {
+                topLangs.push({
+                    lang: lang,
+                    amount: languages[lang]
+                })
+            } else {
+                topLangs[index].amount += languages[lang]
+            }
+            topLangs.sort((a, b) => b.amount - a.amount)
+        }
+    });
+    return topLangs
+}
+
+/**
+ * @param  {array} repoArray
+ * 
+ * Converts repoarray to the issues
+ */
+reposToIssues = (repoArray) => {
+    let issues = []
+    repoArray.forEach(async repo => {
+        const issueFromRepo = await fetchURL(`${repo.url}/issues?state=all`)
+        issues.push(...issueFromRepo)
+    });
+    return issues
+}
+
+/**
+ * @param  {array} repoArray
+ * 
+ * Converts repoarray to the pulls
+ */
+reposToPullRequests = async (repoArray) => {
+    let pullRequests = []
+    repoArray.forEach(async repo => {
+        const pullRequestsFromRepo = await fetchURL(`${repo.url}/pulls?state=all`)
+        pullRequests.push(...pullRequestsFromRepo)
+    });
+    return pullRequests
+}

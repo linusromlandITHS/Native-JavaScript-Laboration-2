@@ -39,6 +39,7 @@ window.onload = async () => {
     let events = await getEvents(user.login)
     let chartData = await eventArrayToChart(events)
     await renderChart(chartData.amount, chartData.day, "#chart", "line", "Commits")
+    console.log(pullRequests, issues, topLanguages);
 
     //Displays diffrent information on load of site
     displayName(user)
@@ -59,17 +60,6 @@ window.onload = async () => {
 
     if (!fakeloading) loading()
     checkToken()
-}
-
-/**
- * 
- * Shows the main content and hides loading display
- */
-loading = () => {
-    console.log("Loading complete!")
-    main.style.display = "block"
-    mainContentArea.style.display = "flex";
-    loadingArea.style.display = "none"
 }
 
 /**
@@ -96,107 +86,6 @@ displayName = (user) => {
     }
 
     document.querySelector('meta[name="description"]').setAttribute("content", `Github Statistics for user ${user.login}`);
-}
-
-/**
- * @param  {array} pulls Array of all pull requests.
- * 
- * Converts inputed array to list items containg information and appends dem to pullRequestsDOM
- */
-displayPullRequests = async (pulls) => {
-    let elements = []
-    let openPullRequests = 0;
-    let closedPullRequests = 0;
-
-    for (let i = 0; i < pulls.length; i++) {
-        const pull = pulls[i];
-        if (pull.state == "open") {
-            //Main list item
-            const li = document.createElement("li")
-
-            //Annchor tag for link
-            const a = document.createElement("a")
-            a.href = pull.html_url
-
-            //Container to contain main content
-            const container = document.createElement("div")
-
-            //Title
-            const h2 = document.createElement("h2")
-            h2.textContent = `#${pull.number} - ${pull.title}`
-
-            //Reponame
-            const repoName = document.createElement("p")
-            repoName.textContent = "Repository: " + pull.base.repo.full_name
-
-            //Updated at time
-            const created = document.createElement("p")
-            created.textContent = "Last updated: " + moment(pull.updated_at).format("dddd, MMMM Do YYYY, HH:mm")
-
-            //Appends title and time to container
-            container.append(h2, repoName, created)
-
-            //Appends container to anchor
-            a.append(container)
-
-            //Appends anchor to list item
-            li.appendChild(a)
-
-            //Pushes list item to array
-            elements.push(li)
-
-            //Increases openPullRequests by one
-            openPullRequests++;
-        } else {
-            //Increases closedPullRequests by one
-            closedPullRequests++;
-        }
-        if (elements.length >= 5) break;
-    }
-    //P tag that displays how many open and closed pull requests in public repos.
-    const requestsOpen = document.createElement("p")
-    requestsOpen.textContent = `${openPullRequests} open / ${closedPullRequests} closed`
-
-    pullRequestsDOM.appendChild(requestsOpen)
-    elements.forEach(element => pullRequestsList.appendChild(element));
-    pullRequestsDOM.hidden = false
-}
-
-/**
- * @param  {array} issuesArray 
- * 
- * Converts issue array to show on html
- */
-displayIssues = (issuesArray) => {
-    openIssues = 0;
-    closedIssues = 0;
-
-    issuesArray.forEach(issue => {
-        if (issue.state == "open") openIssues++;
-        else closedIssues++;
-    });
-
-    const p = document.createElement("p")
-    p.textContent = `${openIssues} open / ${closedIssues} closed`
-    issues.appendChild(p)
-    issues.hidden = false;
-}
-
-/**
- * @param  {array} arr Object array of the top repositories
- * 
- * Loops through the top repositories (max 5) and displays them in the DOM.
- */
-displayTopRepos = (arr) => {
-    let amount = arr.length > 5 ? 5 : arr.length
-
-    if (amount) topRepositories.hidden = false;
-    for (let i = 0; i < amount; i++) {
-        const element = arr[i];
-        let li = document.createElement("li");
-        li.innerHTML = `<a href="https://github.com/${element.repo}/"><p>${element.repo}</p><p>Commits: ${element.amount}</p></a>`
-        topRepositoriesList.appendChild(li)
-    }
 }
 
 /**
@@ -272,43 +161,29 @@ displayLatestCommits = (arr) => {
 }
 
 /**
+ * @param  {array} arr Object array of the top repositories
+ * 
+ * Loops through the top repositories (max 5) and displays them in the DOM.
+ */
+ displayTopRepos = (arr) => {
+    let amount = arr.length > 5 ? 5 : arr.length
+
+    if (amount) topRepositories.hidden = false;
+    for (let i = 0; i < amount; i++) {
+        const element = arr[i];
+        let li = document.createElement("li");
+        li.innerHTML = `<a href="https://github.com/${element.repo}/"><p>${element.repo}</p><p>Commits: ${element.amount}</p></a>`
+        topRepositoriesList.appendChild(li)
+    }
+}
+
+/**
  * @param  {object} user Object containing the user information
  * 
  * Displays the profile picture of user in image DOM
  */
 displayProfilePicture = (user) => {
     profilePicture.setAttribute('src', `${user.avatar_url}&s=250`)
-}
-
-/**
- * @param  {arrays} topLangs Array containg the most popular languages in repos
- * 
- * Displays the 5 most popular languages on user page
- */
-displayTopLanguages = (topLangs) => {
-    let elements = []
-
-    topLanguages.hidden = false;
-
-    for (let i = 0; i < topLangs.length; i++) {
-        const lang = topLangs[i];
-        // Main listitem
-        const li = document.createElement("li")
-
-        //Text DOM
-        const p = document.createElement("p")
-        p.textContent = lang.lang
-
-        li.appendChild(p)
-        elements.push(li)
-
-        if (elements.length >= 5) break;
-    }
-
-
-    elements.forEach(element => {
-        topLanguagesList.appendChild(element)
-    });
 }
 
 /**
@@ -362,59 +237,6 @@ eventArrayToChart = (eventArray) => {
     object.topRepositories = topRepositories //Sets topRepositories to topRepositories in object
 
     return object
-}
-
-/**
- * @param  {array} repoArray
- * 
- * Converts repoarray to the top languages
- */
-reposToLanguages = (repoArray) => {
-    let topLangs = []
-    repoArray.forEach(async repo => {
-        const languages = await fetchURL(repo.languages_url)
-        for (const lang in languages) {
-            let index = topLangs.findIndex((e) => e.lang == lang)
-            if (index == -1) {
-                topLangs.push({
-                    lang: lang,
-                    amount: languages[lang]
-                })
-            } else {
-                topLangs[index].amount += languages[lang]
-            }
-            topLangs.sort((a, b) => b.amount - a.amount)
-        }
-    });
-    return topLangs
-}
-
-/**
- * @param  {array} repoArray
- * 
- * Converts repoarray to the issues
- */
-reposToIssues = (repoArray) => {
-    let issues = []
-    repoArray.forEach(async repo => {
-        const issueFromRepo = await fetchURL(`${repo.url}/issues?state=all`)
-        issues.push(...issueFromRepo)
-    });
-    return issues
-}
-
-/**
- * @param  {array} repoArray
- * 
- * Converts repoarray to the pulls
- */
-reposToPullRequests = async (repoArray) => {
-    let pullRequests = []
-    repoArray.forEach(async repo => {
-        const pullRequestsFromRepo = await fetchURL(`${repo.url}/pulls?state=all`)
-        pullRequests.push(...pullRequestsFromRepo)
-    });
-    return pullRequests
 }
 
 /**

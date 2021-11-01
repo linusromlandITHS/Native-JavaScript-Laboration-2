@@ -10,25 +10,69 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 
-    <!-- Import of JavaScript for connecting to API -->
-    <script src="js/repo.js" defer></script>
-    <script src="js/github.js" defer></script>
-
     <!-- Import of Global CSS Stylesheet -->
     <link rel="stylesheet" href="style/global.css">
 
     <!-- Import of CSS Stylesheet for Footer -->
     <link rel="stylesheet" href="style/footer.css">
-    
+
     <!-- Import of CSS Stylesheet for repo -->
     <link rel="stylesheet" href="style/repo.css">
 
     <!-- Import of JavaScript for partials -->
     <script src="js/partials.js" defer></script>
+
+    <!-- Import for header -->
+    <link rel="stylesheet" href="style/header.css">
+    <script src="js/header.js"></script>
+
+    <!-- Import of JavaScript for connecting to API -->
+    <script src="js/repo.js" defer></script>
+    <script src="js/github.js" defer></script>
+
+    <!-- Import of JavaScript for shared display functions -->
+    <script src="js/sharedDisplay.js" defer></script>
+
+    <!-- Import of loading  -->
+    <script src="js/loading.js" defer></script>
+    <link rel="stylesheet" href="style/loading.css" />
 </head>
 
 <body>
-    <div data-partials="footer.html"></div>
+    <!-- Loading display  -->
+    <div id="loadingArea">
+        <div id="loader"></div>
+        <h1>Loading repository statistics</h1>
+    </div>
+
+    <!-- Main Content (Shows after load) -->
+    <div id="main">
+
+        <!-- Header -->
+        <div data-partials="header.html"></div>
+
+        <div id="mainContentArea">
+            <!-- Shows 5 latest open issues and total of issues in repo-->
+            <div id="issues" hidden>
+                <h2>Issues:</h2>
+            </div>
+
+            <!-- Shows latest 5 open pull requests and also total in repo -->
+            <div id="pullRequests" hidden>
+                <h2>Pull Requests:</h2>
+                <ul></ul>
+            </div>
+
+            <!-- List with the top repositories (Generated in JS) -->
+            <div id="topLanguages" hidden>
+                <h2>Top Languages</h2>
+                <ol></ol>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div data-partials="footer.html"></div>
+    </div>
 </body>
 
 </html>
