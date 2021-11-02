@@ -9,7 +9,7 @@ window.onload = () => {
     const apiDomain = "githubStats.romland.space"
 
     //TODO add check if URL is correct
-    if(window.location.host == "localhost:3000"){
+    if(window.location.host == apiDomain){
         loginWithGithub.hidden = false;
         addToken.style.display = "none"
     }
