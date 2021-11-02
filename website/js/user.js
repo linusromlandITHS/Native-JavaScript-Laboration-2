@@ -136,8 +136,8 @@ displayLatestCommits = (arr) => {
         const a = document.createElement("a");
         a.href = `https://github.com/${element.commitInformation.repo.name}/commit/${element.commit.sha}`;
 
-        const title = document.createElement("p")
-        title.textContent = `Pushed to repository ${element.commitInformation.repo.name}`
+        const title = document.createElement("h3")
+        title.innerHTML = `Pushed to repository <strong>${element.commitInformation.repo.name}</strong>`
 
         const message = document.createElement("p")
         message.textContent = `${element.commit.message}`
