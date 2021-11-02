@@ -12,15 +12,16 @@ window.onload = async () => {
 
     //Gets repo from GitHub API
     const repo = await getRepo(params.repo);
-    
+
     //Redirects client if repo not found
     if (!repo) window.location = "index.html"
     const pullRequests = await repoToPullRequests(repo)
     const issues = await repoToIssues(repo)
     const topLanguages = await repoToLanguages(repo);
     const events = await getRepositoryEvents(repo.full_name);
+    const chartData = await eventArrayToChart(events)
 
-    console.log(events)
+    await renderChart(chartData.amount, chartData.day, "#chart", "line", "Commits")
 
     displayPullRequests(pullRequests)
     displayIssues(issues)
