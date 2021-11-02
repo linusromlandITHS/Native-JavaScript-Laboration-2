@@ -6,7 +6,7 @@ const form = document.querySelector("form")
 
 window.onload = () => {
 
-    const apiDomain = "githubStats.romland.space"
+    const apiDomain = "githubstatistics.romland.space"
 
     //TODO add check if URL is correct
     if(window.location.host == apiDomain){
