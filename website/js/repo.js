@@ -2,6 +2,8 @@ const nameTag = document.querySelector("#name")
 bio = document.querySelector("#bio")
 latestCommits = document.querySelector("#latestCommits")
 latestCommitsList = document.querySelector("#latestCommits>ul")
+topContributorsDOM = document.querySelector("#topContributors")
+topContributorsList = document.querySelector("#topContributors>ul")
 
 window.onload = async () => {
     initPartials()
@@ -28,7 +30,7 @@ window.onload = async () => {
     displayTopLanguages(topLanguages)
     displayLatestCommits(events)
     displayName(repo)
-
+    displayTopContributions(chartData.topContributors)
     //Fake loading
     let fakeloading = true;
     setTimeout(() => {
@@ -54,6 +56,23 @@ window.onload = async () => {
     if (repo.description) {
         bio.textContent = repo.description
         bio.hidden = false;
+    }
+}
+
+/**
+ * @param  {array} arr Object array of the top repositories
+ * 
+ * Loops through the top repositories (max 5) and displays them in the DOM.
+ */
+ displayTopContributions = (arr) => {
+    const amount = arr.length > 5 ? 5 : arr.length
+
+    if (amount) topContributorsDOM.hidden = false;
+    for (let i = 0; i < amount; i++) {
+        const element = arr[i];
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="https://github.com/${element.contributor}/"><p><strong>${element.contributor}</strong></p><p>Commits: ${element.amount}</p></a>`
+        topContributorsList.appendChild(li)
     }
 }
 
@@ -92,7 +111,7 @@ window.onload = async () => {
 
 
         const title = document.createElement("h3")
-        title.innerHTML = `<strong>${element.commit.author.name}</strong> pushed to repository`
+        title.innerHTML = `<strong>${element.commit.author.name}</strong> pushed to the repository`
 
         const message = document.createElement("p")
         message.textContent = `${element.commit.message}`
@@ -125,10 +144,10 @@ window.onload = async () => {
     const object = {
         amount: [],
         day: [],
-        topRepositories: null,
+        topContributors: null,
     }
 
-    const topRepositories = []
+    const topContributors = []
 
     for (let i = 0; i < eventArray.length; i++) { //Loops through commits
         const commit = eventArray[i];
@@ -149,15 +168,14 @@ window.onload = async () => {
         } else {
             object.amount[index] += commit.payload.commits.length
         }
-
-        const repoIndex = topRepositories.findIndex((e) => e.repo === commit.repo.name) //Checks if repo is in repo array
+        const repoIndex = topContributors.findIndex((e) => e.contributor === commit.actor.display_login) //Checks if repo is in repo array
         if (repoIndex === -1) {
-            topRepositories.push({
-                repo: commit.repo.name,
-                amount: commit.payload.commits.length
+            topContributors.push({
+                contributor: commit.actor.display_login,
+                amount: 1
             })
         } else {
-            topRepositories[repoIndex].amount += commit.payload.commits.length
+            topContributors[repoIndex].amount += 1
         }
     }
 
@@ -168,8 +186,8 @@ window.onload = async () => {
         object.amount.push(0)
     }
 
-    topRepositories.sort((a, b) => b.amount - a.amount) // Sorts array by no of commits
-    object.topRepositories = topRepositories //Sets topRepositories to topRepositories in object
-
+    topContributors.sort((a, b) => b.amount - a.amount) // Sorts array by no of commits
+    object.topContributors = topContributors //Sets topRepositories to topRepositories in object
+    console.log(object)
     return object
 }
