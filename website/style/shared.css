@@ -45,7 +45,7 @@ a{
 }
 
 #latestCommits {
-    width: 90%;
+    width: 100%;
     margin-right: 0 !important;
 }
 
@@ -77,13 +77,16 @@ a{
 #topRepositories>ul>li {
     padding: 0.5rem;
     padding-left: 0;
+    margin-block: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px
 }
 
 #pullRequests>ul>li:hover,
 #latestCommits>ul>li:hover,
 #topRepositories>ul>li:hover {
     background-color: #dbdbdb;
-    border-radius: 5px
 }
 
 #pullRequests>ul>li>p,
