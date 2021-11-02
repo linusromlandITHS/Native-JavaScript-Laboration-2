@@ -1,5 +1,7 @@
 const nameTag = document.querySelector("#name")
 bio = document.querySelector("#bio")
+latestCommits = document.querySelector("#latestCommits")
+latestCommitsList = document.querySelector("#latestCommits>ul")
 
 window.onload = async () => {
     initPartials()
@@ -23,6 +25,7 @@ window.onload = async () => {
     displayPullRequests(pullRequests)
     displayIssues(issues)
     displayTopLanguages(topLanguages)
+    displayLatestCommits(events)
     displayName(repo)
 
     //Fake loading
