@@ -171,7 +171,7 @@ displayLatestCommits = (arr) => {
     for (let i = 0; i < amount; i++) {
         const element = arr[i];
         const li = document.createElement("li");
-        li.innerHTML = `<a href="https://github.com/${element.repo}/"><p>${element.repo}</p><p>Commits: ${element.amount}</p></a>`
+        li.innerHTML = `<a href="https://github.com/${element.repo}/"><p><strong>${element.repo}</strong></p><p>Commits: ${element.amount}</p></a>`
         topRepositoriesList.appendChild(li)
     }
 }
