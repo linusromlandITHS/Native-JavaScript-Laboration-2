@@ -94,7 +94,6 @@ getEvents = async (user) => {
         commits = commits.concat(data);
         i++;
     }
-    let j = 0;
     while (true) {
         const index = commits.findIndex(e => e.type !== "PushEvent")
         if (index == -1) break;
