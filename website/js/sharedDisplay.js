@@ -120,3 +120,35 @@ displayIssues = (issuesArray) => {
         topLanguagesList.appendChild(element)
     });
 }
+
+/**
+ * @param  {array} dataPoints Data points for chart
+ * @param  {array} categories Categories for chart
+ * @param  {string} selector Selector (id, class etc. of DOM) to insert chart to
+ * @param  {string} type Type of chart (line etc.)
+ * @param  {string} name Name of Chart
+ * 
+ * Renders Chart to choosen DOM with inputed data
+ */
+ renderChart = (dataPoints, categories, selector, type, name) => {
+    if (dataPoints.length > 0) {
+        var options = {
+            chart: {
+                type: type
+            },
+            series: [{
+                name: name,
+                data: dataPoints
+            }],
+            xaxis: {
+                categories: categories
+            },
+            colors: ['#5065A8']
+        }
+
+        var chart = new ApexCharts(document.querySelector(selector), options);
+
+        chart.render();
+        document.querySelector(selector).hidden = false;
+    }
+}
