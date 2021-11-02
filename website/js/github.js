@@ -104,6 +104,31 @@ getEvents = async (user) => {
 }
 
 /**
+ * @param  {string} repo github repo
+ * 
+ * Retrives all events from repo from GitHub's API
+ */
+ getRepositoryEvents = async (repo) => {
+    let i = 1;
+    let commits = []
+    while (true) {
+        const request = await fetch(`https://api.github.com/repos/${repo}/events?sort=pushed&per_page=100&page=${i}`, _params)
+        if (request.status !== 200) break;
+        outOfRequests(request)
+        const data = await request.json();
+        commits = commits.concat(data);
+        i++;
+    }
+    while (true) {
+        const index = commits.findIndex(e => e.type !== "PushEvent")
+        if (index == -1) break;
+        else commits.splice(index, 1);
+    }
+
+    return commits;
+}
+
+/**
  * @param  {Response} request response object from fetch request
  * 
  * Checks if your out of request on GitHub's API and displays error if you're out.
