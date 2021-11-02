@@ -55,6 +55,64 @@ window.onload = async () => {
         bio.hidden = false;
     }
 }
+
+/**
+ * @param  {array} arr Array Containing latest events
+ * 
+ * Converts latest events (input) and then displays 5 latest commits
+ */
+ displayLatestCommits = (arr) => {
+    arr = arr.reverse();
+
+    const commits = []
+    let i = 0;
+    while (commits.length < 8 && arr.length > 0) {
+        if (arr[i].type === "PushEvent") { // Checkes that event is of type PushEvent.
+            arr[i].payload.commits.forEach(element => {
+                commits.push({
+                    commitInformation: arr[i],
+                    commit: element
+                })
+                commits[commits.length - 1].commitInformation.payload = {};
+            });
+            if (i > arr.length) break;
+        }
+        i++;
+    }
+    const amount = commits.length > 8 ? 8 : commits.length
+
+    if (amount) latestCommits.hidden = false;
+    for (let i = 0; i < amount; i++) {
+        const element = commits[i];
+        const li = document.createElement("li");
+
+        const a = document.createElement("a");
+        a.href = `https://github.com/${element.commitInformation.repo.name}/commit/${element.commit.sha}`;
+
+
+        const title = document.createElement("h3")
+        title.innerHTML = `<strong>${element.commit.author.name}</strong> pushed to repository`
+
+        const message = document.createElement("p")
+        message.textContent = `${element.commit.message}`
+
+        const date = document.createElement("p")
+        date.textContent = `${moment(element.commitInformation.created_at).calendar(null, {
+            lastDay : '[Yesterday at] HH:mm',
+            sameDay : '[Today at] HH:mm',
+            nextDay : '[Tomorrow at] HH:mm',
+            lastWeek : '[last] dddd [at] HH:mm',
+            nextWeek : 'dddd [at] HH:mm',
+            sameElse : 'L'
+        })}`
+
+        a.append(title, message, date)
+        li.appendChild(a)
+
+        latestCommitsList.appendChild(li)
+    }
+}
+
 /**
  * @param  {array} eventArray Array of Events directly from GitHub's API
  * 
