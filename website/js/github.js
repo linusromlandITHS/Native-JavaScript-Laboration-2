@@ -111,7 +111,7 @@ getEvents = async (user) => {
  */
 outOfRequests = (request) => {
     if (request.status === 403) {
-        const path = `${window.location.origin + window.location.pathname.substring(0,window.location.pathname.length-9)}authenticate.html`
+        const path = `${window.location.origin + window.location.pathname.substring(0,window.location.pathname.length-9)}/authenticate.html`
         window.location = path;
     }
 }
