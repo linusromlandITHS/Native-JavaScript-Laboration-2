@@ -232,6 +232,13 @@ eventArrayToChart = (eventArray) => {
         }
     }
 
+    while (object.day.at(-1) !== moment(new Date()).format("YYYY-MM-DD")) {
+        const newDate = moment(object.day.at(-1))
+        newDate.add(1, "days")
+        object.day.push(newDate.format("YYYY-MM-DD"))
+        object.amount.push(0)
+    }
+
     topRepositories.sort((a, b) => b.amount - a.amount) // Sorts array by no of commits
     object.topRepositories = topRepositories //Sets topRepositories to topRepositories in object
 
