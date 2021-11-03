@@ -130,7 +130,7 @@ displayLatestCommits = (arr) => {
     }
     const amount = commits.length > show ? show : commits.length
 
-    if (amount) latestCommits.hidden = false;
+    if (commits.length > 0) latestCommits.hidden = false;
     for (let i = 0; i < amount; i++) {
         const element = commits[i];
         const li = document.createElement("li");
