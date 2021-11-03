@@ -87,7 +87,7 @@ getEvents = async (user) => {
     let i = 1;
     let commits = []
     while (true) {
-        const request = await fetch(`https://api.github.com/users/${user}/events/public?sort=pushed&per_page=100&page=${i}`, _params)
+        const request = await fetch(`https://api.github.com/users/${user}/events?sort=pushed&per_page=100&page=${i}`, _params)
         if (request.status !== 200) break;
         outOfRequests(request)
         const data = await request.json();
