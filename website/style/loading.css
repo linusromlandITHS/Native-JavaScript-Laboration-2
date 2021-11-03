@@ -1,67 +1,67 @@
 #loadingArea {
-    width: 100vw;
-    height: 100vh;
-    background-color: #f2eee4;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	width: 100vw;
+	height: 100vh;
+	background-color: #f2eee4;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 #loader {
-    border: 16px solid #f3f3f3;
-    border-top: 16px solid #5065a8;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 1.5s linear infinite;
-    margin-bottom: 5rem;
+	border: 16px solid #f3f3f3;
+	border-top: 16px solid #5065a8;
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	animation: spin 1.5s linear infinite;
+	margin-bottom: 5rem;
 }
 
 #main {
-    animation: animatebottom 1s;
+	animation: animatebottom 1s;
 }
 
 #loadingArea > h1 {
-    color: #5065a8;
-    position: relative;
-    margin-left: calc(-35px / 2);
+	color: #5065a8;
+	position: relative;
+	margin-left: calc(-35px / 2);
 }
 
 #loadingArea > h1::after {
-    position: absolute;
-    overflow: hidden;
-    display: inline-block;
-    vertical-align: bottom;
-    animation: ellipsis steps(4, end) 900ms infinite;
-    content: "\2026";
-    width: 0px;
+	position: absolute;
+	overflow: hidden;
+	display: inline-block;
+	vertical-align: bottom;
+	animation: ellipsis steps(4, end) 900ms infinite;
+	content: '\2026';
+	width: 0px;
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
+	0% {
+		transform: rotate(0deg);
+	}
 
-    100% {
-        transform: rotate(360deg);
-    }
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 @keyframes animatebottom {
-    from {
-        bottom: -100px;
-        opacity: 0;
-    }
+	from {
+		bottom: -100px;
+		opacity: 0;
+	}
 
-    to {
-        bottom: 0;
-        opacity: 1;
-    }
+	to {
+		bottom: 0;
+		opacity: 1;
+	}
 }
 
 @keyframes ellipsis {
-    to {
-        width: 35px;
-    }
+	to {
+		width: 35px;
+	}
 }

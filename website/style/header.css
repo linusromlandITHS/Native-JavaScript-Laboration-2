@@ -1,82 +1,82 @@
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #5065a8;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid #000;
-    height: 50px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: #5065a8;
+	background-color: rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid #000;
+	height: 50px;
 }
 
 header > a {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 header > a > img {
-    margin: 0 8px;
+	margin: 0 8px;
 }
 
 header > a {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-left: 1rem;
-    color: #5065a8 !important;
-    text-decoration: none;
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin-left: 1rem;
+	color: #5065a8 !important;
+	text-decoration: none;
 }
 
 #authArea {
-    display: flex;
-    align-items: center;
-    margin-right: 1rem;
+	display: flex;
+	align-items: center;
+	margin-right: 1rem;
 }
 
 #authArea > p {
-    margin: 1rem;
+	margin: 1rem;
 }
 
 header > * > button {
-    height: 20%;
-    font-size: 100%;
-    background-color: rgba(255, 255, 255, 0);
-    color: #5065a8;
-    border: 1px solid #5065a8;
-    outline: 0;
-    margin: 5px;
-    margin-left: 16px;
-    padding: 5px 5px;
-    border-radius: 8px;
-    cursor: pointer;
+	height: 20%;
+	font-size: 100%;
+	background-color: rgba(255, 255, 255, 0);
+	color: #5065a8;
+	border: 1px solid #5065a8;
+	outline: 0;
+	margin: 5px;
+	margin-left: 16px;
+	padding: 5px 5px;
+	border-radius: 8px;
+	cursor: pointer;
 }
 
 header > * > button:hover {
-    background-color: rgba(255, 255, 255, 0.432);
+	background-color: rgba(255, 255, 255, 0.432);
 }
 
 @media only screen and (max-width: 600px) {
-    header > a {
-        font-size: 1rem;
-    }
+	header > a {
+		font-size: 1rem;
+	}
 
-    header > a {
-        font-size: 0;
-    }
+	header > a {
+		font-size: 0;
+	}
 
-    header > div > img {
-        display: none;
-    }
+	header > div > img {
+		display: none;
+	}
 
-    #authArea {
-        margin-right: 0 !important;
-    }
+	#authArea {
+		margin-right: 0 !important;
+	}
 
-    #authArea > p {
-        margin-right: 1rem;
-        text-align: right;
-    }
+	#authArea > p {
+		margin-right: 1rem;
+		text-align: right;
+	}
 
-    header > * > button {
-        margin: 1px;
-        padding: 1px 1px;
-    }
+	header > * > button {
+		margin: 1px;
+		padding: 1px 1px;
+	}
 }

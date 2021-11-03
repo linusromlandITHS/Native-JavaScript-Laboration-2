@@ -1,112 +1,112 @@
 * {
-    transition: all 0.2s;
+	transition: all 0.2s;
 }
 
 body {
-    background-color: #f2eee4 !important;
+	background-color: #f2eee4 !important;
 }
 
 #main {
-    display: none;
+	display: none;
 }
 
 #name {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
+	margin-bottom: 0 !important;
+	padding-bottom: 0 !important;
 }
 
 a {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 #mainContentArea {
-    /* Changes display configuration to flex in JavaScript */
-    display: none;
-    min-height: 90vh;
+	/* Changes display configuration to flex in JavaScript */
+	display: none;
+	min-height: 90vh;
 }
 
 #mainContentArea > * {
-    margin: 0.5rem;
+	margin: 0.5rem;
 }
 
 #chart {
-    width: 50rem;
-    min-height: 0 !important;
+	width: 50rem;
+	min-height: 0 !important;
 }
 
 #userArea {
-    margin: 2rem;
-    margin-left: 0;
-    margin-top: 0;
+	margin: 2rem;
+	margin-left: 0;
+	margin-top: 0;
 }
 
 #userArea > * {
-    margin: 1rem;
+	margin: 1rem;
 }
 
 #latestCommits {
-    width: 100%;
-    margin-right: 0 !important;
+	width: 100%;
+	margin-right: 0 !important;
 }
 
 #topLanguages > ol {
-    list-style: none;
-    counter-reset: i;
+	list-style: none;
+	counter-reset: i;
 }
 
 #topLanguages > ol > li > p {
-    display: inline;
+	display: inline;
 }
 
 #topLanguages > ol > li::before {
-    display: inline;
-    counter-increment: i;
-    content: counter(i) ". ";
+	display: inline;
+	counter-increment: i;
+	content: counter(i) '. ';
 }
 
 #topRepositories {
-    margin-block: 2rem;
+	margin-block: 2rem;
 }
 
 #pullRequests > ul,
 #latestCommits > ul,
 #topContributors > ul,
 #topRepositories > ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 #pullRequests > ul > li,
 #latestCommits > ul > li,
 #topContributors > ul > li,
 #topRepositories > ul > li {
-    padding: 0.5rem;
-    padding-left: 0;
-    margin-block: 0.5rem;
-    padding: 0.5rem;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+	padding: 0.5rem;
+	padding-left: 0;
+	margin-block: 0.5rem;
+	padding: 0.5rem;
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
 }
 
 #pullRequests > ul > li:hover,
 #latestCommits > ul > li:hover,
 #topContributors > ul > li:hover,
 #topRepositories > ul > li:hover {
-    background-color: #dbdbdb;
+	background-color: #dbdbdb;
 }
 
 #pullRequests > ul > li > p,
 #latestCommits > ul > li > p {
-    margin: 0 !important;
-    padding: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
 }
 
 @media only screen and (max-width: 1000px) {
-    #mainContentArea {
-        flex-direction: column;
-    }
-    #chart {
-        width: 100%;
-    }
+	#mainContentArea {
+		flex-direction: column;
+	}
+	#chart {
+		width: 100%;
+	}
 }
