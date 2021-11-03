@@ -64,6 +64,10 @@ a{
     content: counter(i) ". "
 }
 
+#topRepositories{
+    margin-block: 2rem;
+}
+
 #pullRequests>ul,
 #latestCommits>ul,
 #topContributors>ul,
@@ -97,6 +101,7 @@ a{
     margin: 0 !important;
     padding: 0 !important;
 }
+
 
 
 
