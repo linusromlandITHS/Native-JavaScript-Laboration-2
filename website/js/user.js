@@ -165,8 +165,9 @@ displayLatestCommits = (arr) => {
  * 
  * Loops through the top repositories (max 5) and displays them in the DOM.
  */
- displayTopRepos = (arr) => {
-    const amount = arr.length > 5 ? 5 : arr.length
+displayTopRepos = (arr) => {
+    const show = 3;
+    const amount = arr.length > show ? show : arr.length
 
     if (amount) topRepositories.hidden = false;
     for (let i = 0; i < amount; i++) {
