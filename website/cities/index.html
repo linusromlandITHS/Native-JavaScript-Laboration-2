@@ -1,77 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cities</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cities</title>
 
-    <!-- Import of CSS Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+        <!-- Import of CSS Stylesheet -->
+        <link rel="stylesheet" href="style.css">
 
-    <!-- Import of JavaScript -->
-    <script src="script.js" defer></script>
+        <!-- Import of JavaScript -->
+        <script src="script.js" defer></script>
 
-    <!-- Import of Google Material Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-</head>
+        <!-- Import of Google Material Icons -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    </head>
 
-<body>
-    <div id="main">
-        <a href="../" id="backToHome">Back to home</a>
-        <h1>Cites, powered by Avancera API</h1>
-        <div id="form-wrapper">
-            <p>Add your city below!</p>
-            <form>
-                <input type="text" placeholder="City" autocomplete="off">
-                <input type="number" placeholder="Population" autocomplete="off" min="0">
-                <input type="submit" value="Add city">
-            </form>
-            <p><b>Note:</b> The database is cleared every 20 minutes!</p>
-            <div id="response" hidden>
+    <body>
+        <div id="main">
+            <a href="../" id="backToHome">Back to home</a>
+            <h1>Cites, powered by Avancera API</h1>
+            <div id="form-wrapper">
+                <p>Add your city below!</p>
+                <form>
+                    <input type="text" placeholder="City" autocomplete="off">
+                    <input type="number" placeholder="Population" autocomplete="off" min="0">
+                    <input type="submit" value="Add city">
+                </form>
+                <p><b>Note:</b> The database is cleared every 20 minutes!</p>
+                <div id="response" hidden>
+                </div>
+            </div>
+            <ul id="cities-wrapper">
+
+            </ul>
+        </div>
+
+        <!-- Edit Modal -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <h2>Edit City</h2>
+                <section>
+                    <label for="editCityName">City name:</label>
+                    <input type="text" id="editCityName" placeholder="City" autocomplete="off">
+                </section>
+                <section>
+                    <label for="editCityPopulation">City population:</label>
+                    <input type="number" id="editCityPopulation" placeholder="Population" autocomplete="off" min="0">
+                </section>
+                <div class="button-wrapper">
+                    <button id="saveBtn"><span class="material-icons">save</span>
+                        <p>Save</p>
+                    </button>
+                    <button id="editCancel"><span class="material-icons">cancel</span>
+                        <p>Cancel</p>
+                    </button>
+                </div>
             </div>
         </div>
-        <ul id="cities-wrapper">
 
-        </ul>
-    </div>
-
-    <!-- Edit Modal -->
-    <div id="editModal" class="modal">
-        <div class="modal-content">
-            <h2>Edit City</h2>
-            <section>
-                <label for="editCityName">City name:</label>
-                <input type="text" id="editCityName" placeholder="City" autocomplete="off">
-            </section>
-            <section>
-                <label for="editCityPopulation">City population:</label>
-                <input type="number" id="editCityPopulation" placeholder="Population" autocomplete="off" min="0">
-            </section>
-            <div class="button-wrapper">
-                <button id="saveBtn"><span class="material-icons">save</span>
-                    <p>Save</p>
-                </button>
-                <button id="editCancel"><span class="material-icons">cancel</span>
-                    <p>Cancel</p>
-                </button>
+        <!-- Delete Modal -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <h2>Delete city</h2>
+                <p id="delConfirmText"></p>
+                <div class="button-wrapper">
+                    <button id="delBtn"></button>
+                    <button id="delCancel">No, don't delete.</button>
+                </div>
+                <p><b>Note:</b> This action is permanent and can not be reversed!</p>
             </div>
         </div>
-    </div>
-
-    <!-- Delete Modal -->
-    <div id="deleteModal" class="modal">
-        <div class="modal-content">
-            <h2>Delete city</h2>
-            <p id="delConfirmText"></p>
-            <div class="button-wrapper">
-                <button id="delBtn"></button>
-                <button id="delCancel">No, don't delete.</button>
-            </div>
-            <p><b>Note:</b> This action is permanent and can not be reversed!</p>
-        </div>
-    </div>
-</body>
+    </body>
 
 </html>

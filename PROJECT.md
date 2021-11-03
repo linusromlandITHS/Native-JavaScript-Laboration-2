@@ -8,19 +8,21 @@
 <a href="https://github.com/linusromland/Velody/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" /></a></p>
 
 ## What is it?
+
 `Github Statistics` will become a website that will display statistics of your user or repository on GitHub.
 It is written without a JavaScript Framework as a final assignment in the Course `Native JavaScript`.
 
 ## Additions to come
-- [X] chart.js Last months commits
-- [X] Last 5 commits, show message, date and repo(user)
-- [X] Show title and description (alternative name and bio on profile)
-- [ ] Show Top Languages
-- [ ] On repo show top contributiors based on commits
-- [ ] Stars
-- [ ] no of commits (last year on profile)
-- [ ] issues (both no and latest open)
-- [ ] pull requests (both no and latest open)
+
+-   [x] chart.js Last months commits
+-   [x] Last 5 commits, show message, date and repo(user)
+-   [x] Show title and description (alternative name and bio on profile)
+-   [ ] Show Top Languages
+-   [ ] On repo show top contributiors based on commits
+-   [ ] Stars
+-   [ ] no of commits (last year on profile)
+-   [ ] issues (both no and latest open)
+-   [ ] pull requests (both no and latest open)
 
 Have other ideas? Add a comment!
 
@@ -32,7 +34,7 @@ For information about what Colors, Fonts and icons i used, check the [`BRAND.md`
 
 If you want to say **thank you** or/and support active development of `Github Statistics`:
 
-- Add a [GitHub Star](https://github.com/linusromland-ITHS/Native-JavaScript-Laboration-2) to the project.
+-   Add a [GitHub Star](https://github.com/linusromland-ITHS/Native-JavaScript-Laboration-2) to the project.
 
 ## ⚠️ License
 

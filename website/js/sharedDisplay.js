@@ -1,19 +1,19 @@
-const pullRequestsDOM = document.querySelector("#pullRequests")
-pullRequestsList = document.querySelector("#pullRequests>ul")
-issues = document.querySelector("#issues")
-topLanguages = document.querySelector("#topLanguages")
-topLanguagesList = document.querySelector("#topLanguages>ol")
+const pullRequestsDOM = document.querySelector("#pullRequests");
+pullRequestsList = document.querySelector("#pullRequests>ul");
+issues = document.querySelector("#issues");
+topLanguages = document.querySelector("#topLanguages");
+topLanguagesList = document.querySelector("#topLanguages>ol");
 
 /**
  * @param  {array} pulls Array of all pull requests.
- * 
+ *
  * Converts inputed array to list items containg information and appends dem to pullRequestsDOM
  */
- displayPullRequests = async (pulls) => {
+displayPullRequests = async (pulls) => {
     // console.log(pulls)
     // console.log(pulls.length)
     // console.log(JSON.stringify(pulls))
-    const elements = []
+    const elements = [];
     let openPullRequests = 0;
     let closedPullRequests = 0;
 
@@ -21,38 +21,40 @@ topLanguagesList = document.querySelector("#topLanguages>ol")
         const pull = pulls[i];
         if (pull.state == "open") {
             //Main list item
-            const li = document.createElement("li")
+            const li = document.createElement("li");
 
             //Annchor tag for link
-            const a = document.createElement("a")
-            a.href = pull.html_url
+            const a = document.createElement("a");
+            a.href = pull.html_url;
 
             //Container to contain main content
-            const container = document.createElement("div")
+            const container = document.createElement("div");
 
             //Title
-            const h2 = document.createElement("h2")
-            h2.textContent = `#${pull.number} - ${pull.title}`
+            const h2 = document.createElement("h2");
+            h2.textContent = `#${pull.number} - ${pull.title}`;
 
             //Reponame
-            const repoName = document.createElement("p")
-            repoName.textContent = "Repository: " + pull.base.repo.full_name
+            const repoName = document.createElement("p");
+            repoName.textContent = "Repository: " + pull.base.repo.full_name;
 
             //Updated at time
-            const created = document.createElement("p")
-            created.textContent = "Last updated: " + moment(pull.updated_at).format("dddd, MMMM Do YYYY, HH:mm")
+            const created = document.createElement("p");
+            created.textContent =
+                "Last updated: " +
+                moment(pull.updated_at).format("dddd, MMMM Do YYYY, HH:mm");
 
             //Appends title and time to container
-            container.append(h2, repoName, created)
+            container.append(h2, repoName, created);
 
             //Appends container to anchor
-            a.append(container)
+            a.append(container);
 
             //Appends anchor to list item
-            li.appendChild(a)
+            li.appendChild(a);
 
             //Pushes list item to array
-            elements.push(li)
+            elements.push(li);
 
             //Increases openPullRequests by one
             openPullRequests++;
@@ -63,63 +65,62 @@ topLanguagesList = document.querySelector("#topLanguages>ol")
         if (elements.length >= 5) break;
     }
     //P tag that displays how many open and closed pull requests in public repos.
-    const requestsOpen = document.createElement("p")
-    requestsOpen.textContent = `${openPullRequests} open / ${closedPullRequests} closed`
-    pullRequestsDOM.appendChild(requestsOpen)
-    elements.forEach(element => pullRequestsList.appendChild(element));
-    pullRequestsDOM.hidden = false
-}
+    const requestsOpen = document.createElement("p");
+    requestsOpen.textContent = `${openPullRequests} open / ${closedPullRequests} closed`;
+    pullRequestsDOM.appendChild(requestsOpen);
+    elements.forEach((element) => pullRequestsList.appendChild(element));
+    pullRequestsDOM.hidden = false;
+};
 
 /**
- * @param  {array} issuesArray 
- * 
+ * @param  {array} issuesArray
+ *
  * Converts issue array to show on html
  */
 displayIssues = (issuesArray) => {
     openIssues = 0;
     closedIssues = 0;
 
-    issuesArray.forEach(issue => {
+    issuesArray.forEach((issue) => {
         if (issue.state == "open") openIssues++;
         else closedIssues++;
     });
 
-    const p = document.createElement("p")
-    p.textContent = `${openIssues} open / ${closedIssues} closed`
-    issues.appendChild(p)
+    const p = document.createElement("p");
+    p.textContent = `${openIssues} open / ${closedIssues} closed`;
+    issues.appendChild(p);
     issues.hidden = false;
-}
+};
 
 /**
  * @param  {arrays} topLangs Array containg the most popular languages in repos
- * 
+ *
  * Displays the 5 most popular languages on user page
  */
- displayTopLanguages = (topLangs) => {
-    const elements = []
+displayTopLanguages = (topLangs) => {
+    const elements = [];
 
     topLanguages.hidden = false;
 
     for (let i = 0; i < topLangs.length; i++) {
         const lang = topLangs[i];
         // Main listitem
-        const li = document.createElement("li")
+        const li = document.createElement("li");
 
         //Text DOM
-        const p = document.createElement("p")
-        p.textContent = lang.lang
+        const p = document.createElement("p");
+        p.textContent = lang.lang;
 
-        li.appendChild(p)
-        elements.push(li)
+        li.appendChild(p);
+        elements.push(li);
 
         if (elements.length >= 5) break;
     }
 
-
-    elements.forEach(element => {
-        topLanguagesList.appendChild(element)
+    elements.forEach((element) => {
+        topLanguagesList.appendChild(element);
     });
-}
+};
 
 /**
  * @param  {array} dataPoints Data points for chart
@@ -127,28 +128,30 @@ displayIssues = (issuesArray) => {
  * @param  {string} selector Selector (id, class etc. of DOM) to insert chart to
  * @param  {string} type Type of chart (line etc.)
  * @param  {string} name Name of Chart
- * 
+ *
  * Renders Chart to choosen DOM with inputed data
  */
- renderChart = (dataPoints, categories, selector, type, name) => {
+renderChart = (dataPoints, categories, selector, type, name) => {
     if (dataPoints.length > 0) {
         var options = {
             chart: {
-                type: type
+                type: type,
             },
-            series: [{
-                name: name,
-                data: dataPoints
-            }],
+            series: [
+                {
+                    name: name,
+                    data: dataPoints,
+                },
+            ],
             xaxis: {
-                categories: categories
+                categories: categories,
             },
-            colors: ['#5065A8']
-        }
+            colors: ["#5065A8"],
+        };
 
         var chart = new ApexCharts(document.querySelector(selector), options);
 
         chart.render();
         document.querySelector(selector).hidden = false;
     }
-}
+};

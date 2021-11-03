@@ -1,17 +1,16 @@
 #loadingArea {
     width: 100vw;
     height: 100vh;
-    background-color: #F2EEE4;
+    background-color: #f2eee4;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 #loader {
     border: 16px solid #f3f3f3;
-    border-top: 16px solid #5065A8;
+    border-top: 16px solid #5065a8;
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -21,16 +20,15 @@
 
 #main {
     animation: animatebottom 1s;
-
 }
 
-#loadingArea>h1 {
-    color: #5065A8;
+#loadingArea > h1 {
+    color: #5065a8;
     position: relative;
-    margin-left: calc(-35px/2);
+    margin-left: calc(-35px / 2);
 }
 
-#loadingArea>h1::after {
+#loadingArea > h1::after {
     position: absolute;
     overflow: hidden;
     display: inline-block;
@@ -39,7 +37,6 @@
     content: "\2026";
     width: 0px;
 }
-
 
 @keyframes spin {
     0% {
@@ -54,15 +51,14 @@
 @keyframes animatebottom {
     from {
         bottom: -100px;
-        opacity: 0
+        opacity: 0;
     }
 
     to {
         bottom: 0;
-        opacity: 1
+        opacity: 1;
     }
 }
-
 
 @keyframes ellipsis {
     to {

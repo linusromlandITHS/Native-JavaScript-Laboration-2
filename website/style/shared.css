@@ -1,9 +1,9 @@
-*{
+* {
     transition: all 0.2s;
 }
 
 body {
-    background-color: #F2EEE4 !important;
+    background-color: #f2eee4 !important;
 }
 
 #main {
@@ -15,7 +15,7 @@ body {
     padding-bottom: 0 !important;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
@@ -25,13 +25,13 @@ a{
     min-height: 90vh;
 }
 
-#mainContentArea>* {
+#mainContentArea > * {
     margin: 0.5rem;
 }
 
 #chart {
     width: 50rem;
-    min-height: 0 !important
+    min-height: 0 !important;
 }
 
 #userArea {
@@ -40,7 +40,7 @@ a{
     margin-top: 0;
 }
 
-#userArea>* {
+#userArea > * {
     margin: 1rem;
 }
 
@@ -49,67 +49,64 @@ a{
     margin-right: 0 !important;
 }
 
-#topLanguages>ol {
+#topLanguages > ol {
     list-style: none;
     counter-reset: i;
 }
 
-#topLanguages>ol>li>p {
+#topLanguages > ol > li > p {
     display: inline;
 }
 
-#topLanguages>ol>li::before {
+#topLanguages > ol > li::before {
     display: inline;
     counter-increment: i;
-    content: counter(i) ". "
+    content: counter(i) ". ";
 }
 
-#topRepositories{
+#topRepositories {
     margin-block: 2rem;
 }
 
-#pullRequests>ul,
-#latestCommits>ul,
-#topContributors>ul,
-#topRepositories>ul {
+#pullRequests > ul,
+#latestCommits > ul,
+#topContributors > ul,
+#topRepositories > ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-#pullRequests>ul>li,
-#latestCommits>ul>li,
-#topContributors>ul>li,
-#topRepositories>ul>li {
+#pullRequests > ul > li,
+#latestCommits > ul > li,
+#topContributors > ul > li,
+#topRepositories > ul > li {
     padding: 0.5rem;
     padding-left: 0;
     margin-block: 0.5rem;
     padding: 0.5rem;
     background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 5px
+    border-radius: 5px;
 }
 
-#pullRequests>ul>li:hover,
-#latestCommits>ul>li:hover,
-#topContributors>ul>li:hover,
-#topRepositories>ul>li:hover {
+#pullRequests > ul > li:hover,
+#latestCommits > ul > li:hover,
+#topContributors > ul > li:hover,
+#topRepositories > ul > li:hover {
     background-color: #dbdbdb;
 }
 
-#pullRequests>ul>li>p,
-#latestCommits>ul>li>p {
+#pullRequests > ul > li > p,
+#latestCommits > ul > li > p {
     margin: 0 !important;
     padding: 0 !important;
 }
-
-
-
 
 @media only screen and (max-width: 1000px) {
     #mainContentArea {
         flex-direction: column;
     }
-    #chart{
-        width: 100%
+    #chart {
+        width: 100%;
     }
 }

@@ -1,5 +1,5 @@
 body {
-    background-color: #F2EEE4;
+    background-color: #f2eee4;
 }
 
 #main {
@@ -11,12 +11,12 @@ body {
 }
 
 #title {
-    color: #5065A8;
+    color: #5065a8;
 }
 
 #title,
 #infoText {
-    margin-bottom: 1rem
+    margin-bottom: 1rem;
 }
 
 #inputFields {
@@ -25,7 +25,7 @@ body {
 }
 
 .button {
-    background-color: #5065A8;
+    background-color: #5065a8;
     border: none;
     border-radius: 4px;
     color: white;
@@ -49,7 +49,6 @@ body {
     #inputFields {
         margin: 1rem;
     }
-
 
     #addToken {
         width: 90%;

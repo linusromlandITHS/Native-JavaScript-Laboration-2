@@ -12,14 +12,14 @@ footer {
     footer {
         flex-direction: column;
         font-size: 15px;
-        height: 70px
+        height: 70px;
     }
 
-    footer>div:first-child {
+    footer > div:first-child {
         padding-top: 10px;
     }
 
-    footer>div:last-child {
+    footer > div:last-child {
         padding-bottom: 10px;
     }
 }
