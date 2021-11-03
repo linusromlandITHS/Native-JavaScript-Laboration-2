@@ -16,7 +16,7 @@ pullRequestsList = document.querySelector("#pullRequests>ul")
 issues = document.querySelector("#issues")
 topLanguages = document.querySelector("#topLanguages")
 topLanguagesList = document.querySelector("#topLanguages>ol")
-
+chartWrapper = document.querySelector("#chart-wrapper")
 let _user, _name;
 
 window.onload = async () => {
@@ -37,6 +37,7 @@ window.onload = async () => {
     if (!user) window.location = "index.html"
 
     const events = await getEvents(user.login)
+    console.log(events)
     const chartData = await eventArrayToChart(events)
     await renderChart(chartData.amount, chartData.day, "#chart", "line", "Commits")
 
@@ -233,16 +234,17 @@ eventArrayToChart = (eventArray) => {
             topRepositories[repoIndex].amount += commit.payload.commits.length
         }
     }
-
-    while (object.day.at(-1) !== moment(new Date()).format("YYYY-MM-DD")) {
-        const newDate = moment(object.day.at(-1))
-        newDate.add(1, "days")
-        object.day.push(newDate.format("YYYY-MM-DD"))
-        object.amount.push(0)
+    if(object.day.length > 0){
+        while (object.day.at(-1) !== moment(new Date()).format("YYYY-MM-DD")) {
+            const newDate = moment(object.day.at(-1))
+            newDate.add(1, "days")
+            object.day.push(newDate.format("YYYY-MM-DD"))
+            object.amount.push(0)
+        }
+        chartWrapper.hidden = false;
     }
 
     topRepositories.sort((a, b) => b.amount - a.amount) // Sorts array by no of commits
     object.topRepositories = topRepositories //Sets topRepositories to topRepositories in object
-
     return object
 }
