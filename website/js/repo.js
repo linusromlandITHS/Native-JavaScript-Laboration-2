@@ -83,10 +83,10 @@ window.onload = async () => {
  */
  displayLatestCommits = (arr) => {
     arr = arr.reverse();
-
+    const show = 5;
     const commits = []
     let i = 0;
-    while (commits.length < 8 && arr.length > 0) {
+    while (commits.length < show && arr.length > 0) {
         if (arr[i].type === "PushEvent") { // Checkes that event is of type PushEvent.
             arr[i].payload.commits.forEach(element => {
                 commits.push({
@@ -99,7 +99,7 @@ window.onload = async () => {
         }
         i++;
     }
-    const amount = commits.length > 8 ? 8 : commits.length
+    const amount = commits.length > show ? show : commits.length
 
     if (amount) latestCommits.hidden = false;
     for (let i = 0; i < amount; i++) {
