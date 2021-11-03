@@ -47,7 +47,7 @@ window.onload = async () => {
  * 
  * Sets the username DOMs and updated metadata.
  */
- displayName = (repo) => {
+displayName = (repo) => {
     document.title = `${repo.name} - Github Statistics`
     nameTag.textContent = repo.name
 
@@ -64,8 +64,9 @@ window.onload = async () => {
  * 
  * Loops through the top repositories (max 5) and displays them in the DOM.
  */
- displayTopContributions = (arr) => {
-    const amount = arr.length > 5 ? 5 : arr.length
+displayTopContributions = (arr) => {
+    const show = 3
+    const amount = arr.length > show ? show : arr.length
 
     if (amount) topContributorsDOM.hidden = false;
     for (let i = 0; i < amount; i++) {
@@ -81,7 +82,7 @@ window.onload = async () => {
  * 
  * Converts latest events (input) and then displays 5 latest commits
  */
- displayLatestCommits = (arr) => {
+displayLatestCommits = (arr) => {
     arr = arr.reverse();
     const show = 5;
     const commits = []
@@ -138,7 +139,7 @@ window.onload = async () => {
  * 
  * Converts the eventArray from GitHub's API to a object with the amount of commits each day and the total number of commits in each repository.
  */
- eventArrayToChart = (eventArray) => {
+eventArrayToChart = (eventArray) => {
     eventArray = eventArray.reverse(); //reverse array to get oldest first
 
     const object = {
