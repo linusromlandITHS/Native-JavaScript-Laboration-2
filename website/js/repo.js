@@ -4,6 +4,7 @@ latestCommits = document.querySelector("#latestCommits")
 latestCommitsList = document.querySelector("#latestCommits>ul")
 topContributorsDOM = document.querySelector("#topContributors")
 topContributorsList = document.querySelector("#topContributors>ul")
+chartWrapper = document.querySelector("#chart-wrapper")
 
 window.onload = async () => {
     initPartials()
@@ -179,16 +180,16 @@ eventArrayToChart = (eventArray) => {
             topContributors[repoIndex].amount += 1
         }
     }
-
-    while (object.day.at(-1) !== moment(new Date()).format("YYYY-MM-DD")) {
-        const newDate = moment(object.day.at(-1))
-        newDate.add(1, "days")
-        object.day.push(newDate.format("YYYY-MM-DD"))
-        object.amount.push(0)
+    if (object.day.length > 0) {
+        while (object.day.at(-1) !== moment(new Date()).format("YYYY-MM-DD")) {
+            const newDate = moment(object.day.at(-1))
+            newDate.add(1, "days")
+            object.day.push(newDate.format("YYYY-MM-DD"))
+            object.amount.push(0)
+        }
+        chartWrapper.hidden = false;
     }
-
     topContributors.sort((a, b) => b.amount - a.amount) // Sorts array by no of commits
     object.topContributors = topContributors //Sets topRepositories to topRepositories in object
-    console.log(object)
     return object
 }
