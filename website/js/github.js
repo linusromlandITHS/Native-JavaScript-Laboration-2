@@ -67,14 +67,14 @@ searchUser = async (username) => {
     outOfRequests(request)
     const data = await request.json();
     const users = data.items;
-    while (true) {
-        const index = users.findIndex(o => o.type === "Organization")
-        if (index === -1) {
-            break;
-        } else {
-            users.splice(index, 1)
-        }
-    }
+    // while (true) {
+    //     const index = users.findIndex(o => o.type === "Organization")
+    //     if (index === -1) {
+    //         break;
+    //     } else {
+    //         users.splice(index, 1)
+    //     }
+    // }
     return users;
 }
 
