@@ -23,8 +23,6 @@ window.onload = async () => {
 	//Gets repo from GitHub API
 	const repo = await getRepo(params.repo);
 
-	console.log(repo);
-
 	//Redirects client if repo not found
 	if (!repo) window.location = 'index.html';
 	const pullRequests = await repoToPullRequests(repo);
@@ -41,7 +39,7 @@ window.onload = async () => {
 	displayLatestCommits(events);
 	displayName(repo);
 	displayTopContributions(chartData.topContributors);
-	displayStatsInformation(repo, getSumOfArray(chartData.amount));
+	displayStatsInformation(repo, chartData);
 
 	//Fake loading
 	let fakeloading = true;
@@ -70,11 +68,11 @@ displayName = (repo) => {
 	}
 };
 
-displayStatsInformation = (repo, commits) => {
+displayStatsInformation = (repo, chartData) => {
 	stars.textContent = repo.stargazers_count;
 	watchers.textContent = repo.watchers_count;
 	forks.textContent = repo.forks_count;
-	commitAmount.textContent = commits;
+	commitAmount.innerHTML = `${chartData.day[0]} - ${chartData.day[chartData.day.length - 1]}: <code>${getSumOfArray(chartData.amount)}</code>`;
 
 	stars.hidden = false;
 	watchers.hidden = false;
