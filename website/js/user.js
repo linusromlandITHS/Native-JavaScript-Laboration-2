@@ -17,7 +17,11 @@ issues = document.querySelector('#issues');
 topLanguages = document.querySelector('#topLanguages');
 topLanguagesList = document.querySelector('#topLanguages>ol');
 chartWrapper = document.querySelector('#chart-wrapper');
+
 let _user, _name;
+
+//Dependencies
+const md = window.markdownit();
 
 window.onload = async () => {
 	initPartials();
@@ -37,7 +41,6 @@ window.onload = async () => {
 	if (!user) window.location = 'index.html';
 
 	const events = await getEvents(user.login);
-	console.log(events);
 	const chartData = await eventArrayToChart(events);
 	await renderChart(chartData.amount, chartData.day, '#chart', 'line', 'Commits');
 
@@ -143,7 +146,7 @@ displayLatestCommits = (arr) => {
 		title.innerHTML = `Pushed to repository <strong>${element.commitInformation.repo.name}</strong>`;
 
 		const message = document.createElement('p');
-		message.textContent = `${element.commit.message}`;
+		message.innerHTML = `${md.render(element.commit.message)}`;
 
 		const date = document.createElement('p');
 		date.textContent = `${moment(element.commitInformation.created_at).calendar(null, {

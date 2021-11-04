@@ -6,6 +6,9 @@ topContributorsDOM = document.querySelector('#topContributors');
 topContributorsList = document.querySelector('#topContributors>ul');
 chartWrapper = document.querySelector('#chart-wrapper');
 
+//Dependencies
+const md = window.markdownit();
+
 window.onload = async () => {
 	initPartials();
 
@@ -115,7 +118,7 @@ displayLatestCommits = (arr) => {
 		title.innerHTML = `<strong>${element.commit.author.name}</strong> pushed to the repository`;
 
 		const message = document.createElement('p');
-		message.textContent = `${element.commit.message}`;
+		message.innerHTML = `${md.render(element.commit.message)}`;
 
 		const date = document.createElement('p');
 		date.textContent = `${moment(element.commitInformation.created_at).calendar(null, {
