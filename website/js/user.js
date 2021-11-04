@@ -102,7 +102,7 @@ displayCommitAmount = (data) => {
 		data.amount.forEach((amount) => {
 			commits += parseInt(amount);
 		});
-		commitAmount.textContent = `Commits (${data.day[0]} - ${data.day[data.day.length - 1]}): ${commits}`;
+		commitAmount.innerHTML = `Commits (${data.day[0]} - ${data.day[data.day.length - 1]}): <code>${commits}</code>`;
 		commitAmount.hidden = false;
 	}
 };
