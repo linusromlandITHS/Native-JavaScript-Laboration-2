@@ -17,6 +17,7 @@ issues = document.querySelector('#issues');
 topLanguages = document.querySelector('#topLanguages');
 topLanguagesList = document.querySelector('#topLanguages>ol');
 chartWrapper = document.querySelector('#chart-wrapper');
+profileLink = document.querySelector('#profileLink');
 
 let _user, _name;
 
@@ -75,7 +76,7 @@ displayName = (user) => {
 	name = user.name ? user.name : user.login;
 	document.title = `${user.login} - Github Statistics`;
 	nameTag.textContent = name;
-
+	profileLink.href = user.html_url;
 	//If GitHub profile has name set, shows login name in other field.
 	if (user.name) {
 		usernameTag.textContent = user.login;
