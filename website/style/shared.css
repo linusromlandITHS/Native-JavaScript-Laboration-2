@@ -3,7 +3,12 @@
 }
 
 body {
-	background-color: #f2eee4 !important;
+	background-color: #333d79 !important;
+	color: #faebef;
+}
+
+a {
+	color: #faebef;
 }
 
 code {
