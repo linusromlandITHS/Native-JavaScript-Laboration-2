@@ -10,12 +10,12 @@ body {
 	width: 40%;
 }
 
-#title {
+.title {
 	color: #5065a8;
 }
 
-#title,
-#infoText {
+.title,
+.infoText {
 	margin-bottom: 1rem;
 }
 
@@ -43,6 +43,26 @@ body {
 
 .button:active {
 	transform: scale(0.9);
+}
+
+#loginWithGithub {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#loginWithGithub > a {
+	background-color: #5065a8;
+	text-align: center;
+	text-decoration: none;
+	border: 1px solid rgb(255, 255, 255);
+	width: 8rem;
+	color: #fff;
+	font-size: 1.5rem;
+	font-weight: 600;
+	cursor: pointer;
+	padding: 6px 12px;
+	border-radius: 5px;
 }
 
 @media only screen and (max-width: 600px) {
