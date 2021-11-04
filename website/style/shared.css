@@ -40,6 +40,11 @@ a {
 	min-height: 0 !important;
 }
 
+#profileLink,
+#repoLink {
+	display: block;
+}
+
 #userArea,
 #commitsArea,
 #chart-wrapper {
