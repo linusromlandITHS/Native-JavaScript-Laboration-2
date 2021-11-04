@@ -5,6 +5,10 @@ latestCommitsList = document.querySelector('#latestCommits>ul');
 topContributorsDOM = document.querySelector('#topContributors');
 topContributorsList = document.querySelector('#topContributors>ul');
 chartWrapper = document.querySelector('#chart-wrapper');
+stars = document.querySelector('#stars');
+watchers = document.querySelector('#watchers');
+forks = document.querySelector('#forks');
+commitAmount = document.querySelector('#commitAmount');
 
 //Dependencies
 const md = window.markdownit();
@@ -18,6 +22,8 @@ window.onload = async () => {
 
 	//Gets repo from GitHub API
 	const repo = await getRepo(params.repo);
+
+	console.log(repo);
 
 	//Redirects client if repo not found
 	if (!repo) window.location = 'index.html';
@@ -35,6 +41,8 @@ window.onload = async () => {
 	displayLatestCommits(events);
 	displayName(repo);
 	displayTopContributions(chartData.topContributors);
+	displayStatsInformation(repo, getSumOfArray(chartData.amount));
+
 	//Fake loading
 	let fakeloading = true;
 	setTimeout(() => {
@@ -60,6 +68,18 @@ displayName = (repo) => {
 		bio.textContent = repo.description;
 		bio.hidden = false;
 	}
+};
+
+displayStatsInformation = (repo, commits) => {
+	stars.textContent = repo.stargazers_count;
+	watchers.textContent = repo.watchers_count;
+	forks.textContent = repo.forks_count;
+	commitAmount.textContent = commits;
+
+	stars.hidden = false;
+	watchers.hidden = false;
+	forks.hidden = false;
+	commitAmount.hidden = false;
 };
 
 /**
@@ -196,4 +216,12 @@ eventArrayToChart = (eventArray) => {
 	topContributors.sort((a, b) => b.amount - a.amount); // Sorts array by no of commits
 	object.topContributors = topContributors; //Sets topRepositories to topRepositories in object
 	return object;
+};
+
+getSumOfArray = (arr) => {
+	let sum = 0;
+	for (let i = 0; i < arr.length; i++) {
+		sum += arr[i];
+	}
+	return sum;
 };
