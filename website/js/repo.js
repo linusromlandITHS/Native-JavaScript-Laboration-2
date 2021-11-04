@@ -9,6 +9,7 @@ stars = document.querySelector('#stars');
 watchers = document.querySelector('#watchers');
 forks = document.querySelector('#forks');
 commitAmount = document.querySelector('#commitAmount');
+repoLink = document.querySelector('#repoLink');
 
 //Dependencies
 const md = window.markdownit();
@@ -60,14 +61,19 @@ window.onload = async () => {
 displayName = (repo) => {
 	document.title = `${repo.name} - Github Statistics`;
 	nameTag.textContent = repo.name;
-
+	repoLink.href = repo.html_url;
 	//If GitHub repo has bio set, shows bio in field.
 	if (repo.description) {
 		bio.textContent = repo.description;
 		bio.hidden = false;
 	}
 };
-
+/**
+ * @param  {object} repo Object containing the repo information
+ * @param  {object} chartData Object containing the chart data
+ *
+ * Sets the stats.
+ */
 displayStatsInformation = (repo, chartData) => {
 	stars.textContent = repo.stargazers_count;
 	watchers.textContent = repo.watchers_count;
