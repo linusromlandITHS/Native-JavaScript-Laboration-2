@@ -29,7 +29,7 @@ a {
 #mainContentArea {
 	/* Changes display configuration to flex in JavaScript */
 	display: none;
-	min-height: 90vh;
+	min-height: calc(100vh - 102px);
 }
 
 #mainContentArea > * {
