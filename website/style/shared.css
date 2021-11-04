@@ -49,7 +49,9 @@ a {
 	width: 33%;
 }
 
-#userArea > * {
+#userArea > *,
+#commitsArea > *,
+#chart-wrapper > * {
 	margin: 1rem;
 }
 
@@ -58,7 +60,6 @@ a {
 }
 
 #latestCommits {
-	width: 100%;
 	margin-right: 0 !important;
 }
 
@@ -125,6 +126,6 @@ a {
 	#userArea,
 	#commitsArea,
 	#chart-wrapper {
-		max-width: 100%;
+		width: calc(100% - 1rem);
 	}
 }

@@ -9,10 +9,9 @@ window.onload = () => {
 
 	//TODO add check if URL is correct
 	if (window.location.host == apiDomain) {
-		loginWithGithub.hidden = false;
+		loginWithGithub.style.display = 'flex';
 		addToken.style.display = 'none';
 	}
-
 	initPartials();
 };
 

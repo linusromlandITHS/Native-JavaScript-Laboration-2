@@ -99,4 +99,7 @@ ul {
 	#searchBar {
 		width: 75vw !important;
 	}
+	#title {
+		text-align: center;
+	}
 }

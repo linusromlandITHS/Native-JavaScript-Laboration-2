@@ -46,7 +46,9 @@ body {
 }
 
 #loginWithGithub {
-	display: flex;
+	/* Changes in JavaScript */
+	display: none;
+
 	flex-direction: column;
 	align-items: center;
 }
