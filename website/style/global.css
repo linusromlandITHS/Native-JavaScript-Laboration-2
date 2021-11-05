@@ -8,8 +8,10 @@
 	scrollbar-width: none;
 }
 
-a {
-	color: black;
+:root {
+	/* Color varibles */
+	--main-color: #5065a8;
+	--secondary-color: #f2eee3;
 }
 
 .center {

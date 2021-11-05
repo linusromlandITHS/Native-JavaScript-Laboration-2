@@ -1,7 +1,7 @@
 #loadingArea {
 	width: 100vw;
 	height: 100vh;
-	background-color: #f2eee4;
+	background-color: var(--main-color);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -9,8 +9,8 @@
 }
 
 #loader {
-	border: 16px solid #f3f3f3;
-	border-top: 16px solid #5065a8;
+	border: 16px solid #9b9b9b;
+	border-top: 16px solid var(--secondary-color);
 	border-radius: 50%;
 	width: 120px;
 	height: 120px;
@@ -23,7 +23,7 @@
 }
 
 #loadingArea > h1 {
-	color: #5065a8;
+	color: var(--secondary-color);
 	position: relative;
 	margin-left: calc(-35px / 2);
 }

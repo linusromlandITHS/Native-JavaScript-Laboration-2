@@ -2,10 +2,14 @@ header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	color: #5065a8;
+	color: var(--secondary-color);
 	background-color: rgba(0, 0, 0, 0.1);
-	border-bottom: 1px solid #000;
+	border-bottom: 1px solid var(--secondary-color);
 	height: 50px;
+}
+
+a {
+	color: var(--secondary-color);
 }
 
 header > a {
@@ -21,7 +25,7 @@ header > a {
 	font-size: 1.5rem;
 	font-weight: 700;
 	margin-left: 1rem;
-	color: #5065a8 !important;
+	color: var(--secondary-color) !important;
 	text-decoration: none;
 }
 
@@ -39,8 +43,8 @@ header > * > button {
 	height: 20%;
 	font-size: 100%;
 	background-color: rgba(255, 255, 255, 0);
-	color: #5065a8;
-	border: 1px solid #5065a8;
+	color: var(--secondary-color);
+	border: 1px solid var(--secondary-color);
 	outline: 0;
 	margin: 5px;
 	margin-left: 16px;
