@@ -3,8 +3,8 @@
 }
 
 body {
-	background-color: var(--main-color) !important;
-	color: var(--secondary-color);
+	background-color: var(--secondary-color) !important;
+	color: var(--main-color);
 }
 
 code {
@@ -25,7 +25,7 @@ code {
 
 a {
 	text-decoration: none;
-	color: var(--secondary-color);
+	color: var(--main-color);
 }
 #mainContentArea {
 	/* Changes display configuration to flex in JavaScript */

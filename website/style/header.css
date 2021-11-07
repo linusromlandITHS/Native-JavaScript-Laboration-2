@@ -3,12 +3,12 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	color: var(--secondary-color);
-	background-color: rgba(0, 0, 0, 0.1);
+	background-color: var(--main-color);
 	border-bottom: 1px solid var(--secondary-color);
 	height: 50px;
 }
 
-a {
+header a {
 	color: var(--secondary-color);
 }
 

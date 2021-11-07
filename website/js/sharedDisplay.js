@@ -144,7 +144,7 @@ renderChart = (dataPoints, categories, selector, type, name) => {
 			xaxis: {
 				categories: categories
 			},
-			colors: ['#f2eee3', '#5065a8']
+			colors: ['#5065a8']
 		};
 
 		var chart = new ApexCharts(document.querySelector(selector), options);
