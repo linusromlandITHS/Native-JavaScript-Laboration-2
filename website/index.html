@@ -1,69 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>GitHub Tracker</title>
+		<meta name="description" content="Shows statistics from GitHub repositories and users!" />
+		<meta name="keywords" content="GitHub, Statistics, Repo" />
+		<meta name="author" content="Linus Romland" />
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>GitHub Tracker</title>
-        <meta name="description" content="Shows statistics from GitHub repositories and users!">
-        <meta name="keywords" content="GitHub, Statistics, Repo">
-        <meta name="author" content="Linus Romland">
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 
-        <!-- Favicon -->
-        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+		<!-- Import of JavaScript for connecting to API -->
+		<script src="js/index.js" defer></script>
+		<script src="js/github.js" defer></script>
 
-        <!-- Import of JavaScript for connecting to API -->
-        <script src="js/index.js" defer></script>
-        <script src="js/github.js" defer></script>
+		<!-- Import of Global CSS Stylesheet -->
+		<link rel="stylesheet" href="style/global.css" />
 
-        <!-- Import of Global CSS Stylesheet -->
-        <link rel="stylesheet" href="style/global.css">
+		<!-- Import of CSS Stylesheet for index -->
+		<link rel="stylesheet" href="style/index.css" />
 
-        <!-- Import of CSS Stylesheet for index -->
-        <link rel="stylesheet" href="style/index.css">
+		<!-- Import of CSS Stylesheet for Footer -->
+		<link rel="stylesheet" href="style/footer.css" />
 
-        <!-- Import of CSS Stylesheet for Footer -->
-        <link rel="stylesheet" href="style/footer.css">
+		<!-- Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-XYW5ZPQ577"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				window.dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
 
-        <!-- Import of Autocomplete.js -->
-        <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
-        <link rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/css/autoComplete.01.min.css">
+			gtag('config', 'G-XYW5ZPQ577');
+		</script>
 
-        <!-- Import of JavaScript for partials -->
-        <script src="js/partials.js" defer></script>
+		<!-- Import of Autocomplete.js -->
+		<script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/css/autoComplete.01.min.css" />
 
-    </head>
+		<!-- Import of JavaScript for partials -->
+		<script src="js/partials.js" defer></script>
+	</head>
 
-    <body>
-        <!-- Main Content -->
-        <div id="main" class="center">
+	<body>
+		<!-- Main Content -->
+		<div id="main" class="center">
+			<!-- Search Container -->
+			<div id="search-wrapper" class="center">
+				<!-- Site Logo -->
+				<img src="images/icon.svg" alt="Github Statistics Icon" width="125px" id="icon" />
+				<div id="spacerLine"></div>
 
-            <!-- Search Container -->
-            <div id="search-wrapper" class="center">
-                <!-- Site Logo -->
-                <img src="images/icon.svg" alt="Github Statistics Icon" width="125px" id="icon">
-                <div id="spacerLine"></div>
+				<h1 id="title">GitHub Statistics</h1>
 
-                <h1 id="title">GitHub Statistics</h1>
+				<!-- Form for input and search -->
+				<form id="searchForm" class="center">
+					<input type="text" id="searchBar" class="input-field" autocomplete="off" required />
+					<ul id="historySearches" hidden></ul>
+					<input type="submit" hidden />
+				</form>
 
-                <!-- Form for input and search -->
-                <form id="searchForm" class="center">
-                    <input type="text" id="searchBar" class="input-field" autocomplete="off" required>
-                    <ul id="historySearches" hidden>
-                    </ul>
-                    <input type="submit" hidden>
-                </form>
-
-                <!-- Error messages -->
-                <div id="error" hidden>
-                    <p id="userError" hidden>No user found with that name!</p>
-                    <p id="repoError" hidden>No user and/or repositories found with that name!</p>
-                </div>
-            </div>
-        </div>
-        <div data-partials="footer.html"></div>
-    </body>
-
+				<!-- Error messages -->
+				<div id="error" hidden>
+					<p id="userError" hidden>No user found with that name!</p>
+					<p id="repoError" hidden>No user and/or repositories found with that name!</p>
+				</div>
+			</div>
+		</div>
+		<div data-partials="footer.html"></div>
+	</body>
 </html>
