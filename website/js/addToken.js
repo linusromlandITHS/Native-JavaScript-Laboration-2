@@ -7,7 +7,7 @@ loginWithGithub = document.querySelector('#loginWithGithub');
 window.onload = () => {
 	const apiDomain = 'githubstatistics.romland.space';
 
-	//TODO add check if URL is correct
+	//Checkes if domain is correct and then shows login button instead.
 	if (window.location.host == apiDomain) {
 		loginWithGithub.style.display = 'flex';
 		addToken.style.display = 'none';

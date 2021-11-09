@@ -23,6 +23,7 @@ window.onload = () => {
 };
 
 window.onclick = (event) => {
+	//Checks if user clicks outside of modal and shakes it if so.
 	if (event.target == editModal) {
 		resetAnimation(editModal.children[0]);
 		editModal.children[0].style.animation = 'shake 0.5s';
@@ -48,6 +49,8 @@ form.addEventListener('submit', async (e) => {
 			},
 			method: 'POST'
 		});
+
+		// If Avancera API Returns 201 (Successfully created), shows success message and rerenders citites
 		if (request.status === 201) {
 			console.log(`Added city ${input.value} to Cities API`);
 			responseMessage(`Added city "${input.value}" to Cities API`, 'successMessage');
@@ -55,6 +58,7 @@ form.addEventListener('submit', async (e) => {
 			populationInput.value = '';
 			renderCitites();
 		} else {
+			// If request is not 201, shows error message
 			const error = await request.json();
 			console.log(`Error! ${error.error}`);
 			responseMessage(`Error! ${error.error}`, 'errorMessage');
@@ -94,39 +98,62 @@ renderCitites = async () => {
 			container.classList = 'card';
 			container.title = city.name;
 
+			//Container for text
 			const textContainer = document.createElement('div');
 
+			//Container for city name
 			const cityName = document.createElement('p');
 			cityName.textContent = city.name;
 
+			//Container for city population
 			const cityPopulation = document.createElement('p');
 			cityPopulation.textContent = `${Intl.NumberFormat().format(city.population)} ${city.population == '1' ? 'inhabitant' : 'inhabitants'}`;
 
+			//Appends city name and population to textContainer
 			textContainer.append(cityName, cityPopulation);
 
+			//Container for buttons
 			const buttonContainer = document.createElement('div');
 
+			//Creates edit button
 			const editButton = document.createElement('button');
+
+			//Creates span element for material icon
 			const editSpan = document.createElement('span');
 			editSpan.classList = 'material-icons';
 			editSpan.textContent = 'edit';
+
+			//Sets event for edit button
 			editButton.onclick = () => {
 				updateEditModal(city);
 			};
+
+			//appends edit span (ICON) to edit button container
 			editButton.appendChild(editSpan);
 
+			//Creates delete button
 			const deleteButton = document.createElement('button');
+
+			//Creates span element for material icon
 			const deleteSpan = document.createElement('span');
 			deleteSpan.classList = 'material-icons';
 			deleteSpan.textContent = 'delete';
+
+			//Sets event for delete button
 			deleteButton.onclick = () => {
 				updateDeleteModal(city);
 			};
+
+			//appends delete span (ICON) to delete button container
 			deleteButton.appendChild(deleteSpan);
 
+			//Appends edit and delete buttons to buttonContainer
 			buttonContainer.append(editButton, deleteButton);
 
+			//Appends textContainer and buttonContainer to container
 			container.append(textContainer, buttonContainer);
+
+			//Appends container to citiesWrapper
 			citiesWrapper.appendChild(container);
 		});
 	}

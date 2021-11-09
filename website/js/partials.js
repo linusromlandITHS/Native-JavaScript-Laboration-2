@@ -1,4 +1,4 @@
-//Location
+//Partials Root Location
 const partialLocation = 'partials/';
 
 initPartials = () => {
