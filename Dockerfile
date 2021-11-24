@@ -2,10 +2,10 @@ FROM node:16-alpine
 
 WORKDIR /usr/app
 
-COPY package*.json ./
+COPY ../ .
+
+WORKDIR /usr/app/api
 
 RUN npm install --quiet
-
-COPY . .
 
 CMD npm run start
